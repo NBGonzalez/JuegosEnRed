@@ -181,7 +181,7 @@ Power-ups y elementos especiales: Para añadir un toque único y emocionante a l
 Se ha decidido que el estilo general de Virtual Velocity: Racing Unleashed sea a modo pixel art. Se optará por un tono más animado y menos realista siguiendo las mecánicas y jugabilidad del videojuego. 
 
  
-
+![](https://github.com/NBGonzalez/JuegosEnRed/blob/main/images_readme/coches.png)
 Estilo visual a asemejarse - Fuente 
 
 ### 1.7. Alcance 
