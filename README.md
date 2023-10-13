@@ -1,12 +1,8 @@
-Virtual Velocity: Racing Unleashed 
+# Virtual Velocity: Racing Unleashed 
 
  
 
-Documento de Diseño 
-
- 
-
- 
+# Documento de Diseño 
 
  
 
@@ -22,31 +18,23 @@ Documento de Diseño
 
  
 
- 
+## Realizado por:    
 
- 
+         Néstor Bermejillo González: Programación de mecánicas
+         Antonio Bernal de Celis: Arte y diseño.
+         Ángel Luis Rodríguez Otero: Arte y diseño.
+         Alejandro Tobías Márquez: Programación de objetos y potenciadores.
+         Pablo Prior Molina: Programación de interfaces.
+	 
+## Correo oficial de la universidad:
 
- 
+ 	info@urjc.es
 
- 
+## Cuenta de GitHub:
 
- 
+	https://github.com/NBGonzalez
 
- 
-
- 
-
- 
-
-Realizado por:    
-
-         Néstor Bermejillo González 
-         Antonio Bernal de Celis 
-         Ángel Luis Rodríguez Otero 
-         Alejandro Tobías Márquez 
-         Pablo Prior Molina 
-
-Índice 
+## Índice 
 
 ​​ 
 
@@ -114,7 +102,7 @@ Realizado por:
 
  
 
-1. Introducción 
+## 1. Introducción 
 
  
 
@@ -122,7 +110,7 @@ En este documento de diseño se presenta el videojuego Virtual Velocity: Racing 
 
  
 
-1.1. Concepto 
+### 1.1. Concepto 
 
  
 
@@ -130,7 +118,7 @@ En Virtual Velocity: Racing Unleashed se podrá controlar nuestro propio coche d
 
  
 
-1.2. Características 
+### 1.2. Características 
 
  
 
@@ -144,7 +132,7 @@ Personalización: Los jugadores podrán personalizar su propio coche de carreras
 
  
 
-1.3. Género 
+### 1.3. Género 
 
  
 
@@ -162,7 +150,7 @@ Acción: Con la utilización de algunos Power-Ups y elementos especiales, entrar
 
  
 
-1.4. Público objetivo 
+### 1.4. Público objetivo 
 
  
 
@@ -170,7 +158,7 @@ Al contar con partidas cortas y ciertamente frenéticas, Virtual Velocity: Racin
 
  
 
-1.5. Jugabilidad 
+### 1.5. Jugabilidad 
 
  
 
@@ -186,7 +174,7 @@ Power-ups y elementos especiales: Para añadir un toque único y emocionante a l
 
  
 
-1.6. Estilo Visual 
+### 1.6. Estilo Visual 
 
  
 
@@ -196,7 +184,7 @@ Se ha decidido que el estilo general de Virtual Velocity: Racing Unleashed sea a
 
 Estilo visual a asemejarse - Fuente 
 
-1.7. Alcance 
+### 1.7. Alcance 
 
  
 
@@ -204,7 +192,7 @@ El videojuego saldrá de inicio con diferentes pistas, coches y diseños, pero n
 
  
 
-2. Gameplay y Mecánicas 
+## 2. Gameplay y Mecánicas 
 
  
 
@@ -212,58 +200,120 @@ En este apartado se tratará más a fondo la jugabilidad y los distintos element
 
  
 
-2.1. Controles 
+### 2.1. Controles 
 
  
 
- 
+### 2.2. Tipos de vehículos 
 
  
 
-2.2. Tipos de vehículos 
+### 2.3. Power-Ups 
 
  
 
-2.3. Power-Ups 
+- Boosts de velocidad 
+
+- Teletransporte del coche 
+
+-  
 
  
 
-2.4. Circuitos 
+### 2.4. Circuitos 
 
-3. Requerimientos Tecnológicos 
-
- 
-
-3.1 Herramientas utilizadas en el juego 
-
-	- Unity 2022.3.2.f1 
-
-	- Microsoft Visual Studio 2022. 
-
-3.2Herramientas en el diseño del juego 
-
-	- Photoshop 2023 
-
-	-  
-
-3.3 
+## 3. Requerimientos Tecnológicos 
 
  
 
-4. Parte frontal del  juego 
+### 3.1 Herramientas utilizadas en el juego 
+
+ 
+
+- Microsoft Visual Studio 2022. 
+
+- GitHub 
+
+ 
+
+### 3.2Herramientas en el diseño del juego 
+
+ 
+
+- Photoshop 2023. 
+
+ 
+
+## 4. Parte frontal del  juego 
 
  
 
 (Pegi, logo de empresa, logo del juego, pantalla al iniciar el juego) 
 
- 
+### 4.1. PEGI 
 
-5. Potenciadores y bonificaciones 
+Virtual Velocity es un juego pensado para todas las edades en el que no se representa nada de violencia en las carreras. 
 
- 
-
-6. Esquema de progresión del juego 
+El juego tendrá una tienda en la que se puedan comprar skins y recolores exclusivos para los coches. 
 
  
 
-7. Música y efectos de sonido 
+ 
+
+## 5. Esquema de progresión del juego 
+
+ 
+
+## 6. Música y efectos de sonido 
+
+ 
+
+Los sonidos los descargaremos de páginas libres y sin Copyright. 
+
+	- https://freesound.org/ 
+
+	- https://pixabay.com/es/sound-effects/ 
+
+	- https://www.fiftysounds.com/es/ 
+
+ 
+
+## 7. Miembros y roles 
+
+ 
+
+### 7.1. Roles 
+
+ 
+
+Néstor Bermejillo González: Programación de mecánicas 
+Antonio Bernal de Celis: Arte y diseño. 
+Ángel Luis Rodríguez Otero: Arte y diseño 
+Alejandro Tobías Márquez: Programación de objetos y potenciadores. 
+Pablo Prior Molina: Programación de interfaces. 
+
+ 
+
+### 7.2. GitHub 
+
+ 
+
+Repositorio: https://github.com/NBGonzalez/JuegosEnRed 
+
+ 
+
+### 7.3. Correo 
+
+ 
+
+Universidad Rey Juan Carlos: infor@urjc.es 
+
+Néstor Bermejillo: n.bermejillo.2021@alumnos.urjc.es 
+
+Antonio Bernal: 
+
+Ángel Luis Rodríguez: 
+
+Alejandro Tobías: a.tobias.2021@alumnos.urjc.es 
+
+Pablo Prior: p.prior.2019@alumnos.urjc.es 
