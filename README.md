@@ -230,9 +230,23 @@ En este apartado se tratará más a fondo la jugabilidad y los distintos element
 
  
 
-- Microsoft Visual Studio 2022. 
+El juego deberá implementarse con las tecnologías principales abordadas en la asignatura: 
 
-- GitHub 
+ 
+
+Lado del servidor: Java con SpringBoot. 
+
+Lado del cliente: JavaScript con el framework Phaser 3. 
+
+ 
+
+Asimismo, se utilizará lo siguiente para el desarrollo del videojuego 
+
+ 
+
+Microsoft Visual Studio 2022. 
+
+GitHub  
 
  
 
