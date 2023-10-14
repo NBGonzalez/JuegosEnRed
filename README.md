@@ -182,7 +182,7 @@ Se ha decidido que el estilo general de Virtual Velocity: Racing Unleashed sea a
 
  
 ![](https://github.com/NBGonzalez/JuegosEnRed/blob/main/images_readme/coches.png)
-Estilo visual a asemejarse - Fuente 
+Estilo visual a asemejarse - [Fuente](https://www.istockphoto.com/es/search/2/image?mediatype=illustration&phrase=pixel+car) 
 
 ### 1.7. Alcance 
 
