@@ -196,17 +196,39 @@ El videojuego saldrá de inicio con diferentes pistas, coches y diseños, pero n
 
  
 
-En este apartado se tratará más a fondo la jugabilidad y los distintos elementos y factores que hay en el videojuego. 
+En este apartado se tratará más a fondo la jugabilidad y los distintos elementos y factores que hay en el videojuego. Para ello, se desarrollarán y explicarán los siguientes apartados.
 
  
 
 ### 2.1. Controles 
 
- 
+Para Virtual Velocity: Racing Unleashed se van a necesitar unos controles básicos para poder moverse a través de los diferentes menús del videojuego como es lógico. Esto se podrá hacer gracias al ratón. 
+
+Asimismo, centrándonos en el propio gameplay, se dispondrá de unos controles de movimiento con los que se les permitirá a los jugadores moverse por la pista/circuito.  
+
+En el modo local, si los dos jugadores están jugando en el mismo dispositivo, los movimientos para cada uno serán: 
+
+ - J1: teclas W, A, S, D (acelerar, izquierda, frenar, derecha) 
+
+ - J2: teclas I, J, K, L (acelerar, izquierda, frenar, derecha) 
+
+Paralelamente, al disponer de los nombrados Power-Ups, se tendrá un botón de acción de los mismos. Para accionarlos y utilizarlos, se deberá pulsar: 
+
+ - J1: tecla E
+ - J2: tecla O 
+
+Finalmente, cada cierto tiempo, el vehículo de cada jugador dispondrá de un pequeño turbo que le ayude a ir más rápido por el circuito. Este se irá recargando poco a poco y supondrá otra ventaja para el jugador. Se podrá utilizar de la siguiente manera: 
+
+ - J1: tecla R
+ - J2: tecla P  
 
 ### 2.2. Tipos de vehículos 
 
- 
+Como se ha comentado anteriormente, en Virtual Velocity: Racing Unleashed se dará la opción de manejar distintos tipos de vehículos. En un principio habrá 3 tipos diferentes de manejables, que se irán introduciendo en contenidos adicionales de futuras versiones del videojuego: 
+
+ - Coche deportivo (Cyclone): Será el vehículo más equilibrado del videojuego, combinará velocidad, manejo y fuerza en unas estadísticas estándares para el inicio del mismo.
+ - Moto (Zenith): El vehículo más rápido con diferencia, pero el más difícil de manejar, tendrá un cierto desequilibrio en su conducción y se desestabilizará casi al mínimo contacto con otros elementos y/o vehículos.
+ - Camión (IronClad): Vehículo pesado donde los haya, pero muy divertido de llevar. Será el más lento de los 3 pero arrasará con todos elementos del circuito y no sufrirá penalizaciones al chocar. 
 
 ### 2.3. Power-Ups 
 
