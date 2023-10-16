@@ -6,6 +6,8 @@
 **Documento de Diseño**
 
 
+![Logo URJC](https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/URJC_logo.svg/1280px-URJC_logo.svg.png)
+
 
 ![](Aspose.Words.1ef4df2d-da37-4393-ba0f-857d04603b1d.001.png)
 
