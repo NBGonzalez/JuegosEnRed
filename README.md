@@ -1,3 +1,48 @@
+## Nombre del videojuego
+
+  Virtual Velocity: Racing Unleashed 
+
+## Temática 
+
+  En Virtual Velocity: Racing Unleashed se podrá controlar nuestro propio coche de carreras personalizable para poder así sentir y disfrutar la adrenalina de conducir, pero con un toque más animado y arcade. Aquí, se permitirá competir en solitario o junto a otro 
+  usuario gracias al juego en línea multijugador. Gracias al uso de Power-Ups y ventajas otorgadas, cada jugador deberá dar el número de vueltas estipulado en el menor tiempo posible
+
+## Realizado por  
+
+  Antonio Bernal De Celis
+
+  Néstor Bermejillo González
+
+  Ángel Luis Rodríguez Otero
+
+  Alejandro Tobías Márquez
+
+  Pablo Prior Molina
+	 
+## Correos oficiales de la universidad
+  
+  a.bernal.2021@alumnos.urjc.es
+
+  n.bermejillo.2021@alumnos.urjc.es
+  
+  al.rodriguez.2021@alumnos.urjc.es
+  
+  a.tobias.2021@alumnos.urjc.es
+  
+  p.prior.2019@alumnos.urjc.es
+
+## Cuentas de GitHub:
+
+  https://github.com/xinitoo
+
+  https://github.com/NBGonzalez
+
+  https://github.com/angeluisr
+
+  https://github.com/AlejandroTobias
+ 
+  https://github.com/PabloPrior
+ 
 ||||
 | :- | :-: | -: |
 
@@ -11,23 +56,6 @@
 
 ![](Aspose.Words.1ef4df2d-da37-4393-ba0f-857d04603b1d.001.png)
 
-
-
-
-
-**Realizado por:**  
-
-Néstor Bermejillo: <n.bermejillo.2021@alumnos.urjc.es>
-
-Antonio Bernal: <a.bernal.2021@alumnos.urjc.es>
-
-Ángel Luis Rodríguez: <al.rodriguez.2021@alumnos.urjc.es>
-
-Alejandro Tobías: <a.tobias.2021@alumnos.urjc.es>
-
-Pablo Prior: <p.prior.2019@alumnos.urjc.es>
-
-Universidad Rey Juan Carlos: <infor@urjc.es>
 
 **Índice**
 
