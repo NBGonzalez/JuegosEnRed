@@ -1,18 +1,21 @@
 <!doctype html> 
 <html lang="en"> 
-<head> 
+<head>
     <meta charset="UTF-8" />
     <title>Virtual Velocity: Racing Unleashed</title>
     <script src="phaser.js"></script>
-    <style src = "Style.css">
-        
-    </style>
+    <link rel="stylesheet" type="text/css" href="menu.css">
+    <link rel="stylesheet" type="text/css" href="Style.css">
 </head>
 <body>
 
-<script src = "Code.js">
+    <div id="menu">
+        <button onclick="iniciarJuego()">JUGAR</button>
+        <button onclick="verCreditos()">CRÉDITOS</button>
+        <button onclick="salirDelJuego()">SALIR</button>
+    </div>
 
-</script>
+    <script src="menu.js"></script>
 
 </body>
 </html>

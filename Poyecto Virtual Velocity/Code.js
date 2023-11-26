@@ -1,7 +1,7 @@
 var config = {
     type: Phaser.AUTO,
     width: 800,
-    height: 700,
+    height: 600,
     physics: {
         default: 'arcade',
         arcade: {
@@ -26,7 +26,9 @@ var game = new Phaser.Game(config);
 
 function preload ()
 {
-    this.load.image('track', 'assets/carretera.png');
+        console.log("Cargando track...");
+        this.load.image('track', 'assets/carretera.png');
+ 
 }
 
 function create ()
