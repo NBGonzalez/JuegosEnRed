@@ -1,12 +1,24 @@
-
-
 function iniciarJuego() {
-    alert("¡Juego iniciado!");
     cargarJuego();
 }
 
 function verCreditos() {
-    alert("Desarrollado por [Tu Nombre]");
+    var nombresDesarrolladores = [
+        "Realizado por: Pixel Pulse Entertainment",
+        "NÉSTOR BERMEJILLO GONZÁLEZ",
+        "ANTONIO BERNAL DE CELIS",
+        "ÁNGEL LUIS RODRÍGUEZ OTERO",
+        "ALEJANDRO TOBÍAS MÁRQUEZ",
+        "PABLO PRIOR MOLINA"
+    ];
+
+    var mensaje="";
+
+    for (var i = 0; i < nombresDesarrolladores.length; i++) {
+        mensaje += "- " + nombresDesarrolladores[i] + "\n";
+    }
+
+    alert(mensaje);
 }
 
 function salirDelJuego() {
@@ -29,12 +41,12 @@ function salirDelJuego() {
 // }
 function cargarJuego() {
     var gameScript = document.createElement('script');
-    gameScript.src = 'code.js';
+    gameScript.src = 'Code.js';
     document.head.appendChild(gameScript);
 
     var gameStyle = document.createElement('link');
     gameStyle.rel = 'stylesheet';
-    gameStyle.href = 'style.css';
+    gameStyle.href = 'Style.css';
     document.head.appendChild(gameStyle);
 
     document.getElementById('menu').style.display = 'none';

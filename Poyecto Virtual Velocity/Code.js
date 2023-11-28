@@ -1,11 +1,11 @@
 var config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 1100,
+    height: 800,
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 300 },
+            gravity: { y: 0 },
             debug: false
         }
     },
@@ -16,29 +16,69 @@ var config = {
     }
 };
 
-var car1;
-var car2;
+var J1;
+var J2;
+var back;
 var gameOver = false;
 var cursorJ1;
 var cursorJ2;
+var tracks;
 
 var game = new Phaser.Game(config);
 
 function preload ()
 {
-        console.log("Cargando track...");
-        this.load.image('track', 'assets/carretera.png');
+    this.load.image('sky', 'assets/sky.png');
+    console.log("Cargando track...");
+    this.load.image('track', 'assets/carretera.png');
+    this.load.image('car1', 'assets/Coche1.png');
  
 }
 
 function create ()
 {
-    this.add.image(400, 300, 'track');
+    back = this.physics.add.staticGroup();
+
+    back.create(550, 420, 'sky').setScale(2.5).refreshBody();
+
+    this.physics.add.image(550, 420, 'track').setScale(2.5);
+
+    J1 = this.physics.add.sprite(75, 450, 'car1').setScale(0.25).refreshBody();
+
+    J1.setCollideWorldBounds(true);
 
     cursors = this.input.keyboard.createCursorKeys();
+
+    this.physics.add.collider(J1, back);
 }
 
 function update ()
 {
+    if (cursors.left.isDown)
+        {
+            J1.setVelocityX(-100);
+        }
+        else if (cursors.right.isDown)
+        {
+            J1.setVelocityX(100);
+        }
+        else
+        {
+            J1.setVelocityX(0);
+        }
 
+    if (cursors.up.isDown)
+        {
+            J1.setVelocityY(-100);
+        }
+        else if (cursors.down.isDown)
+        {
+            J1.setVelocityY(100);
+        }
+        else
+        {
+            J1.setVelocityY(0);
+        }
+        
+    
 }
