@@ -1,7 +1,7 @@
 var config = {
     type: Phaser.AUTO,
-    width: 1100,
-    height: 800,
+    width: 1088,
+    height: 768,
     physics: {
         default: 'arcade',
         arcade: {
@@ -23,6 +23,7 @@ var gameOver = false;
 var cursorJ1;
 var cursorJ2;
 var tracks;
+var platforms;
 
 var game = new Phaser.Game(config);
 
@@ -32,24 +33,37 @@ function preload ()
     console.log("Cargando track...");
     this.load.image('track', 'assets/carretera.png');
     this.load.image('car1', 'assets/Coche1.png');
- 
+    this.load.image('track2', 'assets/circuitoprueba.png');
+    this.load.image('sand', 'assets/arena.png');
+    this.load.image('curvleftup', 'assets/subidaizq.png');
+    this.load.image('curvrightup', 'assets/subidader.png');
+    this.load.image('curvleftdown', 'assets/bajadaizq.png');
+    this.load.image('curvrightdown', 'assets/bajadader.png');
+    this.load.image('straight', 'assets/recta.png');
 }
 
 function create ()
 {
     back = this.physics.add.staticGroup();
 
-    back.create(550, 420, 'sky').setScale(2.5).refreshBody();
+    tracks = this.physics.add.staticGroup();
 
-    this.physics.add.image(550, 420, 'track').setScale(2.5);
+    tracks.create(500, 700, 'straight');
+    back.create(635, 775, 'sand');
+    //platforms = this.physics.add.staticGroup();
 
-    J1 = this.physics.add.sprite(75, 450, 'car1').setScale(0.25).refreshBody();
+    //platforms.create(400, 568, 'ground').setScale(2).refreshBody();;
+
+    //this.physics.add.image(550, 420, 'track').setScale(1.5);
+
+    J1 = this.physics.add.sprite(220, 450, 'car1').setScale(0.5).refreshBody();
 
     J1.setCollideWorldBounds(true);
 
     cursors = this.input.keyboard.createCursorKeys();
 
     this.physics.add.collider(J1, back);
+    this.physics.add.collider(J1, platforms);
 }
 
 function update ()
