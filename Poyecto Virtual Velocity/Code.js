@@ -35,28 +35,75 @@ function preload ()
     this.load.image('car1', 'assets/Coche1.png');
     this.load.image('track2', 'assets/circuitoprueba.png');
     this.load.image('sand', 'assets/arena.png');
-    this.load.image('curvleftup', 'assets/subidaizq.png');
-    this.load.image('curvrightup', 'assets/subidader.png');
-    this.load.image('curvleftdown', 'assets/bajadaizq.png');
-    this.load.image('curvrightdown', 'assets/bajadader.png');
-    this.load.image('straight', 'assets/recta.png');
+    this.load.image('curva1', 'assets/curva1.png');
+    this.load.image('curva2', 'assets/curva2.png');
+    this.load.image('curva3', 'assets/curva3.png');
+    this.load.image('curva4', 'assets/curva4.png');
+    this.load.image('straight1', 'assets/carretera1.png');
+    this.load.image('straight2', 'assets/carretera2.png');
 }
 
 function create ()
 {
+    // Carretera 128
+    // Arena 64
     back = this.physics.add.staticGroup();
 
     tracks = this.physics.add.staticGroup();
 
-    tracks.create(500, 700, 'straight');
-    back.create(635, 775, 'sand');
+    //Circuito
+    tracks.create(192, 256, 'straight1').setScale(0.4).refreshBody;
+    tracks.create(192, 128, 'curva2').setScale(0.4).refreshBody;
+    tracks.create(320, 128, 'straight2').setScale(0.4).refreshBody;
+    tracks.create(448, 128, 'straight2').setScale(0.4).refreshBody;
+    tracks.create(576, 128, 'straight2').setScale(0.4).refreshBody;
+    tracks.create(704, 128, 'curva1').setScale(0.4).refreshBody;
+    tracks.create(704, 256, 'curva3').setScale(0.4).refreshBody;
+    tracks.create(832, 256, 'straight2').setScale(0.4).refreshBody;
+    tracks.create(960, 256, 'curva1').setScale(0.4).refreshBody;
+    tracks.create(960, 384, 'straight1').setScale(0.4).refreshBody;
+    tracks.create(960, 512, 'straight1').setScale(0.4).refreshBody;
+    tracks.create(960, 640, 'curva4').setScale(0.4).refreshBody;
+    tracks.create(832, 640, 'straight2').setScale(0.4).refreshBody;
+    tracks.create(704, 640, 'curva3').setScale(0.4).refreshBody;
+    tracks.create(704, 512, 'curva1').setScale(0.4).refreshBody;
+    tracks.create(576, 512, 'straight2').setScale(0.4).refreshBody;
+    tracks.create(448, 512, 'curva2').setScale(0.4).refreshBody;
+    tracks.create(448, 640, 'curva4').setScale(0.4).refreshBody;
+    tracks.create(320, 640, 'straight2').setScale(0.4).refreshBody;
+    tracks.create(192, 640, 'curva3').setScale(0.4).refreshBody;
+    tracks.create(192, 512, 'straight1').setScale(0.4).refreshBody;
+    tracks.create(192, 384, 'straight1').setScale(0.4).refreshBody;
+
+    //Arena
+
+    for(var i = 32; i<768; i+=64){
+        back.create(32, i, 'sand');
+    }
+    
+    for(var i = 32; i<768; i+=64){
+        back.create(96, i, 'sand');
+    }
+
+    for(var i = 160; i<768; i+=64){
+        back.create(i, 32, 'sand');
+    }
+
+    for(var i = 160; i<768; i+=64){
+        back.create(i, 32, 'sand');
+    }
+
+    for(var i = 800; i<=928; i+=64){
+        back.create(i, 32, 'sand');
+    }
+    
     //platforms = this.physics.add.staticGroup();
 
     //platforms.create(400, 568, 'ground').setScale(2).refreshBody();;
 
     //this.physics.add.image(550, 420, 'track').setScale(1.5);
 
-    J1 = this.physics.add.sprite(220, 450, 'car1').setScale(0.5).refreshBody();
+    J1 = this.physics.add.sprite(220, 450, 'car1').setScale(0.25).refreshBody();
 
     J1.setCollideWorldBounds(true);
 
