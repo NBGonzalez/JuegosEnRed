@@ -22,7 +22,7 @@ var back;
 var gameOver = false;
 
 var tracks;
-var platforms;
+var elements;
 
 var teclaW;
 var teclaA;
@@ -34,15 +34,27 @@ var teclaJ;
 var teclaL;
 var teclaK;
 
+var numVueltasJ1; 
+var numVueltasJ2;
+
+var numVueltasJ1Text; 
+var numVueltasJ2Text;
+
+var vueltasTotales;
+
+var cruzarJ1;
+var cruzarJ2;
+
+var controlJ1;
+var controlJ2;
+
 var game = new Phaser.Game(config);
 
 function preload ()
 {
-    this.load.image('sky', 'assets/sky.png');
+    //elememtos pista
     console.log("Cargando track...");
-    this.load.image('track', 'assets/carretera.png');
-    this.load.image('car1', 'assets/Coche1.png');
-    this.load.image('track2', 'assets/circuitoprueba.png');
+    //this.load.image('car1', 'assets/Coche1.png');
     this.load.image('sand', 'assets/arena.png');
     this.load.image('curva1', 'assets/curva1.png');
     this.load.image('curva2', 'assets/curva2.png');
@@ -50,20 +62,37 @@ function preload ()
     this.load.image('curva4', 'assets/curva4.png');
     this.load.image('straight1', 'assets/carretera1.png');
     this.load.image('straight2', 'assets/carretera2.png');
+    this.load.image('meta', 'assets/meta.png');
 
-    // Coche 1
+    //Coche 1
     this.load.spritesheet('car1ver', 'assets/spritesheetvertical.png', { frameWidth: 28, frameHeight: 49 });
     this.load.spritesheet('car1hor', 'assets/spritesheethorizontal.png', { frameWidth: 49, frameHeight: 28 });
     this.load.spritesheet('car1dia', 'assets/spritesheetdiagonal.png', { frameWidth: 43, frameHeight: 45 });
+
+    //Coche 2
+    this.load.spritesheet('car2ver', 'assets/spritesheetvertical2.png', { frameWidth: 28, frameHeight: 49 });
+    this.load.spritesheet('car2hor', 'assets/spritesheethorizontal2.png', { frameWidth: 49, frameHeight: 28 });
+    this.load.spritesheet('car2dia', 'assets/spritesheetdiagonal2.png', { frameWidth: 43, frameHeight: 45 });
 }
 
 function create ()
 {
+    cruzarJ1 = false;
+    controlJ1 = true;
+
+    cruzarJ2 = false;
+    controlJ2 = true;
+
+    vueltasTotales = 5;
+    numVueltasJ1 = 1;
+    numVueltasJ2 = 1;
     // Carretera 128
     // Arena 64
     back = this.physics.add.staticGroup();
 
-    tracks = this.physics.add.staticGroup();
+    tracks = this.physics.add.staticGroup();  
+    
+    elements = this.physics.add.staticGroup();
 
     //Circuito
     tracks.create(192, 256, 'straight1').setScale(0.4).refreshBody;
@@ -89,32 +118,31 @@ function create ()
     tracks.create(192, 512, 'straight1').setScale(0.4).refreshBody;
     tracks.create(192, 384, 'straight1').setScale(0.4).refreshBody;
 
+    
     //Arena
 
-    for(var i = 32; i<768; i+=64){
-        back.create(32, i, 'sand');
-    }
-    
-    for(var i = 32; i<768; i+=64){
-        back.create(96, i, 'sand');
+    //Llena la pantalla con bloques de arena
+    for (let row = 32; row < 1088; row += 64) {
+        for (let col = 32; col < 768; col += 64) {
+            let overlappingTrack = false;
+
+            //Verifica si hay algún sprite de carretera en las coordenadas actuales
+            tracks.children.iterate((track) => {
+                if (track.getBounds().contains(row, col)) {
+                    overlappingTrack = true;
+                }
+            });
+
+            //Si no hay sprite de carretera en las coordenadas actuales, crea un bloque de arena
+            if (!overlappingTrack) {
+                back.create(row, col, 'sand');
+            }
+        }
     }
 
-    for(var i = 160; i<768; i+=64){
-        back.create(i, 32, 'sand');
-    }
+    elements.create(192, 256, 'meta').setScale(0.2).refreshBody();
 
-    for(var i = 160; i<768; i+=64){
-        back.create(i, 32, 'sand');
-    }
-
-    for(var i = 800; i<=928; i+=64){
-        back.create(i, 32, 'sand');
-    }
-    back.create(800, 96, 'sand');
-    back.create(800, 160, 'sand');
-
-
-    //Animaciones
+    //Animaciones rectas coche 1
 
     this.anims.create({
         key: 'up',
@@ -143,7 +171,7 @@ function create ()
         J1 : this.physics.add.sprite('car1hor')
     });
 
-    //Anims DIAGONALES
+    //Anims DIAGONALES coche 1
 
     this.anims.create({
         key: 'rightup',
@@ -172,6 +200,65 @@ function create ()
         frameRate: 20,
         J1 : this.physics.add.sprite('car1dia')
     });
+
+    //Animaciones rectas coche 2
+
+    this.anims.create({
+        key: 'up2',
+        frames: [ { key: 'car2ver', frame: 0 } ],
+        frameRate: 20,
+        J2 : this.physics.add.sprite('car2ver')
+    });
+
+    this.anims.create({
+        key: 'down2',
+        frames: [ { key: 'car2ver', frame: 1 } ],
+        frameRate: 20,
+        J2 : this.physics.add.sprite('car2ver')
+    });
+    this.anims.create({
+        key: 'right2',
+        frames: [ { key: 'car2hor', frame: 0 } ],
+        frameRate: 20,
+        J2 : this.physics.add.sprite('car2hor')
+    });
+
+    this.anims.create({
+        key: 'left2',
+        frames: [ { key: 'car2hor', frame: 1 } ],
+        frameRate: 20,
+        J2 : this.physics.add.sprite('car2hor')
+    });
+
+    //Anims DIAGONALES coche 2
+
+    this.anims.create({
+        key: 'rightup2',
+        frames: [ { key: 'car2dia', frame: 0 } ],
+        frameRate: 20,
+        J2 : this.physics.add.sprite('car2dia')
+    });
+
+    this.anims.create({
+        key: 'rightdown2',
+        frames: [ { key: 'car2dia', frame: 1 } ],
+        frameRate: 20,
+        J2 : this.physics.add.sprite('car2dia')
+    });
+
+    this.anims.create({
+        key: 'leftdown2',
+        frames: [ { key: 'car2dia', frame: 2 } ],
+        frameRate: 20,
+        J2 : this.physics.add.sprite('car2dia')
+    });
+
+    this.anims.create({
+        key: 'leftup2',
+        frames: [ { key: 'car2dia', frame: 3 } ],
+        frameRate: 20,
+        J2 : this.physics.add.sprite('car2dia')
+    });
     
     //platforms = this.physics.add.staticGroup();
 
@@ -182,6 +269,10 @@ function create ()
     J1 = this.physics.add.sprite(220, 450, 'car1ver');
 
     J1.setCollideWorldBounds(true);
+
+    J2 = this.physics.add.sprite(165, 450, 'car2ver');
+
+    J2.setCollideWorldBounds(true);
 
     //cursors = this.input.keyboard.createCursorKeys();
 
@@ -196,11 +287,35 @@ function create ()
     teclaK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
 
     this.physics.add.collider(J1, back);
-    this.physics.add.collider(J1, platforms);
+    this.physics.add.collider(J2, back);
+    this.physics.add.collider(J1, J2);
+
+    this.physics.add.overlap(J1, elements, cambiarCruzarJ1, null, this);
+    this.physics.add.overlap(J2, elements, cambiarCruzarJ2, null, this);
+
+    numVueltasJ1Text = this.add.text(16, 16, 'J1 Vueltas:'+ numVueltasJ1 + '/' + vueltasTotales, { fontSize: '32px', fill: '#000' });
+    numVueltasJ2Text = this.add.text(800, 16, 'J2 Vueltas:' + numVueltasJ2 + '/' + vueltasTotales, { fontSize: '32px', fill: '#000' });
 }
 
 function update ()
 {
+    if(controlJ1 == true){
+        if(cruzarJ1 == true){
+            sumarVueltaJ1(); 
+            setTimeout(cambiarJ1, 5000); 
+        }
+    }
+
+    if(controlJ2 ==true){
+        if(cruzarJ2==true){
+            sumarVueltaJ2(); 
+            setTimeout(cambiarJ2, 5000); 
+        }
+    }
+    // if(cruzarJ1){
+    //     sumarVueltaJ1();  
+    // }
+    //condiciones movimiento coche 1
     if(teclaA.isDown && teclaW.isDown)
     {
         J1.anims.play('leftup', true);
@@ -266,4 +381,108 @@ function update ()
         J1.setVelocityY(0);
         //J1.angle = 0;
     } 
+
+    //condiciones movimiento coche 2
+    if(teclaJ.isDown && teclaI.isDown)
+    {
+        J2.anims.play('leftup2', true);
+        J2.setVelocityX(-75);
+        J2.setVelocityY(-75);
+    }
+    else if(teclaJ.isDown && teclaK.isDown)
+    {
+        J2.anims.play('leftdown2', true);
+        J2.setVelocityX(-75);
+        J2.setVelocityY(75);
+    }
+    else if(teclaL.isDown && teclaI.isDown)
+    {
+        J2.anims.play('rightup2', true);
+        J2.setVelocityX(75);
+        J2.setVelocityY(-75);
+        
+    }
+    else if(teclaL.isDown && teclaK.isDown)
+    {
+        J2.anims.play('rightdown2', true);
+        J2.setVelocityX(75);
+        J2.setVelocityY(75);
+    }
+    else if (teclaJ.isDown)
+    {
+        J2.setVelocityY(0);
+        J2.setVelocityX(-100);
+        //J1.angle = -45;
+        J2.anims.play('left2', true);
+        //J1 = this.physics.add.sprite('car1hor');
+    }
+    else if (teclaL.isDown)
+    {
+        J2.setVelocityY(0);
+        J2.setVelocityX(100);
+        //J1.angle = 45;
+        J2.anims.play('right2', true);
+        //J1 = this.physics.add.sprite('car1hor');
+    }
+    else if (teclaI.isDown)
+    {
+        J2.setVelocityX(0);
+        J2.setVelocityY(-100);
+        //J1.angle = 0;
+        J2.anims.play('up2', true);
+        //J1 = this.physics.add.sprite('car1ver');
+    }
+    else if (teclaK.isDown)
+    {
+        J2.setVelocityX(0);
+        J2.setVelocityY(100);
+        //J1.angle = 180;
+        J2.anims.play('down2', true);
+        //J1 = this.physics.add.sprite('car1ver');
+    }
+    else
+    {
+        J2.setVelocityX(0);
+        //J1.angle = 0;
+        J2.setVelocityY(0);
+        //J1.angle = 0;
+    } 
+
+}
+
+function sumarVueltaJ1(){
+    numVueltasJ1++;
+    numVueltasJ1Text.setText('J1 Vueltas:' + numVueltasJ1 + '/' + vueltasTotales);
+    cruzarJ1 = false;
+    setTimeout(cambiarCruzarJ1, 5000);
+    controlJ1 = false;
+    console.log('sumar');
+}
+function sumarVueltaJ2(){
+    numVueltasJ2++;
+    numVueltasJ2Text.setText('J2 Vueltas:' + numVueltasJ2 + '/' + vueltasTotales);
+    cruzarJ2 = false;
+    setTimeout(cambiarCruzarJ2, 5000);
+    controlJ2 = false;
+    console.log('sumar');
+}
+
+function cambiarCruzarJ1(){
+    console.log('cambiar');
+    cruzarJ1 = !cruzarJ1;
+}
+
+function cambiarJ1(){
+    console.log('cambiar');
+    controlJ1 = true;
+}
+
+function cambiarCruzarJ2(){
+    console.log('cambiar');
+    cruzarJ2 = !cruzarJ2;
+}
+
+function cambiarJ2(){
+    console.log('cambiar');
+    controlJ2 = true;
 }
