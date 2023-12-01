@@ -98,6 +98,7 @@ function create ()
     detection = this.physics.add.staticGroup();
 
     detection.create(192, 512, 'meta').setScale(0.6).refreshBody();
+
     //Circuito
     tracks.create(192, 256, 'straight1').setScale(0.4).refreshBody;
     tracks.create(192, 128, 'curva2').setScale(0.4).refreshBody;
@@ -144,7 +145,7 @@ function create ()
         }
     }
 
-    elements.create(192, 256, 'meta').setScale(0.4).refreshBody();
+    elements.create(192, 256, 'meta').setScale(0.28).refreshBody();
     
     //Animaciones rectas coche 1
 

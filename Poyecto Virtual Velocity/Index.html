@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <title>Virtual Velocity: Racing Unleashed</title>
+    <audio id="miMusica" autoplay>
+        <source src="assets/musicafondo.mp3" type="audio/mp3">
+    </audio>
     <script src="phaser.js"></script>
     <link rel="stylesheet" type="text/css" href="menu.css">
     <!-- <link rel="stylesheet" type="text/css" href="Style.css"> -->
@@ -12,7 +15,25 @@
     <div id="menu">
         <button onclick="iniciarJuego()">JUGAR</button>
         <button onclick="verCreditos()">CRÉDITOS</button>
+        <button onclick="verAjustes()">AJUSTES</button>
         <button onclick="salirDelJuego()">SALIR</button>
+    </div>
+
+    <div id="creditos" style="display: none;">
+        <h2>CRÉDITOS</h2>
+        <ul id="listaCreditos">
+            <li>NÉSTOR BERMEJILLO GONZÁLEZ</li>
+            <li>ANTONIO BERNAL DE CELIS</li>
+            <li>ÁNGEL LUIS RODRÍGUEZ OTERO</li>
+            <li>ALEJANDRO TOBÍAS MÁRQUEZ</li>
+            <li>PABLO PRIOR MOLINA</li>
+        </ul>
+        <button onclick="volverAlMenu()">MENÚ</button>
+    </div>
+
+    <div id="ajustes" style="display: none;">
+        <button onclick="estadoVolumen()">vol</button>
+        <button onclick="volverAlMenu()">MENÚ</button>
     </div>
 
     <script src="menu.js"></script>

@@ -1,24 +1,43 @@
-function iniciarJuego() {
-    cargarJuego();
+function reproducirMusica() {
+    var musica = document.getElementById('miMusica');
+    musica.play();
 }
 
+function iniciarJuego() {
+    cargarJuego();
+    reproducirMusica();
+}
+
+//Función para volver al menú desde la sección de créditos
+function volverAlMenu() {
+    //Oculta los créditos y muestra el menú
+    document.getElementById('creditos').style.display = 'none';
+    document.getElementById('ajustes').style.display = 'none';
+    document.getElementById('menu').style.display = 'block';
+    reproducirMusica();
+}
+
+//Oculta el menú y muestra los créditos
 function verCreditos() {
-    var nombresDesarrolladores = [
-        "Realizado por: Pixel Pulse Entertainment",
-        "NÉSTOR BERMEJILLO GONZÁLEZ",
-        "ANTONIO BERNAL DE CELIS",
-        "ÁNGEL LUIS RODRÍGUEZ OTERO",
-        "ALEJANDRO TOBÍAS MÁRQUEZ",
-        "PABLO PRIOR MOLINA"
-    ];
+    // var nombresDesarrolladores = [
+    //     "Realizado por: Pixel Pulse Entertainment",
+    //     "NÉSTOR BERMEJILLO GONZÁLEZ",
+    //     "ANTONIO BERNAL DE CELIS",
+    //     "ÁNGEL LUIS RODRÍGUEZ OTERO",
+    //     "ALEJANDRO TOBÍAS MÁRQUEZ",
+    //     "PABLO PRIOR MOLINA"
+    // ];
 
-    var mensaje="";
+    // var mensaje="";
 
-    for (var i = 0; i < nombresDesarrolladores.length; i++) {
-        mensaje += "- " + nombresDesarrolladores[i] + "\n";
-    }
+    // for (var i = 0; i < nombresDesarrolladores.length; i++) {
+    //     mensaje += "- " + nombresDesarrolladores[i] + "\n";
+    // }
 
-    alert(mensaje);
+    // alert(mensaje);
+    document.getElementById('menu').style.display = 'none';
+    document.getElementById('creditos').style.display = 'block';
+    reproducirMusica();
 }
 
 function salirDelJuego() {
@@ -26,7 +45,6 @@ function salirDelJuego() {
         window.close();
     }
 }
-
 
 // function cargarJuego() {
 //     console.log("Cargando juego...");
@@ -39,6 +57,12 @@ function salirDelJuego() {
 //     juego.style.display = 'block';
 
 // }
+
+function verAjustes(){
+    document.getElementById('menu').style.display = 'none';
+    document.getElementById('ajustes').style.display = 'block';
+}
+
 function cargarJuego() {
     var gameScript = document.createElement('script');
     gameScript.src = 'Code.js';
@@ -51,3 +75,4 @@ function cargarJuego() {
 
     document.getElementById('menu').style.display = 'none';
 }
+
