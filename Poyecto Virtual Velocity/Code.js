@@ -85,8 +85,8 @@ function create ()
     controlJ2 = true;
 
     vueltasTotales = 5;
-    numVueltasJ1 = 1;
-    numVueltasJ2 = 1;
+    numVueltasJ1 = 0;
+    numVueltasJ2 = 0;
     // Carretera 128
     // Arena 64
     back = this.physics.add.staticGroup();
@@ -96,6 +96,8 @@ function create ()
     elements = this.physics.add.staticGroup();
 
     detection = this.physics.add.staticGroup();
+
+    detection.create(192, 512, 'meta').setScale(0.6).refreshBody();
     //Circuito
     tracks.create(192, 256, 'straight1').setScale(0.4).refreshBody;
     tracks.create(192, 128, 'curva2').setScale(0.4).refreshBody;
@@ -142,8 +144,8 @@ function create ()
         }
     }
 
-    elements.create(192, 256, 'meta').setScale(0.2).refreshBody();
-    detection.create(192, 512, 'meta').setScale(0.6).refreshBody();
+    elements.create(192, 256, 'meta').setScale(0.4).refreshBody();
+    
     //Animaciones rectas coche 1
 
     this.anims.create({
@@ -306,21 +308,21 @@ function update ()
     //if(controlJ1 == true){
         
     //}
-    if(cruzarJ1 == 1){
-        //sumarVueltaJ1(); 
-        //setTimeout(cambiarJ1, 5000);
-        numVueltasJ1 += 1;
-        numVueltasJ1Text.setText('J1 Vueltas:' + numVueltasJ1 + '/' + vueltasTotales); 
-    }
+    // if(cruzarJ1 == 1){
+    //     //sumarVueltaJ1(); 
+    //     //setTimeout(cambiarJ1, 5000);
+    //     numVueltasJ1 += 1;
+    //     numVueltasJ1Text.setText('J1 Vueltas:' + numVueltasJ1 + '/' + vueltasTotales); 
+    // }
     //if(controlJ2 ==true){
         
     //}
-    if(cruzarJ2 == 1){
-        //sumarVueltaJ2(); 
-        //setTimeout(cambiarJ2, 5000); 
-        numVueltasJ2 += 1;
-        numVueltasJ2Text.setText('J2 Vueltas:' + numVueltasJ2 + '/' + vueltasTotales); 
-    }
+    // if(cruzarJ2 == 1){
+    //     //sumarVueltaJ2(); 
+    //     //setTimeout(cambiarJ2, 5000); 
+    //     numVueltasJ2 += 1;
+    //     numVueltasJ2Text.setText('J2 Vueltas:' + numVueltasJ2 + '/' + vueltasTotales); 
+    // }
     // if(cruzarJ1){
     //     sumarVueltaJ1();  
     // }
@@ -479,6 +481,10 @@ function sumarVueltaJ2(){
 function cambiarCruzarJ1(){
     console.log('cambiar');
     cruzarJ1 += 1;
+    if(cruzarJ1 == 1){
+        numVueltasJ1 += 1;
+        numVueltasJ1Text.setText('J1 Vueltas:' + numVueltasJ1 + '/' + vueltasTotales); 
+    }
 }
 
 function cambiarJ1(){
@@ -489,6 +495,10 @@ function cambiarJ1(){
 function cambiarCruzarJ2(){
     console.log('cambiar');
     cruzarJ2 += 1;
+    if(cruzarJ2 == 1){ 
+        numVueltasJ2 += 1;
+        numVueltasJ2Text.setText('J2 Vueltas:' + numVueltasJ2 + '/' + vueltasTotales); 
+    }
 }
 
 function cambiarJ2(){
