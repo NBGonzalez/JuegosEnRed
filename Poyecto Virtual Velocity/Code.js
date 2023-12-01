@@ -23,6 +23,7 @@ var gameOver = false;
 
 var tracks;
 var elements;
+var detection;
 
 var teclaW;
 var teclaA;
@@ -77,10 +78,10 @@ function preload ()
 
 function create ()
 {
-    cruzarJ1 = false;
+    cruzarJ1 = 0;
     controlJ1 = true;
 
-    cruzarJ2 = false;
+    cruzarJ2 = 0;
     controlJ2 = true;
 
     vueltasTotales = 5;
@@ -94,6 +95,7 @@ function create ()
     
     elements = this.physics.add.staticGroup();
 
+    detection = this.physics.add.staticGroup();
     //Circuito
     tracks.create(192, 256, 'straight1').setScale(0.4).refreshBody;
     tracks.create(192, 128, 'curva2').setScale(0.4).refreshBody;
@@ -141,7 +143,7 @@ function create ()
     }
 
     elements.create(192, 256, 'meta').setScale(0.2).refreshBody();
-
+    detection.create(192, 512, 'meta').setScale(0.6).refreshBody();
     //Animaciones rectas coche 1
 
     this.anims.create({
@@ -292,6 +294,8 @@ function create ()
 
     this.physics.add.overlap(J1, elements, cambiarCruzarJ1, null, this);
     this.physics.add.overlap(J2, elements, cambiarCruzarJ2, null, this);
+    this.physics.add.overlap(J1, detection, cambiarJ1, null, this);
+    this.physics.add.overlap(J2, detection, cambiarJ2, null, this);
 
     numVueltasJ1Text = this.add.text(16, 16, 'J1 Vueltas:'+ numVueltasJ1 + '/' + vueltasTotales, { fontSize: '32px', fill: '#000' });
     numVueltasJ2Text = this.add.text(800, 16, 'J2 Vueltas:' + numVueltasJ2 + '/' + vueltasTotales, { fontSize: '32px', fill: '#000' });
@@ -299,18 +303,23 @@ function create ()
 
 function update ()
 {
-    if(controlJ1 == true){
-        if(cruzarJ1 == true){
-            sumarVueltaJ1(); 
-            setTimeout(cambiarJ1, 5000); 
-        }
+    //if(controlJ1 == true){
+        
+    //}
+    if(cruzarJ1 == 1){
+        //sumarVueltaJ1(); 
+        //setTimeout(cambiarJ1, 5000);
+        numVueltasJ1 += 1;
+        numVueltasJ1Text.setText('J1 Vueltas:' + numVueltasJ1 + '/' + vueltasTotales); 
     }
-
-    if(controlJ2 ==true){
-        if(cruzarJ2==true){
-            sumarVueltaJ2(); 
-            setTimeout(cambiarJ2, 5000); 
-        }
+    //if(controlJ2 ==true){
+        
+    //}
+    if(cruzarJ2 == 1){
+        //sumarVueltaJ2(); 
+        //setTimeout(cambiarJ2, 5000); 
+        numVueltasJ2 += 1;
+        numVueltasJ2Text.setText('J2 Vueltas:' + numVueltasJ2 + '/' + vueltasTotales); 
     }
     // if(cruzarJ1){
     //     sumarVueltaJ1();  
@@ -451,11 +460,11 @@ function update ()
 }
 
 function sumarVueltaJ1(){
-    numVueltasJ1++;
-    numVueltasJ1Text.setText('J1 Vueltas:' + numVueltasJ1 + '/' + vueltasTotales);
-    cruzarJ1 = false;
-    setTimeout(cambiarCruzarJ1, 5000);
-    controlJ1 = false;
+    //numVueltasJ1++;
+    //numVueltasJ1Text.setText('J1 Vueltas:' + numVueltasJ1 + '/' + vueltasTotales);
+    //cruzarJ1 = false;
+    //setTimeout(cambiarCruzarJ1, 5000);
+    //controlJ1 = false;
     console.log('sumar');
 }
 function sumarVueltaJ2(){
@@ -469,20 +478,20 @@ function sumarVueltaJ2(){
 
 function cambiarCruzarJ1(){
     console.log('cambiar');
-    cruzarJ1 = !cruzarJ1;
+    cruzarJ1 += 1;
 }
 
 function cambiarJ1(){
     console.log('cambiar');
-    controlJ1 = true;
+    cruzarJ1 = 0;
 }
 
 function cambiarCruzarJ2(){
     console.log('cambiar');
-    cruzarJ2 = !cruzarJ2;
+    cruzarJ2 += 1;
 }
 
 function cambiarJ2(){
     console.log('cambiar');
-    controlJ2 = true;
+    cruzarJ2 = 0;
 }
