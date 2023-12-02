@@ -1,4 +1,6 @@
 var musica = document.getElementById('miMusica');
+var sliderVolumen = document.getElementById('sliderVolumen');
+var cargaYaMostrada = sessionStorage.getItem("cargaMostrada");
 
 function reproducirMusica() {
     musica.play();
@@ -6,8 +8,7 @@ function reproducirMusica() {
 
 function iniciarJuego() {
     cargarJuego();
-    // if(!musica.muted)
-    // reproducirMusica();
+    reproducirMusica();
 }
 
 function volverDesdePausa(){
@@ -69,8 +70,8 @@ function salirDelJuego() {
 function verAjustes(){
     document.getElementById('menu').style.display = 'none';
     document.getElementById('ajustes').style.display = 'block';
-    if(!musica.muted)
-    reproducirMusica();
+    //if(!musica.muted)
+    //reproducirMusica();
 }
 
 function cargarJuego() {
@@ -96,3 +97,38 @@ function estadoVolumen() {
     //document.getElementById("imagenAltavoz").src = "assets/altavozmute.png";
     }
 }
+
+function cambiarVolumen(){
+    var nuevoVolumen = sliderVolumen.value;
+    musica.volume = nuevoVolumen;
+}
+
+function simularCarga() {
+    var barraCarga = document.getElementById("barraCarga");
+    var porcentaje = 0;
+    
+    var intervalo = setInterval(function() {
+      porcentaje += 1;
+      barraCarga.style.width = porcentaje + "%";
+  
+      if (porcentaje >= 100) {
+        clearInterval(intervalo);
+  
+        // Oculta la pantalla de carga y muestra el juego
+        document.getElementById("pantallaCarga").style.display = "none";
+       
+      }
+    }, 50);
+  }
+
+  if (!cargaYaMostrada) {
+    // Si no se ha mostrado, simula la carga del juego
+    simularCarga();
+  
+    // Marca que la pantalla de carga ya se ha mostrado en la sesión actual
+    sessionStorage.setItem("cargaMostrada", "true");
+  } else {
+    // Si ya se mostró, oculta la pantalla de carga y muestra el juego directamente
+    document.getElementById("pantallaCarga").style.display = "none";
+    
+  }

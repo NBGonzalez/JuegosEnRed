@@ -1,6 +1,7 @@
 <!doctype html> 
 <html lang="en"> 
 <head>
+    
     <meta charset="UTF-8" />
     <title>Virtual Velocity: Racing Unleashed</title>
     <audio autoplay id="miMusica" >
@@ -9,9 +10,16 @@
     <script src="phaser.js"></script>
     <link rel="stylesheet" type="text/css" href="menu.css">
     <!-- <link rel="stylesheet" type="text/css" href="Style.css"> -->
+    
 </head>
 <body>
+
     
+    <div id="pantallaCarga">
+        <h1>Cargando...</h1>
+        <div class="barraCarga" id="barraCarga"></div>
+    </div>
+
     <div id="menu">
         <button onclick="iniciarJuego()">JUGAR</button>
         <button onclick="verCreditos()">CRÉDITOS</button>
@@ -35,6 +43,9 @@
         <button id="sonido" onclick="estadoVolumen()">
             <img id="imagenAltavoz" src="assets/altavoz.png" alt="Altavoz">
         </button>
+
+        <input type="range" id="sliderVolumen" min="0" max="1" step="0.01" value="1.0" oninput="cambiarVolumen()">
+        
         <button onclick="volverAlMenu()">MENÚ</button>
     </div>
 

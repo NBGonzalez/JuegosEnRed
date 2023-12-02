@@ -359,8 +359,8 @@ function create ()
     this.physics.add.overlap(J1.fisicas, detection, cambiarJ1, null, this);
     this.physics.add.overlap(J2.fisicas, detection, cambiarJ2, null, this);
 
-    numVueltasJ1Text = this.add.text(16, 16, 'J1 Vueltas:'+ numVueltasJ1 + '/' + vueltasTotales, { fontSize: '32px', fill: '#000' });
-    numVueltasJ2Text = this.add.text(800, 16, 'J2 Vueltas:' + numVueltasJ2 + '/' + vueltasTotales, { fontSize: '32px', fill: '#000' });
+    numVueltasJ1Text = this.add.text(16, 16, 'J1 Vueltas: 1/' + vueltasTotales, { fontSize: '32px', fill: '#000' });
+    numVueltasJ2Text = this.add.text(800, 16, 'J2 Vueltas: 1/' + vueltasTotales, { fontSize: '32px', fill: '#000' });
 }
 
 function update ()
@@ -428,26 +428,11 @@ function update ()
 
 }
 
-function sumarVueltaJ1(){
-    //numVueltasJ1++;
-    //numVueltasJ1Text.setText('J1 Vueltas:' + numVueltasJ1 + '/' + vueltasTotales);
-    //cruzarJ1 = false;
-    //setTimeout(cambiarCruzarJ1, 5000);
-    //controlJ1 = false;
-}
-function sumarVueltaJ2(){
-    numVueltasJ2++;
-    numVueltasJ2Text.setText('J2 Vueltas:' + numVueltasJ2 + '/' + vueltasTotales);
-    cruzarJ2 = false;
-    setTimeout(cambiarCruzarJ2, 5000);
-    controlJ2 = false;
-}
-
 function cambiarCruzarJ1(){
     cruzarJ1 += 1;
     if(cruzarJ1 == 1){
         numVueltasJ1 += 1;
-        numVueltasJ1Text.setText('J1 Vueltas:' + numVueltasJ1 + '/' + vueltasTotales); 
+        numVueltasJ1Text.setText('J1 Vueltas: ' + numVueltasJ1 + '/' + vueltasTotales); 
     }
 }
 
