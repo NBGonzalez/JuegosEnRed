@@ -41,7 +41,7 @@ body {
     font-family: 'MiFuente',  sans-serif; /* Utiliza el nombre asignado a la fuente en font-family */
     background-color: #333;
     display: flex;
-     align-items: center;
+    align-items: center;
     justify-content: center;
     height: 100vh;
     margin: 0;
@@ -83,6 +83,8 @@ body {
   height: auto;
   display: block;
   margin: 20px auto; /* Ajustado para centrar vertical y horizontalmente */
+  align-items: center; /* Centra los elementos horizontalmente */
+  justify-content: center; /* Centra los elementos verticalmente */
 }
 
 #creditos, #ajustes {
@@ -135,7 +137,7 @@ button:hover, #menu button:hover, #ajustes button:hover {
     overflow: hidden;
   }
   
-  #sonido img {
+#sonido img {
     max-width: 100%; 
     max-height: 100%; 
     width: auto; 

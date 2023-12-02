@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>Virtual Velocity: Racing Unleashed</title>
-    <audio id="miMusica" autoplay>
+    <audio autoplay id="miMusica" >
         <source src="assets/musicafondo.mp3" type="audio/mp3">
     </audio>
     <script src="phaser.js"></script>
@@ -36,6 +36,12 @@
             <img id="imagenAltavoz" src="assets/altavoz.png" alt="Altavoz">
         </button>
         <button onclick="volverAlMenu()">MENÚ</button>
+    </div>
+
+    <div id="pausa" style="display: none;">
+        <h2><style></style>¡Juego en pausa!</h2>
+        <button onclick="reanudarJuego()">Reanudar</button>
+        <button onclick="volverDesdePausa()">Volver al menú</button>
     </div>
 
     <script src="menu.js"></script>

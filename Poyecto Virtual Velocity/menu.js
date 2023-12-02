@@ -6,8 +6,12 @@ function reproducirMusica() {
 
 function iniciarJuego() {
     cargarJuego();
-    if(!musica.muted)
-    reproducirMusica();
+    // if(!musica.muted)
+    // reproducirMusica();
+}
+
+function volverDesdePausa(){
+    window.location.href = 'Index.html';
 }
 
 //Función para volver al menú desde la sección de créditos
@@ -16,8 +20,8 @@ function volverAlMenu() {
     document.getElementById('creditos').style.display = 'none';
     document.getElementById('ajustes').style.display = 'none';
     document.getElementById('menu').style.display = 'block';
-    if(!musica.muted)
-    reproducirMusica();
+    // if(!musica.muted)
+    // reproducirMusica();
 }
 
 //Oculta el menú y muestra los créditos

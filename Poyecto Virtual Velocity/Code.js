@@ -16,10 +16,33 @@ var config = {
     }
 };
 
-var J1;
-var J2;
+class Jugador{
+    constructor(_vel, _velD){
+    this.vel = _vel;
+    this.velD = _velD;
+    this.fisicas = null;
+    this.inver = false;
+    this.numInver = 1;
+    this.cong = false;
+    this.numCong = 1;
+    }
+    get velocidad(){
+        return this.vel;
+    }
+    get velocidadD(){
+        return this.velD;
+    }
+}
+
+var J1 = new Jugador(100, 75);
+var J2 = new Jugador(100, 75);
+
+// var velD;
+// var vel;
+
 var back;
 var gameOver = false;
+var juegoPausado = false;
 
 var tracks;
 var elements;
@@ -35,6 +58,8 @@ var teclaJ;
 var teclaL;
 var teclaK;
 
+var teclaE;
+
 var numVueltasJ1; 
 var numVueltasJ2;
 
@@ -48,6 +73,12 @@ var cruzarJ2;
 
 var controlJ1;
 var controlJ2;
+
+var inver;
+var inver2;
+
+var cong;
+var cong2;
 
 var game = new Phaser.Game(config);
 
@@ -70,6 +101,10 @@ function preload ()
     this.load.image('puddle', 'assets/charco.png');
     this.load.image('mudpuddle', 'assets/charcobarro.png');
 
+    //powers
+    this.load.image('inv', 'assets/inversion.png');
+    this.load.image('inv2', 'assets/inversion2.png');
+
     //Coche 1
     this.load.spritesheet('car1ver', 'assets/spritesheetvertical.png', { frameWidth: 28, frameHeight: 49 });
     this.load.spritesheet('car1hor', 'assets/spritesheethorizontal.png', { frameWidth: 49, frameHeight: 28 });
@@ -83,13 +118,19 @@ function preload ()
 
 function create ()
 {
+    // vel = 100;
+    // velD = 75;
+
     cruzarJ1 = 0;
     controlJ1 = true;
 
     cruzarJ2 = 0;
     controlJ2 = true;
 
-    vueltasTotales = 5;
+    inver = false;
+    inver2 = false;
+
+    vueltasTotales = 2;
     numVueltasJ1 = 0;
     numVueltasJ2 = 0;
     // Carretera 128
@@ -157,6 +198,8 @@ function create ()
     this.add.image(300, 250, 'ball3');
     this.add.image(835, 135, 'puddle');
     this.add.image(570, 650, 'mudpuddle');
+
+    //this.add.image(64, 700, 'inv').setScale(0.2);
     
     //Animaciones rectas coche 1
 
@@ -282,13 +325,13 @@ function create ()
 
     //this.physics.add.image(550, 420, 'track').setScale(1.5);
 
-    J1 = this.physics.add.sprite(220, 450, 'car1ver');
+    J1.fisicas = this.physics.add.sprite(220, 450, 'car1ver');
 
-    J1.setCollideWorldBounds(true);
+    J1.fisicas.setCollideWorldBounds(true);
 
-    J2 = this.physics.add.sprite(165, 450, 'car2ver');
+    J2.fisicas = this.physics.add.sprite(165, 450, 'car2ver');
 
-    J2.setCollideWorldBounds(true);
+    J2.fisicas.setCollideWorldBounds(true);
 
     //cursors = this.input.keyboard.createCursorKeys();
 
@@ -302,14 +345,19 @@ function create ()
     teclaL = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
     teclaK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
 
-    this.physics.add.collider(J1, back);
-    this.physics.add.collider(J2, back);
-    this.physics.add.collider(J1, J2);
+    teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+    teclaO = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O);
+    teclaR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+    teclaP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 
-    this.physics.add.overlap(J1, elements, cambiarCruzarJ1, null, this);
-    this.physics.add.overlap(J2, elements, cambiarCruzarJ2, null, this);
-    this.physics.add.overlap(J1, detection, cambiarJ1, null, this);
-    this.physics.add.overlap(J2, detection, cambiarJ2, null, this);
+    this.physics.add.collider(J1.fisicas, back);
+    this.physics.add.collider(J2.fisicas, back);
+    this.physics.add.collider(J1.fisicas, J2.fisicas);
+
+    this.physics.add.overlap(J1.fisicas, elements, cambiarCruzarJ1, null, this);
+    this.physics.add.overlap(J2.fisicas, elements, cambiarCruzarJ2, null, this);
+    this.physics.add.overlap(J1.fisicas, detection, cambiarJ1, null, this);
+    this.physics.add.overlap(J2.fisicas, detection, cambiarJ2, null, this);
 
     numVueltasJ1Text = this.add.text(16, 16, 'J1 Vueltas:'+ numVueltasJ1 + '/' + vueltasTotales, { fontSize: '32px', fill: '#000' });
     numVueltasJ2Text = this.add.text(800, 16, 'J2 Vueltas:' + numVueltasJ2 + '/' + vueltasTotales, { fontSize: '32px', fill: '#000' });
@@ -338,9 +386,45 @@ function update ()
     // if(cruzarJ1){
     //     sumarVueltaJ1();  
     // }
+    if (!gameOver){
+        if(!juegoPausado){
     //condiciones movimiento coche 1
-    controles(J1, teclaW, teclaS, teclaA, teclaD,'leftup','leftdown','rightup','rightdown','left','right','up','down')
-    controles(J2, teclaI, teclaK, teclaJ, teclaL,'leftup2','leftdown2','rightup2','rightdown2','left2','right2','up2','down2')
+    if(!J1.inver){
+    controles(J1, teclaW, teclaS, teclaA, teclaD,'leftup','leftdown','rightup','rightdown','left','right','up','down');
+    } else{
+        controles(J1, teclaS, teclaW, teclaD, teclaA,'leftup','leftdown','rightup','rightdown','left','right','up','down');
+    }
+    
+    if(!J2.inver){
+    controles(J2, teclaI, teclaK, teclaJ, teclaL,'leftup2','leftdown2','rightup2','rightdown2','left2','right2','up2','down2');
+    } else {
+        controles(J2, teclaK, teclaI, teclaL, teclaJ,'leftup2','leftdown2','rightup2','rightdown2','left2','right2','up2','down2');
+    }
+
+    if(teclaE.isDown && J1.numInver == 1){
+        powerInversion(J2,J1);
+    }
+
+    if(teclaO.isDown && J2.numInver == 1){
+        powerInversion(J1,J2);
+    }
+
+    if(teclaR.isDown && J1.numCong == 1){
+        powerCongelacion(J2,J1);
+    }
+
+    if(teclaP.isDown && J2.numCong == 1){
+        powerCongelacion(J1,J2);
+    }
+
+    verificarFinJuego();
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            pausarJuego();
+        }
+    });
+        }
+    }
 
 }
 
@@ -387,66 +471,143 @@ function cambiarJ2(){
 function controles(J, u, d, l, r,aniLU,aniLD,aniRU,aniRD,aniL,aniR,aniU,aniD){
     if(l.isDown && u.isDown)
     {
-        J.anims.play(aniLU, true);
-        J.setVelocityX(-75);
-        J.setVelocityY(-75);
+        J.fisicas.anims.play(aniLU, true);
+        J.fisicas.setVelocityX(-J.velocidadD);
+        J.fisicas.setVelocityY(-J.velocidadD);
     }
     else if(l.isDown && d.isDown)
     {
-        J.anims.play(aniLD, true);
-        J.setVelocityX(-75);
-        J.setVelocityY(75);
+        J.fisicas.anims.play(aniLD, true);
+        J.fisicas.setVelocityX(-J.velocidadD);
+        J.fisicas.setVelocityY(J.velocidadD);
     }
     else if(r.isDown && u.isDown)
     {
-        J.anims.play(aniRU, true);
-        J.setVelocityX(75);
-        J.setVelocityY(-75);
+        J.fisicas.anims.play(aniRU, true);
+        J.fisicas.setVelocityX(J.velocidadD);
+        J.fisicas.setVelocityY(-J.velocidadD);
         
     }
     else if(r.isDown && d.isDown)
     {
-        J.anims.play(aniRD, true);
-        J.setVelocityX(75);
-        J.setVelocityY(75);
+        J.fisicas.anims.play(aniRD, true);
+        J.fisicas.setVelocityX(J.velocidadD);
+        J.fisicas.setVelocityY(J.velocidadD);
     }
     else if (l.isDown)
     {
-        J.setVelocityY(0);
-        J.setVelocityX(-100);
+        J.fisicas.setVelocityY(0);
+        J.fisicas.setVelocityX(-J.velocidad);
         //J1.angle = -45;
-        J.anims.play(aniL, true);
+        J.fisicas.anims.play(aniL, true);
         //J1 = this.physics.add.sprite('car1hor');
     }
     else if (r.isDown)
     {
-        J.setVelocityY(0);
-        J.setVelocityX(100);
+        J.fisicas.setVelocityY(0);
+        J.fisicas.setVelocityX(J.velocidad);
         //J1.angle = 45;
-        J.anims.play(aniR, true);
+        J.fisicas.anims.play(aniR, true);
         //J1 = this.physics.add.sprite('car1hor');
     }
     else if (u.isDown)
     {
-        J.setVelocityX(0);
-        J.setVelocityY(-100);
+        J.fisicas.setVelocityX(0);
+        J.fisicas.setVelocityY(-J.velocidad);
         //J1.angle = 0;
-        J.anims.play(aniU, true);
+        J.fisicas.anims.play(aniU, true);
         //J1 = this.physics.add.sprite('car1ver');
     }
     else if (d.isDown)
     {
-        J.setVelocityX(0);
-        J.setVelocityY(100);
+        J.fisicas.setVelocityX(0);
+        J.fisicas.setVelocityY(J.velocidad);
         //J1.angle = 180;
-        J.anims.play(aniD, true);
+        J.fisicas.anims.play(aniD, true);
         //J1 = this.physics.add.sprite('car1ver');
     }
     else
     {
-        J.setVelocityX(0);
+        J.fisicas.setVelocityX(0);
         //J1.angle = 0;
-        J.setVelocityY(0);
+        J.fisicas.setVelocityY(0);
         //J1.angle = 0;
     } 
+}
+
+function verificarFinJuego() {
+    if (numVueltasJ1 > vueltasTotales || numVueltasJ2 > vueltasTotales) {
+        if (numVueltasJ1 > vueltasTotales){
+        alert("¡Gana J1, enhorabuena!");
+        }
+        else {
+            alert("¡Gana J2, enhorabuena!");
+        }
+        
+        // Cambia el estado del juego
+        gameOver = true;
+
+        
+        window.location.href = 'Index.html';
+    }
+}
+
+
+function pausarJuego() {
+    // Pausar la lógica del juego aquí (detener animaciones, temporizadores, etc.)
+    
+    // Muestra el menú de pausa
+    document.getElementById('pausa').style.display = 'block';
+    juegoPausado = true;
+}
+
+function reanudarJuego() {
+    // Reanudar la lógica del juego aquí
+    
+    // Ocultar el menú de pausa
+    document.getElementById('pausa').style.display = 'none';
+    juegoPausado = false;
+}
+
+// function powerInversionJ1(){
+//     J2.inver = true;
+//     setTimeout(noPowerInversionJ1, 5000);
+// }
+
+function powerInversion(J, usu) {
+    J.inver = true;
+    usu.numInver = 0;
+    setTimeout(function() {
+        noPowerInversion(J);
+    }, 5000);
+}
+
+function noPowerInversion(Ju) {
+    Ju.inver = false;
+    //this.add.image(64, 700, 'inv2').setScale(0.2);
+}
+
+// function powerInversionJ2(){
+//     inver = true;
+//     setTimeout(noPowerInversionJ2, 5000);
+// }
+
+// function noPowerInversionJ2(){
+//     inver = false;
+//     //this.add.image(64, 700, 'inv2').setScale(0.2);
+// }
+
+function powerCongelacion(J, usu){
+    J.vel = 0;
+    J.velD = 0;
+    usu.numCong = 0;
+    setTimeout(function() {
+        noPowerCongelacion(J);
+    }, 5000);
+}
+
+function noPowerCongelacion(Ju) {
+    Ju.vel = 75;
+    Ju.velD = 100;
+    //this.add.image(64, 700, 'inv2').setScale(0.2);
 }
