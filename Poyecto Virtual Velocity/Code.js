@@ -19,7 +19,8 @@ var config = {
 var J1;
 var J2;
 var back;
-var gameOver = false;
+var J1Win = false;
+var J2Win = false;
 
 var tracks;
 var elements;
@@ -64,6 +65,11 @@ function preload ()
     this.load.image('straight1', 'assets/carretera1.png');
     this.load.image('straight2', 'assets/carretera2.png');
     this.load.image('meta', 'assets/meta.png');
+    this.load.image('ball', 'assets/pelota.png');
+    this.load.image('ball2', 'assets/pelota2.png');
+    this.load.image('ball3', 'assets/pelota3.png');
+    this.load.image('puddle', 'assets/charco.png');
+    this.load.image('mudpuddle', 'assets/charcobarro.png');
 
     //Coche 1
     this.load.spritesheet('car1ver', 'assets/spritesheetvertical.png', { frameWidth: 28, frameHeight: 49 });
@@ -84,7 +90,7 @@ function create ()
     cruzarJ2 = 0;
     controlJ2 = true;
 
-    vueltasTotales = 5;
+    vueltasTotales = 2;
     numVueltasJ1 = 0;
     numVueltasJ2 = 0;
     // Carretera 128
@@ -146,6 +152,12 @@ function create ()
     }
 
     elements.create(192, 256, 'meta').setScale(0.28).refreshBody();
+
+    this.add.image(750, 350, 'ball');
+    this.add.image(350, 520, 'ball2');
+    this.add.image(300, 250, 'ball3');
+    this.add.image(835, 135, 'puddle');
+    this.add.image(570, 650, 'mudpuddle');
     
     //Animaciones rectas coche 1
 
@@ -306,6 +318,9 @@ function create ()
 
 function update ()
 {
+    if(numVueltasJ1 == vueltasTotales + 1){
+        volverAlMenu();
+    }
     //if(controlJ1 == true){
         
     //}
@@ -328,137 +343,8 @@ function update ()
     //     sumarVueltaJ1();  
     // }
     //condiciones movimiento coche 1
-    if(teclaA.isDown && teclaW.isDown)
-    {
-        J1.anims.play('leftup', true);
-        J1.setVelocityX(-75);
-        J1.setVelocityY(-75);
-    }
-    else if(teclaA.isDown && teclaS.isDown)
-    {
-        J1.anims.play('leftdown', true);
-        J1.setVelocityX(-75);
-        J1.setVelocityY(75);
-    }
-    else if(teclaD.isDown && teclaW.isDown)
-    {
-        J1.anims.play('rightup', true);
-
-        J1.setVelocityX(75);
-        J1.setVelocityY(-75);
-        
-    }
-    else if(teclaD.isDown && teclaS.isDown)
-    {
-        J1.anims.play('rightdown', true);
-        J1.setVelocityX(75);
-        J1.setVelocityY(75);
-    }
-    else if (teclaA.isDown)
-    {
-        J1.setVelocityY(0);
-        J1.setVelocityX(-100);
-        //J1.angle = -45;
-        J1.anims.play('left', true);
-        //J1 = this.physics.add.sprite('car1hor');
-    }
-    else if (teclaD.isDown)
-    {
-        J1.setVelocityY(0);
-        J1.setVelocityX(100);
-        //J1.angle = 45;
-        J1.anims.play('right', true);
-        //J1 = this.physics.add.sprite('car1hor');
-    }
-    else if (teclaW.isDown)
-    {
-        J1.setVelocityX(0);
-        J1.setVelocityY(-100);
-        //J1.angle = 0;
-        J1.anims.play('up', true);
-        //J1 = this.physics.add.sprite('car1ver');
-    }
-    else if (teclaS.isDown)
-    {
-        J1.setVelocityX(0);
-        J1.setVelocityY(100);
-        //J1.angle = 180;
-        J1.anims.play('down', true);
-        //J1 = this.physics.add.sprite('car1ver');
-    }
-    else
-    {
-        J1.setVelocityX(0);
-        //J1.angle = 0;
-        J1.setVelocityY(0);
-        //J1.angle = 0;
-    } 
-
-    //condiciones movimiento coche 2
-    if(teclaJ.isDown && teclaI.isDown)
-    {
-        J2.anims.play('leftup2', true);
-        J2.setVelocityX(-75);
-        J2.setVelocityY(-75);
-    }
-    else if(teclaJ.isDown && teclaK.isDown)
-    {
-        J2.anims.play('leftdown2', true);
-        J2.setVelocityX(-75);
-        J2.setVelocityY(75);
-    }
-    else if(teclaL.isDown && teclaI.isDown)
-    {
-        J2.anims.play('rightup2', true);
-        J2.setVelocityX(75);
-        J2.setVelocityY(-75);
-        
-    }
-    else if(teclaL.isDown && teclaK.isDown)
-    {
-        J2.anims.play('rightdown2', true);
-        J2.setVelocityX(75);
-        J2.setVelocityY(75);
-    }
-    else if (teclaJ.isDown)
-    {
-        J2.setVelocityY(0);
-        J2.setVelocityX(-100);
-        //J1.angle = -45;
-        J2.anims.play('left2', true);
-        //J1 = this.physics.add.sprite('car1hor');
-    }
-    else if (teclaL.isDown)
-    {
-        J2.setVelocityY(0);
-        J2.setVelocityX(100);
-        //J1.angle = 45;
-        J2.anims.play('right2', true);
-        //J1 = this.physics.add.sprite('car1hor');
-    }
-    else if (teclaI.isDown)
-    {
-        J2.setVelocityX(0);
-        J2.setVelocityY(-100);
-        //J1.angle = 0;
-        J2.anims.play('up2', true);
-        //J1 = this.physics.add.sprite('car1ver');
-    }
-    else if (teclaK.isDown)
-    {
-        J2.setVelocityX(0);
-        J2.setVelocityY(100);
-        //J1.angle = 180;
-        J2.anims.play('down2', true);
-        //J1 = this.physics.add.sprite('car1ver');
-    }
-    else
-    {
-        J2.setVelocityX(0);
-        //J1.angle = 0;
-        J2.setVelocityY(0);
-        //J1.angle = 0;
-    } 
+    controles(J1, teclaW, teclaS, teclaA, teclaD,'leftup','leftdown','rightup','rightdown','left','right','up','down')
+    controles(J2, teclaI, teclaK, teclaJ, teclaL,'leftup2','leftdown2','rightup2','rightdown2','left2','right2','up2','down2')
 
 }
 
@@ -468,7 +354,6 @@ function sumarVueltaJ1(){
     //cruzarJ1 = false;
     //setTimeout(cambiarCruzarJ1, 5000);
     //controlJ1 = false;
-    console.log('sumar');
 }
 function sumarVueltaJ2(){
     numVueltasJ2++;
@@ -476,11 +361,9 @@ function sumarVueltaJ2(){
     cruzarJ2 = false;
     setTimeout(cambiarCruzarJ2, 5000);
     controlJ2 = false;
-    console.log('sumar');
 }
 
 function cambiarCruzarJ1(){
-    console.log('cambiar');
     cruzarJ1 += 1;
     if(cruzarJ1 == 1){
         numVueltasJ1 += 1;
@@ -489,12 +372,10 @@ function cambiarCruzarJ1(){
 }
 
 function cambiarJ1(){
-    console.log('cambiar');
     cruzarJ1 = 0;
 }
 
 function cambiarCruzarJ2(){
-    console.log('cambiar');
     cruzarJ2 += 1;
     if(cruzarJ2 == 1){ 
         numVueltasJ2 += 1;
@@ -503,6 +384,73 @@ function cambiarCruzarJ2(){
 }
 
 function cambiarJ2(){
-    console.log('cambiar');
     cruzarJ2 = 0;
+}
+
+//función de los controles con jugador, teclas y animaciones
+function controles(J, u, d, l, r,aniLU,aniLD,aniRU,aniRD,aniL,aniR,aniU,aniD){
+    if(l.isDown && u.isDown)
+    {
+        J.anims.play(aniLU, true);
+        J.setVelocityX(-75);
+        J.setVelocityY(-75);
+    }
+    else if(l.isDown && d.isDown)
+    {
+        J.anims.play(aniLD, true);
+        J.setVelocityX(-75);
+        J.setVelocityY(75);
+    }
+    else if(r.isDown && u.isDown)
+    {
+        J.anims.play(aniRU, true);
+        J.setVelocityX(75);
+        J.setVelocityY(-75);
+        
+    }
+    else if(r.isDown && d.isDown)
+    {
+        J.anims.play(aniRD, true);
+        J.setVelocityX(75);
+        J.setVelocityY(75);
+    }
+    else if (l.isDown)
+    {
+        J.setVelocityY(0);
+        J.setVelocityX(-100);
+        //J1.angle = -45;
+        J.anims.play(aniL, true);
+        //J1 = this.physics.add.sprite('car1hor');
+    }
+    else if (r.isDown)
+    {
+        J.setVelocityY(0);
+        J.setVelocityX(100);
+        //J1.angle = 45;
+        J.anims.play(aniR, true);
+        //J1 = this.physics.add.sprite('car1hor');
+    }
+    else if (u.isDown)
+    {
+        J.setVelocityX(0);
+        J.setVelocityY(-100);
+        //J1.angle = 0;
+        J.anims.play(aniU, true);
+        //J1 = this.physics.add.sprite('car1ver');
+    }
+    else if (d.isDown)
+    {
+        J.setVelocityX(0);
+        J.setVelocityY(100);
+        //J1.angle = 180;
+        J.anims.play(aniD, true);
+        //J1 = this.physics.add.sprite('car1ver');
+    }
+    else
+    {
+        J.setVelocityX(0);
+        //J1.angle = 0;
+        J.setVelocityY(0);
+        //J1.angle = 0;
+    } 
 }

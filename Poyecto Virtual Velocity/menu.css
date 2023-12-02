@@ -125,17 +125,23 @@ body {
     height: auto; 
 } */
 
-button:hover {
+button:hover, #menu button:hover, #ajustes button:hover {
     background-color: #17cc1d;  
     color: white;
 } 
 
-#menu button:hover {
-    background-color: #17cc1d; 
-    color: white;
-} 
-
-#listaCreditos li {
-    margin-bottom: 20px; /* Aumenta el espacio entre los nombres */
-    font-size: 24px; /* Aumenta el tamaño de la letra */
-}
+#sonido {
+    position: relative; 
+    overflow: hidden;
+  }
+  
+  #sonido img {
+    max-width: 100%; 
+    max-height: 100%; 
+    width: auto; 
+    height: auto; 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+  }
