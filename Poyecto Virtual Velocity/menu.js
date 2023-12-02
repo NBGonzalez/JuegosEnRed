@@ -1,6 +1,4 @@
 var musica = document.getElementById('miMusica');
-var gameScript = document.createElement('script');
-var gameStyle = document.createElement('link');
 
 function reproducirMusica() {
     musica.play();
@@ -15,22 +13,10 @@ function iniciarJuego() {
 //Función para volver al menú desde la sección de créditos
 function volverAlMenu() {
     //Oculta los créditos y muestra el menú
-    gameScript.src = 'Code.js';
-    if (gameScript) {
-        gameScript.parentNode.removeChild(gameScript);
-    }
-
-    // Eliminar la hoja de estilo cargada
-    gameStyle.rel = 'stylesheet';
-    gameStyle.href = 'Style.css';
-    if (gameStyle) {
-        gameStyle.parentNode.removeChild(gameStyle);
-    }
-    if(!musica.muted)
     document.getElementById('creditos').style.display = 'none';
     document.getElementById('ajustes').style.display = 'none';
     document.getElementById('menu').style.display = 'block';
-    
+    if(!musica.muted)
     reproducirMusica();
 }
 
@@ -84,11 +70,11 @@ function verAjustes(){
 }
 
 function cargarJuego() {
-   
+    var gameScript = document.createElement('script');
     gameScript.src = 'Code.js';
     document.head.appendChild(gameScript);
 
-    
+    var gameStyle = document.createElement('link');
     gameStyle.rel = 'stylesheet';
     gameStyle.href = 'Style.css';
     document.head.appendChild(gameStyle);
@@ -102,7 +88,7 @@ function estadoVolumen() {
         //document.getElementById("imagenAltavoz").src = "assets/altavoz.png";
     }
     else{
-        musica.muted = true;
-        //document.getElementById("imagenAltavoz").src = "assets/altavozmute.png";
+    musica.muted = true;
+    //document.getElementById("imagenAltavoz").src = "assets/altavozmute.png";
     }
 }

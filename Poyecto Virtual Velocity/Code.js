@@ -19,8 +19,7 @@ var config = {
 var J1;
 var J2;
 var back;
-var J1Win = false;
-var J2Win = false;
+var gameOver = false;
 
 var tracks;
 var elements;
@@ -90,7 +89,7 @@ function create ()
     cruzarJ2 = 0;
     controlJ2 = true;
 
-    vueltasTotales = 2;
+    vueltasTotales = 5;
     numVueltasJ1 = 0;
     numVueltasJ2 = 0;
     // Carretera 128
@@ -318,9 +317,6 @@ function create ()
 
 function update ()
 {
-    if(numVueltasJ1 == vueltasTotales + 1){
-        volverAlMenu();
-    }
     //if(controlJ1 == true){
         
     //}
