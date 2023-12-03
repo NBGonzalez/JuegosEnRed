@@ -36,11 +36,20 @@ class Jugador{
     }
 }
 
+var estilo1 = {
+    fontSize: '24px',
+    fontFamily: 'MiFuente',
+    fill: 'rgb(0, 153, 204)'
+};
+
+var estilo2 = {
+    fontSize: '24px',
+    fontFamily: 'MiFuente',
+    fill: 'rgb(153, 204, 0)'
+};
+
 var J1 = new Jugador(100, 75);
 var J2 = new Jugador(100, 75);
-
-// var velD;
-// var vel;
 
 var back;
 var gameOver = false;
@@ -84,13 +93,14 @@ var inver2;
 var cong;
 var cong2;
 
+var musica = document.getElementById('miMusica');
+
 var game = new Phaser.Game(config);
 
 function preload ()
 {
     //elememtos pista
     console.log("Cargando track...");
-    //this.load.image('car1', 'assets/Coche1.png');
     this.load.image('sand', 'assets/arena.png');
     this.load.image('curva1', 'assets/curva1.png');
     this.load.image('curva2', 'assets/curva2.png');
@@ -104,14 +114,15 @@ function preload ()
     this.load.image('ball3', 'assets/pelota3.png');
     this.load.image('puddle', 'assets/charco.png');
     this.load.image('mudpuddle', 'assets/charcobarro.png');
+    this.load.image('betis', 'assets/toalla.png');
+    this.load.image('towell', 'assets/toalla2.png');
+    this.load.image('towell2', 'assets/toalla3.png');
+    this.load.image('towell3', 'assets/toalla4.png');
+    this.load.image('interface', 'assets/interfaz.png');
 
-    // Agrega esto en la función preload antes de cargar otras imágenes
+    //imágenes de victoria
     this.load.image('ganaJ1', 'assets/ganaJ1.png');
     this.load.image('ganaJ2', 'assets/ganaJ2.png');
-
-    //powers
-    this.load.image('inv', 'assets/inversion.png');
-    this.load.image('inv2', 'assets/inversion2.png');
 
     //Coche 1
     this.load.spritesheet('car1ver', 'assets/spritesheetvertical.png', { frameWidth: 28, frameHeight: 49 });
@@ -126,9 +137,6 @@ function preload ()
 
 function create ()
 {
-    // vel = 100;
-    // velD = 75;
-
     cruzarJ1 = 0;
     controlJ1 = true;
 
@@ -143,9 +151,6 @@ function create ()
     }
     numVueltasJ1 = 0;
     numVueltasJ2 = 0;
-    // Carretera 128
-    // Arena 64
-
 
     this.add.image(544, 390, 'ganaJ1').setScale(0.85, 1.07);
     J2Win = this.add.image(544, 390, 'ganaJ2').setScale(0.85, 1.07);
@@ -211,11 +216,14 @@ function create ()
 
     assets.create(750, 350, 'ball');
     assets.create(350, 520, 'ball2');
-    assets.create(300, 250, 'ball3');
+    assets.create(70, 250, 'ball3');
     assets.create(835, 135, 'puddle');
     assets.create(570, 650, 'mudpuddle');
-
-    //this.add.image(64, 700, 'inv').setScale(0.2);
+    assets.create(544, 384, 'betis');
+    assets.create(830, 520, 'towell');
+    assets.create(64, 490, 'towell2');
+    assets.create(300, 265, 'towell3');
+    assets.create(544, 384, 'interface');
     
     //Animaciones rectas coche 1
 
@@ -334,12 +342,6 @@ function create ()
         frameRate: 20,
         J2 : this.physics.add.sprite('car2dia')
     });
-    
-    //platforms = this.physics.add.staticGroup();
-
-    //platforms.create(400, 568, 'ground').setScale(2).refreshBody();;
-
-    //this.physics.add.image(550, 420, 'track').setScale(1.5);
 
     J1.fisicas = this.physics.add.sprite(220, 450, 'car1ver');
 
@@ -348,8 +350,6 @@ function create ()
     J2.fisicas = this.physics.add.sprite(165, 450, 'car2ver');
 
     J2.fisicas.setCollideWorldBounds(true);
-
-    //cursors = this.input.keyboard.createCursorKeys();
 
     teclaW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
     teclaA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -368,7 +368,7 @@ function create ()
     teclaR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
     teclaP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
     //teclas power up turbo
-    teclaT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
+    teclaQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
     teclaU = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.U);
 
     this.physics.add.collider(J1.fisicas, back);
@@ -382,33 +382,15 @@ function create ()
 
     numVueltasJ1Text = this.add.text(16, 16, 'J1 Vueltas: 1/' + vueltasTotales, { fontSize: '32px', fill: '#000' });
     numVueltasJ2Text = this.add.text(800, 16, 'J2 Vueltas: 1/' + vueltasTotales, { fontSize: '32px', fill: '#000' });
+    numVueltasJ1Text.setStyle(estilo1);
+    numVueltasJ2Text.setStyle(estilo2);
 }
 
 function update ()
 {
-    //if(controlJ1 == true){
-        
-    //}
-    // if(cruzarJ1 == 1){
-    //     //sumarVueltaJ1(); 
-    //     //setTimeout(cambiarJ1, 5000);
-    //     numVueltasJ1 += 1;
-    //     numVueltasJ1Text.setText('J1 Vueltas:' + numVueltasJ1 + '/' + vueltasTotales); 
-    // }
-    //if(controlJ2 ==true){
-        
-    //}
-    // if(cruzarJ2 == 1){
-    //     //sumarVueltaJ2(); 
-    //     //setTimeout(cambiarJ2, 5000); 
-    //     numVueltasJ2 += 1;
-    //     numVueltasJ2Text.setText('J2 Vueltas:' + numVueltasJ2 + '/' + vueltasTotales); 
-    // }
-    // if(cruzarJ1){
-    //     sumarVueltaJ1();  
-    // }
     if (!gameOver){
         if(!juegoPausado){
+
     //condiciones movimiento coche 1
     if(!J1.inver){
     controles(J1, teclaW, teclaS, teclaA, teclaD,'leftup','leftdown','rightup','rightdown','left','right','up','down');
@@ -416,6 +398,7 @@ function update ()
         controles(J1, teclaS, teclaW, teclaD, teclaA,'leftup','leftdown','rightup','rightdown','left','right','up','down');
     }
     
+    //condiciones movimiento coche 2
     if(!J2.inver){
     controles(J2, teclaI, teclaK, teclaJ, teclaL,'leftup2','leftdown2','rightup2','rightdown2','left2','right2','up2','down2');
     } else {
@@ -438,7 +421,7 @@ function update ()
         powerCongelacion(J1,J2);
     }
 
-    if(teclaT.isDown && J1.numTurb == 1){
+    if(teclaQ.isDown && J1.numTurb == 1){
         powerTurbo(J1);
     }
 
@@ -454,7 +437,6 @@ function update ()
     });
         }
     }
-
 }
 
 function cambiarCruzarJ1(){
@@ -554,42 +536,32 @@ function verificarFinJuego() {
         finalizarPartida()
     
         gameOver = true;
-
-        //window.location.href = 'Index.html';
     }
 }
 
 
 function pausarJuego() {
-    // Pausar la lógica del juego aquí (detener animaciones, temporizadores, etc.)
-    
     // Muestra el menú de pausa
     document.getElementById('pausa').style.display = 'block';
     juegoPausado = true;
 }
 
-function reanudarJuego() {
-    // Reanudar la lógica del juego aquí
-    
+function reanudarJuego() {  
     // Ocultar el menú de pausa
     document.getElementById('pausa').style.display = 'none';
     juegoPausado = false;
 }
 
-// function powerInversionJ1(){
-//     J2.inver = true;
-//     setTimeout(noPowerInversionJ1, 5000);
-// }
-
 function sonidoPower(ruta) {
-    //Crear un elemento de audio
+    //elemento de audio
     var audio = new Audio(ruta);
 
-    //Reproducir el sonido
+    //reproducir el sonido
     audio.play();
 }
 
 function powerInversion(J, usu) {
+    sonidoPower('assets/invertir.mp3');
     J.inver = true;
     usu.numInver = 0;
     setTimeout(function() {
@@ -599,18 +571,7 @@ function powerInversion(J, usu) {
 
 function noPowerInversion(Ju) {
     Ju.inver = false;
-    //this.add.image(64, 700, 'inv2').setScale(0.2);
 }
-
-// function powerInversionJ2(){
-//     inver = true;
-//     setTimeout(noPowerInversionJ2, 5000);
-// }
-
-// function noPowerInversionJ2(){
-//     inver = false;
-//     //this.add.image(64, 700, 'inv2').setScale(0.2);
-// }
 
 function powerCongelacion(J, usu){
     sonidoPower('assets/congelar.mp3');
@@ -651,13 +612,14 @@ function finalizarPartida() {
     back.clear(true, true);      
     detection.clear(true, true);
     assets.clear(true, true);
+    numVueltasJ1Text.setVisible(false);
+    numVueltasJ2Text.setVisible(false);
+    sonidoPower('assets/final.mp3')
     if(numVueltasJ1 > vueltasTotales){
         J2Win.setVisible(false);
     }
 
-    // Mostrar la imagen de fondo para el final del juego
-    //this.add.image(550, 440, 'ganaJ1');
-
+    //timer para ir al menú
     setTimeout(function() {
         window.location.href = 'Index.html';
     }, 5000); 

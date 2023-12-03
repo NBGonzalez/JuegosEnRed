@@ -18,7 +18,7 @@ function mostrarSelectorVueltas() {
     if (!vueltasMenuVisible) {
         //Si el menú no está visible, lo mostramos
         if (!selectVueltas) {
-            //Creamos el menú solo si aún no existe
+            //Creamos el desplegable solo no existe
             const opcionesVueltas = ["Infinitas", "2", "3", "5", "7"];
             const select = document.createElement("select");
             select.id = "selectVueltas";
@@ -34,7 +34,7 @@ function mostrarSelectorVueltas() {
                 vueltasTotales = parseInt(select.value);
             });
 
-            //Creamos el botón Aplicar solo si aún no existe
+            //Creamos el botón Aplicar solo no existe
             if (!botonAplicar) {
                 const botonAplicar = document.createElement("button");
                 botonAplicar.textContent = "Aplicar";
@@ -72,7 +72,6 @@ function reproducirMusica() {
 }
 
 function iniciarJuego() {
-    //mostrarSelectorVueltas();
     cargarJuego();
     reproducirMusica();
 }
@@ -86,33 +85,25 @@ function volverAlMenu() {
     //Oculta los créditos y muestra el menú
     document.getElementById('creditos').style.display = 'none';
     document.getElementById('ajustes').style.display = 'none';
+    document.getElementById('controles').style.display = 'none';
     document.getElementById('menu').style.display = 'block';
-    // if(!musica.muted)
-    // reproducirMusica();
+    if(!musica.muted)
+    reproducirMusica();
 }
 
 //Oculta el menú y muestra los créditos
 function verCreditos() {
-    // var nombresDesarrolladores = [
-    //     "Realizado por: Pixel Pulse Entertainment",
-    //     "NÉSTOR BERMEJILLO GONZÁLEZ",
-    //     "ANTONIO BERNAL DE CELIS",
-    //     "ÁNGEL LUIS RODRÍGUEZ OTERO",
-    //     "ALEJANDRO TOBÍAS MÁRQUEZ",
-    //     "PABLO PRIOR MOLINA"
-    // ];
-
-    // var mensaje="";
-
-    // for (var i = 0; i < nombresDesarrolladores.length; i++) {
-    //     mensaje += "- " + nombresDesarrolladores[i] + "\n";
-    // }
-
-    // alert(mensaje);
     document.getElementById('menu').style.display = 'none';
     document.getElementById('creditos').style.display = 'block';
-    //if(musica)
-    //reproducirMusica();
+    if(musica)
+    reproducirMusica();
+}
+
+function verControles() {
+    document.getElementById('menu').style.display = 'none';
+    document.getElementById('controles').style.display = 'block';
+    if(musica)
+    reproducirMusica();
 }
 
 function salirDelJuego() {
@@ -121,23 +112,12 @@ function salirDelJuego() {
     }
 }
 
-// function cargarJuego() {
-//     console.log("Cargando juego...");
-//      // Ocultar el menú
-//     var menu = document.getElementById('menu');
-//     menu.style.display = 'none';
-
-//     // Mostrar el contenido del juego
-//     var juego = document.getElementById('juego');
-//     juego.style.display = 'block';
-
-// }
 function verAjustes(){
     console.log(vueltasTotales);
     document.getElementById('menu').style.display = 'none';
     document.getElementById('ajustes').style.display = 'block';
-    //if(!musica.muted)
-    //reproducirMusica();
+    if(!musica.muted)
+    reproducirMusica();
 }
 
 function cargarJuego() {
@@ -156,11 +136,11 @@ function cargarJuego() {
 function estadoVolumen() {
     if(musica.muted){
         musica.muted = false;
-        //document.getElementById("imagenAltavoz").src = "assets/altavoz.png";
+        document.getElementById("imagenAltavoz").src = "assets/altavoz.png";
     }
     else{
     musica.muted = true;
-    //document.getElementById("imagenAltavoz").src = "assets/altavozmute.png";
+    document.getElementById("imagenAltavoz").src = "assets/altavozmute.png";
     }
 }
 
@@ -192,7 +172,7 @@ function simularCarga() {
     //Si no se ha mostrado, simula la carga del juego
     simularCarga();
   
-    //Marca que la pantalla de carga ya se ha mostrado en la sesión actual
+    //Marca que la pantalla de carga ya se ha mostrado
     sessionStorage.setItem("cargaMostrada", "true");
   } else {
     //Si ya se mostró, oculta la pantalla de carga y muestra el juego directamente

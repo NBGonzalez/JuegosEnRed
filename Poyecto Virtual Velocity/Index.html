@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <title>Virtual Velocity: Racing Unleashed</title>
-    <audio autoplay id="miMusica" >
-        <source src="assets/musicafondo.mp3" type="audio/mp3">
+    <audio autoplay id="miMusica" loop>
+        <source src="assets/musica.mp3" type="audio/mp3">
     </audio>
     <script src="phaser.js"></script>
     <link rel="stylesheet" type="text/css" href="menu.css">
-    <!-- <link rel="stylesheet" type="text/css" href="Style.css"> -->
     
 </head>
 <body>
@@ -22,6 +21,7 @@
         <button onclick="iniciarJuego()">JUGAR</button>
         <button onclick="verCreditos()">CRÉDITOS</button>
         <button onclick="verAjustes()">AJUSTES</button>
+        <button onclick="verControles()">CONTROLES</button>
         <button onclick="salirDelJuego()">SALIR</button>
     </div>
 
@@ -50,6 +50,26 @@
             <button onclick="mostrarSelectorVueltas()">VUELTAS</button>
             <button onclick="volverAlMenu()">MENÚ</button>
         </div>
+    </div>
+
+    <div id="controles" style="display: none;">
+        <h2>CONTROLES</h2>
+        
+        <div style="display: flex; justify-content: space-between;">
+            <div style="flex: 1;">
+                <p style="color: rgb(0, 153, 204);">J1</p>
+                <p>WASD - MOVIMIENTO</p>
+                <p>QRT - POWER-UPS</p>
+            </div>
+            
+            <div style="flex: 1;">
+                <p style="color: rgb(153, 204, 0);">J2</p>
+                <p>IJKL - MOVIMIENTO</p>
+                <p>UOP - POWER-UPS</p>
+            </div>
+        </div>
+        
+        <button onclick="volverAlMenu()">MENÚ</button>
     </div>
 
     <div id="pausa" style="display: none;">
