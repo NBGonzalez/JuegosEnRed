@@ -5,12 +5,12 @@
 
 **By Pixel Pulse Entertainment**
 
-![](imagenes_readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.001.png)
+![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.001.png)
 
 **Documento de Diseño**
 
 
-![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.002.png)
+![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.002.png)
 
 
 **Realizado por:**  
@@ -143,7 +143,7 @@ En cada circuito y/o partida del videojuego, se tratará, no solo de ganar la ca
 
 Se ha decidido que el estilo general de *Virtual Velocity: Racing Unleashed* sea a modo pixel art en 2D (Figura 1). Se optará por un tono más animado y menos realista siguiendo las mecánicas y jugabilidad del videojuego.
 
-![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.003.png)
+![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.003.png)
 
 Figura 1 - Estilo visual a asemejarse - [Fuente](https://www.istockphoto.com/es/ilustraciones/pixel-car)
 ##
@@ -285,7 +285,7 @@ En la carátula y menú principal del videojuego se enseñará la siguiente info
 
 El juego tendrá una tienda en la que se puedan comprar skins y diseños exclusivos para los coches. Para futuras versiones.
 
-![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.004.jpeg)                        ![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.005.jpeg)
+![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.004.jpeg)                        ![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.005.jpeg)
 
 Figura 2 - Pegi
 #
@@ -303,13 +303,13 @@ La paleta de colores es vibrante, lo que añade profundidad y emoción a los de 
 
 Para realizar los [vehículos](#_2.2._tipos_de), pistas o botones se han tomado en cuenta inspiración de distintos juegos como *Mario Kart*, así como buscar referencias por internet (Figuras 3 y 4).
 
-![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.006.png)	![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.007.png)
+![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.006.png)	![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.007.png)
 
 Figura 3 - [Vista Cenital	](https://www.artstation.com/artwork/L26G0R)			Figura 4 - [Vehículos](https://www.123rf.com/photo_41826971_pixel-art-game-cars-collection-vector-illustration.html)
 
 Se han cogido ideas para los assets como farolas, señales, o cubos de la primera imagen. Para los power-ups se diseñará cada uno en el estilo de la segunda foto (Figuras 5 y 6).
 
-![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.008.png)		![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.009.png)
+![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.008.png)		![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.009.png)
 
 Figura 5 - [Assets	](https://groovymcgee.itch.io/car-game-pixel-art)		 	Figura 6 - [Power-Ups](https://www.pinterest.cl/pin/AWAuqbZ7iO41AmLsg242xPrq-ZvK_2DSh8gEzwq_-RcoP_iNtF_P5gM/)
 
@@ -317,7 +317,7 @@ Figura 5 - [Assets	](https://groovymcgee.itch.io/car-game-pixel-art)		 	Figura 6
 
 Para el diseño de circuitos y el diseño de las interfaces se han cogido referencia de la serie de videojuegos Mario Kart.
 
-![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.010.png)		![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.011.png)
+![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.010.png)		![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.011.png)
 
 `          `Figura 7 - [Circuito](https://mario-kart.fandom.com/es/wiki/Circuito_Mario_3)			               Figura 8 -  [Interfaz](https://en.wikipedia.org/wiki/Mario_Kart_DS)
 
@@ -325,7 +325,7 @@ Para el diseño de circuitos y el diseño de las interfaces se han cogido refere
 
 **Interfaz:**
 
-![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.012.jpeg)
+![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.012.jpeg)
 
 Figura 9 – Boceto Interfaz
 
@@ -337,59 +337,59 @@ Figura 9 – Boceto Interfaz
 
 **Power-Ups:**
 
-![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.013.jpeg)
+![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.013.jpeg)
 
 Figura 10 – Boceto power-ups
 
 ## <a name="_toc1079173499"></a>**5.2. Diagrama y arte final**
 
-![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.014.png)
+![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.014.png)
 
 Figura 11 – Diagrama de flujo completo
 
 **Coches**
 
-![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.015.png)         ![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.016.png)
+![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.015.png)         ![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.016.png)
 
 Figura 12 – Sprites coche J1 y J2
 
 **Carretera**
 
-![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.017.png)    ![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.018.png)
+![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.017.png)    ![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.018.png)
 
 Figura 13 – Curvas 
 
-![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.019.png)
+![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.019.png)
 
 Figura 14 – Rectas
 
 
-![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.020.png)
+![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.020.png)
 
 Figura 15 – Meta
 
 **Assets variados**
 
-![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.021.png)![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.022.png)![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.023.png)
+![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.021.png)![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.022.png)![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.023.png)
 
 Figura 16 – Pelotas
 
 
-![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.024.png)
+![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.024.png)
 
 Figura 17 – Charco
 
-![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.025.png)![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.026.png) ![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.027.png)![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.028.png)
+![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.025.png)![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.026.png) ![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.027.png)![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.028.png)
 
 Figura 18 - Toallas
 
 #
 
-![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.029.png)
+![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.029.png)
 
 Figura 19 – Arena
 
-![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.030.png)
+![](/Imágenes%20Readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.030.png)
 
 Figura 20 - Botón
 
