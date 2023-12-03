@@ -5,7 +5,7 @@
 
 **By Pixel Pulse Entertainment**
 
-![](Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.001.png)
+![](imagenes_readme/Aspose.Words.3cb98ab1-c34d-40c1-b1e2-11507269131c.001.png)
 
 **Documento de Diseño**
 
