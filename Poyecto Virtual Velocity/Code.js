@@ -12,7 +12,7 @@ var config = {
     scene: {
         preload: preload,
         create: create,
-        update: update
+        update: update,
     }
 };
 
@@ -45,10 +45,12 @@ var J2 = new Jugador(100, 75);
 var back;
 var gameOver = false;
 var juegoPausado = false;
+var J2Win;
 
 var tracks;
 var elements;
 var detection;
+var assets;
 
 var teclaW;
 var teclaA;
@@ -103,6 +105,10 @@ function preload ()
     this.load.image('puddle', 'assets/charco.png');
     this.load.image('mudpuddle', 'assets/charcobarro.png');
 
+    // Agrega esto en la función preload antes de cargar otras imágenes
+    this.load.image('ganaJ1', 'assets/ganaJ1.png');
+    this.load.image('ganaJ2', 'assets/ganaJ2.png');
+
     //powers
     this.load.image('inv', 'assets/inversion.png');
     this.load.image('inv2', 'assets/inversion2.png');
@@ -139,6 +145,11 @@ function create ()
     numVueltasJ2 = 0;
     // Carretera 128
     // Arena 64
+
+
+    this.add.image(544, 390, 'ganaJ1').setScale(0.85, 1.07);
+    J2Win = this.add.image(544, 390, 'ganaJ2').setScale(0.85, 1.07);
+
     back = this.physics.add.staticGroup();
 
     tracks = this.physics.add.staticGroup();  
@@ -146,6 +157,8 @@ function create ()
     elements = this.physics.add.staticGroup();
 
     detection = this.physics.add.staticGroup();
+
+    assets = this.physics.add.staticGroup();
 
     detection.create(192, 512, 'meta').setScale(0.6).refreshBody();
 
@@ -172,7 +185,6 @@ function create ()
     tracks.create(192, 640, 'curva3').setScale(0.4).refreshBody;
     tracks.create(192, 512, 'straight1').setScale(0.4).refreshBody;
     tracks.create(192, 384, 'straight1').setScale(0.4).refreshBody;
-
     
     //Arena
 
@@ -197,11 +209,11 @@ function create ()
 
     elements.create(192, 256, 'meta').setScale(0.28).refreshBody();
 
-    this.add.image(750, 350, 'ball');
-    this.add.image(350, 520, 'ball2');
-    this.add.image(300, 250, 'ball3');
-    this.add.image(835, 135, 'puddle');
-    this.add.image(570, 650, 'mudpuddle');
+    assets.create(750, 350, 'ball');
+    assets.create(350, 520, 'ball2');
+    assets.create(300, 250, 'ball3');
+    assets.create(835, 135, 'puddle');
+    assets.create(570, 650, 'mudpuddle');
 
     //this.add.image(64, 700, 'inv').setScale(0.2);
     
@@ -539,18 +551,11 @@ function controles(J, u, d, l, r,aniLU,aniLD,aniRU,aniRD,aniL,aniR,aniU,aniD){
 
 function verificarFinJuego() {
     if (numVueltasJ1 > vueltasTotales || numVueltasJ2 > vueltasTotales) {
-        if (numVueltasJ1 > vueltasTotales){
-        alert("¡Gana J1, enhorabuena!");
-        }
-        else {
-            alert("¡Gana J2, enhorabuena!");
-        }
-        
-        // Cambia el estado del juego
+        finalizarPartida()
+    
         gameOver = true;
 
-        
-        window.location.href = 'Index.html';
+        //window.location.href = 'Index.html';
     }
 }
 
@@ -635,4 +640,25 @@ function powerTurbo(J){
 function noPowerTurbo(Ju) {
     Ju.vel /= 1.5;
     Ju.velD /= 1.5;
+}
+
+function finalizarPartida() {
+    // Ocultar elementos existentes
+    J1.fisicas.visible = false;
+    J2.fisicas.visible = false;
+    tracks.clear(true, true);
+    elements.clear(true, true);  
+    back.clear(true, true);      
+    detection.clear(true, true);
+    assets.clear(true, true);
+    if(numVueltasJ1 > vueltasTotales){
+        J2Win.setVisible(false);
+    }
+
+    // Mostrar la imagen de fondo para el final del juego
+    //this.add.image(550, 440, 'ganaJ1');
+
+    setTimeout(function() {
+        window.location.href = 'Index.html';
+    }, 5000); 
 }
