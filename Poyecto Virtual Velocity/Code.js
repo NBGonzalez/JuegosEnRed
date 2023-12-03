@@ -25,6 +25,8 @@ class Jugador{
     this.numInver = 1;
     this.cong = false;
     this.numCong = 1;
+    this.turb = false;
+    this.numTurb = 1;
     }
     get velocidad(){
         return this.vel;
@@ -130,7 +132,9 @@ function create ()
     inver = false;
     inver2 = false;
 
-    vueltasTotales = 2;
+    if(vueltasTotales == undefined){
+    vueltasTotales = 3;
+    }
     numVueltasJ1 = 0;
     numVueltasJ2 = 0;
     // Carretera 128
@@ -345,10 +349,15 @@ function create ()
     teclaL = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
     teclaK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
 
+    //teclas power up inversión
     teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
     teclaO = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O);
+    //teclas power up congelación
     teclaR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
     teclaP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
+    //teclas power up turbo
+    teclaT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
+    teclaU = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.U);
 
     this.physics.add.collider(J1.fisicas, back);
     this.physics.add.collider(J2.fisicas, back);
@@ -415,6 +424,14 @@ function update ()
 
     if(teclaP.isDown && J2.numCong == 1){
         powerCongelacion(J1,J2);
+    }
+
+    if(teclaT.isDown && J1.numTurb == 1){
+        powerTurbo(J1);
+    }
+
+    if(teclaU.isDown && J2.numTurb == 1){
+        powerTurbo(J2);
     }
 
     verificarFinJuego();
@@ -559,6 +576,14 @@ function reanudarJuego() {
 //     setTimeout(noPowerInversionJ1, 5000);
 // }
 
+function sonidoPower(ruta) {
+    //Crear un elemento de audio
+    var audio = new Audio(ruta);
+
+    //Reproducir el sonido
+    audio.play();
+}
+
 function powerInversion(J, usu) {
     J.inver = true;
     usu.numInver = 0;
@@ -583,6 +608,7 @@ function noPowerInversion(Ju) {
 // }
 
 function powerCongelacion(J, usu){
+    sonidoPower('assets/congelar.mp3');
     J.vel = 0;
     J.velD = 0;
     usu.numCong = 0;
@@ -592,7 +618,21 @@ function powerCongelacion(J, usu){
 }
 
 function noPowerCongelacion(Ju) {
-    Ju.vel = 75;
-    Ju.velD = 100;
-    //this.add.image(64, 700, 'inv2').setScale(0.2);
+    Ju.vel = 100;
+    Ju.velD = 75;
+}
+
+function powerTurbo(J){
+    sonidoPower('assets/turbo.mp3');
+    J.vel *= 1.5;
+    J.velD *= 1.5;
+    J.numTurb = 0;
+    setTimeout(function() {
+        noPowerTurbo(J);
+    }, 5000);
+}
+
+function noPowerTurbo(Ju) {
+    Ju.vel /= 1.5;
+    Ju.velD /= 1.5;
 }

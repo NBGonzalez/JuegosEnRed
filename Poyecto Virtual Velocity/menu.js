@@ -1,12 +1,78 @@
+
 var musica = document.getElementById('miMusica');
 var sliderVolumen = document.getElementById('sliderVolumen');
 var cargaYaMostrada = sessionStorage.getItem("cargaMostrada");
+var vueltasTotales = 0;
+var vueltasMenuVisible = false;
+var nuevoVolumen;
+
+function aplicarAjustes() {
+    alert("Ajustes aplicados. Vueltas totales: " + vueltasTotales);
+}
+
+function mostrarSelectorVueltas() {
+    const ajustesDiv = document.getElementById("ajustes");
+    const selectVueltas = document.getElementById("selectVueltas");
+    const botonAplicar = document.getElementById("botonAplicarVueltas");
+
+    if (!vueltasMenuVisible) {
+        //Si el menú no está visible, lo mostramos
+        if (!selectVueltas) {
+            //Creamos el menú solo si aún no existe
+            const opcionesVueltas = ["Infinitas", "2", "3", "5", "7"];
+            const select = document.createElement("select");
+            select.id = "selectVueltas";
+
+            opcionesVueltas.forEach(opcion => {
+                const option = document.createElement("option");
+                option.value = opcion;
+                option.text = opcion;
+                select.add(option);
+            });
+
+            select.addEventListener("change", () => {
+                vueltasTotales = parseInt(select.value);
+            });
+
+            //Creamos el botón Aplicar solo si aún no existe
+            if (!botonAplicar) {
+                const botonAplicar = document.createElement("button");
+                botonAplicar.textContent = "Aplicar";
+                botonAplicar.id = "botonAplicarVueltas";
+                botonAplicar.addEventListener("click", () => {
+                    aplicarAjustes();
+                });
+
+                ajustesDiv.appendChild(botonAplicar);
+            }
+
+            ajustesDiv.appendChild(select);
+        }
+
+        vueltasMenuVisible = true;
+    } else {
+        //Si el menú está visible, lo ocultamos
+        if (selectVueltas) {
+            ajustesDiv.removeChild(selectVueltas);
+        }
+        if (botonAplicar) {
+            ajustesDiv.removeChild(botonAplicar);
+        }
+
+        vueltasMenuVisible = false;
+    }
+}
+
+const script = document.currentScript;
+vueltasTotales = script.getAttribute("data-vueltas");
+console.log("Vueltas Totales:", vueltasTotales);
 
 function reproducirMusica() {
     musica.play();
 }
 
 function iniciarJuego() {
+    //mostrarSelectorVueltas();
     cargarJuego();
     reproducirMusica();
 }
@@ -45,8 +111,8 @@ function verCreditos() {
     // alert(mensaje);
     document.getElementById('menu').style.display = 'none';
     document.getElementById('creditos').style.display = 'block';
-    if(musica)
-    reproducirMusica();
+    //if(musica)
+    //reproducirMusica();
 }
 
 function salirDelJuego() {
@@ -66,8 +132,8 @@ function salirDelJuego() {
 //     juego.style.display = 'block';
 
 // }
-
 function verAjustes(){
+    console.log(vueltasTotales);
     document.getElementById('menu').style.display = 'none';
     document.getElementById('ajustes').style.display = 'block';
     //if(!musica.muted)
@@ -99,11 +165,12 @@ function estadoVolumen() {
 }
 
 function cambiarVolumen(){
-    var nuevoVolumen = sliderVolumen.value;
+    nuevoVolumen = sliderVolumen.value;
     musica.volume = nuevoVolumen;
 }
 
 function simularCarga() {
+    reproducirMusica();
     var barraCarga = document.getElementById("barraCarga");
     var porcentaje = 0;
     
@@ -114,7 +181,7 @@ function simularCarga() {
       if (porcentaje >= 100) {
         clearInterval(intervalo);
   
-        // Oculta la pantalla de carga y muestra el juego
+        //Oculta la pantalla de carga y muestra el juego
         document.getElementById("pantallaCarga").style.display = "none";
        
       }
@@ -122,13 +189,12 @@ function simularCarga() {
   }
 
   if (!cargaYaMostrada) {
-    // Si no se ha mostrado, simula la carga del juego
+    //Si no se ha mostrado, simula la carga del juego
     simularCarga();
   
-    // Marca que la pantalla de carga ya se ha mostrado en la sesión actual
+    //Marca que la pantalla de carga ya se ha mostrado en la sesión actual
     sessionStorage.setItem("cargaMostrada", "true");
   } else {
-    // Si ya se mostró, oculta la pantalla de carga y muestra el juego directamente
+    //Si ya se mostró, oculta la pantalla de carga y muestra el juego directamente
     document.getElementById("pantallaCarga").style.display = "none";
-    
   }

@@ -1,7 +1,6 @@
 <!doctype html> 
 <html lang="en"> 
 <head>
-    
     <meta charset="UTF-8" />
     <title>Virtual Velocity: Racing Unleashed</title>
     <audio autoplay id="miMusica" >
@@ -13,14 +12,13 @@
     
 </head>
 <body>
-
-    
     <div id="pantallaCarga">
         <h1>Cargando...</h1>
         <div class="barraCarga" id="barraCarga"></div>
     </div>
 
     <div id="menu">
+        <h1>VIRTUAL VELOCITY: RACING UNLEASHED </h1>
         <button onclick="iniciarJuego()">JUGAR</button>
         <button onclick="verCreditos()">CRÉDITOS</button>
         <button onclick="verAjustes()">AJUSTES</button>
@@ -35,27 +33,35 @@
             <li>ÁNGEL LUIS RODRÍGUEZ OTERO</li>
             <li>ALEJANDRO TOBÍAS MÁRQUEZ</li>
             <li>PABLO PRIOR MOLINA</li>
+            <li></li>
+            <li>BY</li>
+            <img src="assets/PixelPulseLogo.png" alt="Imagen" />
+            <button onclick="volverAlMenu()">MENÚ</button>
         </ul>
-        <button onclick="volverAlMenu()">MENÚ</button>
     </div>
-
+    
     <div id="ajustes" style="display: none;">
-        <button id="sonido" onclick="estadoVolumen()">
-            <img id="imagenAltavoz" src="assets/altavoz.png" alt="Altavoz">
-        </button>
-
-        <input type="range" id="sliderVolumen" min="0" max="1" step="0.01" value="1.0" oninput="cambiarVolumen()">
-        
-        <button onclick="volverAlMenu()">MENÚ</button>
+        <div class="contenido-ajustes">
+            <h2>AJUSTES</h2>
+            <button id="sonido" onclick="estadoVolumen()">
+                <img id="imagenAltavoz" src="assets/altavoz.png" alt="Altavoz">
+            </button>
+            <input type="range" id="sliderVolumen" min="0" max="1" step="0.01" value="1.0" oninput="cambiarVolumen()">
+            <button onclick="mostrarSelectorVueltas()">VUELTAS</button>
+            <button onclick="volverAlMenu()">MENÚ</button>
+        </div>
     </div>
 
     <div id="pausa" style="display: none;">
-        <h2><style></style>¡Juego en pausa!</h2>
-        <button onclick="reanudarJuego()">Reanudar</button>
-        <button onclick="volverDesdePausa()">Volver al menú</button>
+        <h2><style></style>¡PAREN MOTORES!</h2>
+        <button onclick="reanudarJuego()">REANUDAR</button>
+        <button id="sonido" onclick="estadoVolumen()">
+            <img id="imagenAltavoz" src="assets/altavoz.png" alt="Altavoz">
+        </button>
+        <button onclick="volverDesdePausa()">MENÚ</button>
     </div>
 
-    <script src="menu.js"></script>
+    <script src="menu.js" data-vueltas="${vueltasTotales}"></script>
 
 </body>
 </html>

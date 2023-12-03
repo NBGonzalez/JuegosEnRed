@@ -31,14 +31,13 @@
 } */
 
 @font-face {
-    font-family: 'MiFuente'; /* Nombre que asignarás a la fuente */
-    src: url('assets/Symtext.ttf') format('truetype'); /* Ruta a tu archivo de fuente */
-    /* También puedes incluir otros formatos de fuente aquí (e.g., woff, woff2) para mayor compatibilidad */
+    font-family: 'MiFuente'; 
+    src: url('assets/Symtext.ttf') format('truetype'); 
 }
 
 body {
     margin: 0;
-    font-family: 'MiFuente',  sans-serif; /* Utiliza el nombre asignado a la fuente en font-family */
+    font-family: 'MiFuente',  sans-serif; /*Utiliza el nombre asignado a la fuente en font-family*/
     background-color: #333;
     display: flex;
     align-items: center;
@@ -49,29 +48,44 @@ body {
 
 #menu, #creditos, #ajustes {
     text-align: center;
-    margin: 50px auto;
+    margin: 50px;
     width: 1088px;
     height: 768px;
-    background-color: #fff; /* Color de fondo del menú y créditos */
+    background-color: #fff; /*Color de fondo del menú y créditos*/
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra alrededor del menú y créditos */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /*Sombra alrededor del menú y créditos*/
+    color: rgb(255, 255, 255);
+}
+
+#pausa {
+    color: rgb(255, 255, 255);
+    font-size: 30px;
 }
 
 #menu{
-    background-image: url('assets/fondo.jpg');
+    background-image: url('assets/fondoMenu.png');
     background-size: cover;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra los elementos horizontalmente */
-    justify-content: center; /* Centra los elementos verticalmente */
+    align-items: center; 
+    justify-content: center;
+    font-size: 30px;
+    color: rgb(255, 255, 255);
 }
 
-#menu button, button, #ajustes button {
+#creditos img {
+    max-width: 110px; 
+    max-height: 110px; 
+    margin-top: 10px; 
+    margin-bottom: 10px;
+}
+
+#menu button, #creditos button, #ajustes button, #pausa button {
   font-family: 'MiFuente', sans-serif;
   background-color: transparent;
   color: #ffffff;
   font-size: 17px;
-  padding: 15px 70px;
+  padding: 15px 50px;
   cursor: pointer;
   background-image: url('assets/fondobotones.png');
   background-size: auto;
@@ -82,21 +96,35 @@ body {
   box-sizing: border-box;
   height: auto;
   display: block;
-  margin: 20px auto; /* Ajustado para centrar vertical y horizontalmente */
-  align-items: center; /* Centra los elementos horizontalmente */
-  justify-content: center; /* Centra los elementos verticalmente */
+  margin: 20px auto; /*Ajustado para centrar vertical y horizontalmente*/
+  align-items: center; /*Centra los elementos horizontalmente*/
+  justify-content: center; /*Centra los elementos verticalmente*/
 }
 
-#creditos, #ajustes {
+#ajustes button{
+    height: 5vh;
+}
+
+#creditos {
     /*display: none;*/
-    background-image: url('assets/fondo.jpg'); /* Reemplaza 'tu_imagen_de_fondo.jpg' con la ruta de tu imagen */
+    background-image: url('assets/fondoCreditos.jpg'); 
     background-size: cover;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra los elementos horizontalmente */
-    justify-content: center; /* Centra los elementos verticalmente */
+    align-items: center; 
+    justify-content: center;
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+}
 
-    color: rgb(0, 0, 0);
+#ajustes {
+    margin-top: 50px;
+    background-image: url('assets/fondoAjustes.png'); 
+    background-size: cover;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    font-size: 24px;
 }
 
 #listaCreditos {
@@ -104,12 +132,13 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra los elementos horizontalmente */
-    justify-content: center; /* Centra los elementos verticalmente */
-    height: 80%; /* Ocupa toda la altura disponible */
+    align-items: center; /*Centra los elementos horizontalmente*/
+    justify-content: center; /*Centra los elementos verticalmente*/
+    height: 80%; /*Ocupa toda la altura disponibl*/
 }
 
 #listaCreditos li {
+    font-size: 24px;
     margin-bottom: 10px;
 }
 
@@ -127,8 +156,8 @@ body {
     height: auto; 
 } */
 
-button:hover, #menu button:hover, #ajustes button:hover {
-    background-color: #17cc1d;  
+#creditos button:hover, #menu button:hover, #ajustes button:hover, #pausa button:hover {
+    background-color: #5e675e;  
     color: white;
 } 
 
@@ -148,7 +177,7 @@ button:hover, #menu button:hover, #ajustes button:hover {
     transform: translate(-50%, -50%);
   }
 
-  /* Estilo de la pantalla de carga */
+  /*Estilo de la pantalla de carga*/
   #pantallaCarga {
     position: fixed;
     top: 0;
