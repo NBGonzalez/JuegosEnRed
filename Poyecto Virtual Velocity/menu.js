@@ -2,12 +2,12 @@
 var musica = document.getElementById('miMusica');
 var sliderVolumen = document.getElementById('sliderVolumen');
 var cargaYaMostrada = sessionStorage.getItem("cargaMostrada");
-var vueltasTotales = 0;
+var vueltasTotales;
 var vueltasMenuVisible = false;
 var nuevoVolumen;
 
 function aplicarAjustes() {
-    alert("Ajustes aplicados. Vueltas totales: " + vueltasTotales);
+    //lert("Ajustes aplicados. Vueltas totales: " + vueltasTotales);
 }
 
 function mostrarSelectorVueltas() {
@@ -19,7 +19,7 @@ function mostrarSelectorVueltas() {
         //Si el menú no está visible, lo mostramos
         if (!selectVueltas) {
             //Creamos el desplegable solo no existe
-            const opcionesVueltas = ["Infinitas", "2", "3", "5", "7"];
+            const opcionesVueltas = ["-", "2", "3", "5", "7"];
             const select = document.createElement("select");
             select.id = "selectVueltas";
 
@@ -72,7 +72,11 @@ function reproducirMusica() {
 }
 
 function iniciarJuego() {
+    if(vueltasTotales == "${vueltasTotales}"){
+    vueltasTotales = 3;
+    }
     cargarJuego();
+    if(!musica.muted)
     reproducirMusica();
 }
 
@@ -107,9 +111,7 @@ function verControles() {
 }
 
 function salirDelJuego() {
-    if (confirm("¿Estás seguro de que quieres salir del juego?")) {
-        window.close();
-    }
+    window.close();
 }
 
 function verAjustes(){

@@ -146,9 +146,10 @@ function create ()
     inver = false;
     inver2 = false;
 
-    if(vueltasTotales == undefined){
-    vueltasTotales = 3;
-    }
+    // if((vueltasTotales!=2) || (vueltasTotales!=3) || (vueltasTotales!=5) || (vueltasTotales!=7)){
+    // vueltasTotales = 52;
+    // }
+
     numVueltasJ1 = 0;
     numVueltasJ2 = 0;
 
