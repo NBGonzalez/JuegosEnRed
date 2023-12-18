@@ -15,7 +15,7 @@ body {
     margin: 0;
 }
 
-#menu, #creditos, #ajustes, #controles {
+#menu, #creditos, #ajustes, #controles, #inicioSesion, #registro {
     text-align: center;
     margin: 50px;
     width: 1088px;
@@ -31,15 +31,34 @@ body {
     font-size: 24px;
 }
 
-#menu{
+#menu {
     background-image: url('assets/fondoMenu.png');
     background-size: cover;
-    display: flex;
+    /*display: flex;*/
     flex-direction: column;
     align-items: center; 
     justify-content: center;
     font-size: 30px;
     color: rgb(255, 255, 255);
+}
+
+#inicioSesion, #registro {
+    background-image: url('assets/fondoMenu.png');
+    background-size: cover;
+    /*display: flex;*/
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+}
+
+.enlaceIniciarSesion, .enlaceRegistrarse {
+    color: #00cc66; 
+}
+
+.enlaceIniciarSesion:hover, .enlaceRegistrarse:hover {
+    color: red;
 }
 
 #creditos img {
@@ -50,10 +69,10 @@ body {
 }
 
 
-#menu button, #creditos button, #ajustes button, #pausa button, #controles button {
+#menu button, #creditos button, #ajustes button, #pausa button, #controles button, #inicioSesion button, #registro button{
   font-family: 'MiFuente', sans-serif;
   background-color: transparent;
-  color: #ffffff;
+  color: #00cc66;
   font-size: 17px;
   padding: 15px 50px;
   cursor: pointer;
@@ -75,7 +94,7 @@ body {
     height: 5vh;
 }
 
-#creditos {
+#creditos{
     /*display: none;*/
     background-image: url('assets/fondoCreditos.jpg'); 
     background-size: cover;
@@ -124,7 +143,7 @@ body {
     margin-bottom: 10px;
 }
 
-#creditos button:hover, #menu button:hover, #ajustes button:hover, #controles button:hover, #pausa button:hover {
+#creditos button:hover, #menu button:hover, #ajustes button:hover, #controles button:hover, #pausa button:hover, #inicioSesion button:hover, #registro button:hover {
     background-color: #5e675e;  
     color: white;
 } 
