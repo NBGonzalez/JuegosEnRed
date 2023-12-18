@@ -99,6 +99,10 @@ function volverAlMenu() {
 function verCreditos() {
     document.getElementById('menu').style.display = 'none';
     document.getElementById('creditos').style.display = 'block';
+    $(document).ready(function(){
+	console.log('El DOM está cargado')
+	// Acciones sobre el documento
+});
     if(musica)
     reproducirMusica();
 }
@@ -132,7 +136,7 @@ function cargarJuego() {
     gameStyle.href = 'Style.css';
     document.head.appendChild(gameStyle);
 
-    document.getElementById('menu').style.display = 'none';
+    document.getElementById('inicioSesion').style.display = 'none';
 }
 
 function estadoVolumen() {
@@ -180,3 +184,58 @@ function simularCarga() {
     //Si ya se mostró, oculta la pantalla de carga y muestra el juego directamente
     document.getElementById("pantallaCarga").style.display = "none";
   }
+
+  function mostrarInicioSesion() {
+    document.getElementById('registro').style.display = 'none';
+    document.getElementById('inicioSesion').style.display = 'block';
+}
+
+function mostrarRegistro() {
+    document.getElementById('inicioSesion').style.display = 'none';
+    document.getElementById('registro').style.display = 'block';
+}
+
+function irIniciarSesion() {
+    document.getElementById('inicioSesion').style.display = 'block';
+    document.getElementById('menu').style.display = 'none';
+}
+
+function registrar() {
+var name = document.getElementById('nombre').value;
+var contr = document.getElementById('nuevaContrasena').value;
+$.ajax({
+    method: "POST",
+    url: "http://localhost:8080/usuarios", // Asegúrate de usar la URL correcta
+    data: JSON.stringify({ nombre: name, password: contr }),
+    processData: false,
+    headers: {
+        "Content-type": "application/json"
+    }
+}).done(function (data, textStatus, jqXHR) {
+    console.log("Usuario creado con éxito. Nuevo ID: " + data);
+}).fail(function (jqXHR, textStatus, errorThrown) {
+    console.log("Error al crear usuario: " + textStatus + " " + errorThrown);
+    console.log(jqXHR.responseText);
+});
+}
+
+function iniciarSesion() {
+    var usuario = document.getElementById('usuario').value;
+    var contrasena = document.getElementById('contrasena').value;
+
+    $.ajax({
+        method: "POST",
+        url: "http://localhost:8080/usuarios/login",
+        data: JSON.stringify({ nombre: usuario, password: contrasena }),
+        processData: false,
+        headers: {
+            "Content-type": "application/json"
+        }
+    }).done(function (data, textStatus, jqXHR) {
+        console.log("Inicio de sesión exitoso: " + data);
+        iniciarJuego();  // Llama a la función para iniciar el juego
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("Error al iniciar sesión: " + textStatus + " " + errorThrown);
+        console.log(jqXHR.responseText);
+    });
+}

@@ -4,6 +4,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -23,10 +27,15 @@ public class UsuarioController {
     //crear un nuevo usuario
     @PostMapping()
     public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario usuario) {
+    	if (usuarioValido(usuario)) {
     	Long nuevoId = generarNuevoId();
     	usuario.setId(nuevoId);
         usuarios.add(usuario);
+        guardarEnArchivo(usuario);
         return new ResponseEntity<>(usuario, HttpStatus.CREATED);
+    	} else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping()
@@ -102,6 +111,39 @@ public class UsuarioController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    
+    @PostMapping("/login")
+    public ResponseEntity<String> iniciarSesion(@RequestBody Usuario usuario) {
+        if (credencialesValidas(usuario.getNombre(), usuario.getPassword())) {
+            return new ResponseEntity<>("Inicio de sesión exitoso", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Credenciales incorrectas", HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    private boolean credencialesValidas(String usuario, String contrasena) {
+        try {
+            List<String> lines = Files.readAllLines(Paths.get("usuarios.txt"));
+            for (String line : lines) {
+                String[] parts = line.split(" ");
+                if (parts.length == 2) {
+                    String storedUsuario = parts[0].trim();
+                    String storedContrasena = parts[1].trim();
+                    
+                    System.out.println("Stored: " + storedUsuario + " " + storedContrasena);
+                    System.out.println("Provided: " + usuario + " " + contrasena);
+                    
+                    //Verificar si las credenciales coinciden
+                    if (storedUsuario.equals(usuario) && storedContrasena.equals(contrasena)) {
+                        return true;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
    
     
     //Genera un nuevo id y comprueba que no esté siendo utlizado ya
@@ -114,5 +156,18 @@ public class UsuarioController {
             }
         }
     }
+    
+ //Método auxiliar para validar el usuario (valores no nulos)
+    private boolean usuarioValido(Usuario usuario) {
+        return usuario != null && usuario.getNombre() != null && usuario.getPassword() != null;
+    }
+
+private void guardarEnArchivo(Usuario usuario) {
+    try (FileWriter writer = new FileWriter("usuarios.txt", true)) {
+        writer.write(usuario.getNombre() + " " + usuario.getPassword() + "\n");
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
 }
 

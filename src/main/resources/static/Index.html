@@ -6,6 +6,8 @@
     <audio autoplay id="miMusica" loop>
         <source src="assets/musica.mp3" type="audio/mp3">
     </audio>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js">
+	</script>
     <script src="phaser.js"></script>
     <link rel="stylesheet" type="text/css" href="menu.css">
     
@@ -16,9 +18,29 @@
         <div class="barraCarga" id="barraCarga"></div>
     </div>
 
+     <div id="inicioSesion" style="display: none;">
+        <h2>Iniciar Sesión</h2>
+        <label for="usuario">Usuario:</label>
+        <input type="text" id="usuario" name="usuario">
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena">
+        <button onclick="iniciarSesion()">Iniciar</button>
+        <p>¿No tienes una cuenta? <a href="#" onclick="mostrarRegistro()" class="enlaceRegistrarse">Registrarse</a></p>
+    </div>
+
+    <div id="registro" style="display: none;">
+        <h2>Registrarse</h2>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre">
+        <label for="nuevaContrasena">Contraseña:</label>
+        <input type="password" id="nuevaContrasena" name="nuevaContrasena">
+        <button onclick="registrar()">Registrar</button>
+        <p>¿Ya tienes una cuenta? <a href="#" onclick="mostrarInicioSesion()" class="enlaceIniciarSesion">Iniciar Sesión</a></p>
+    </div>
+
     <div id="menu">
         <h1>VIRTUAL VELOCITY: RACING UNLEASHED </h1>
-        <button onclick="iniciarJuego()">JUGAR</button>
+        <button onclick="irIniciarSesion()">JUGAR</button>
         <button onclick="verCreditos()">CRÉDITOS</button>
         <button onclick="verAjustes()">AJUSTES</button>
         <button onclick="verControles()">CONTROLES</button>
