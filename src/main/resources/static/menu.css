@@ -15,7 +15,7 @@ body {
     margin: 0;
 }
 
-#menu, #creditos, #ajustes, #controles, #inicioSesion, #registro {
+#menu, #creditos, #ajustes, #controles, #inicioSesion, #registro, #recuperar, #eliminar {
     text-align: center;
     margin: 50px;
     width: 1088px;
@@ -42,7 +42,7 @@ body {
     color: rgb(255, 255, 255);
 }
 
-#inicioSesion, #registro {
+#inicioSesion, #registro, #recuperar, #eliminar {
     background-image: url('assets/fondoMenu.png');
     background-size: cover;
     /*display: flex;*/
@@ -53,11 +53,11 @@ body {
     color: rgb(255, 255, 255);
 }
 
-.enlaceIniciarSesion, .enlaceRegistrarse {
+.enlaceIniciarSesion, .enlaceRegistrarse, .enlaceOlvidar, .enlaceEliminar {
     color: #00cc66; 
 }
 
-.enlaceIniciarSesion:hover, .enlaceRegistrarse:hover {
+.enlaceIniciarSesion:hover, .enlaceRegistrarse:hover, .enlaceOlvidar:hover, .enlaceEliminar:hover {
     color: red;
 }
 
@@ -69,7 +69,7 @@ body {
 }
 
 
-#menu button, #creditos button, #ajustes button, #pausa button, #controles button, #inicioSesion button, #registro button{
+#menu button, #creditos button, #ajustes button, #pausa button, #controles button, #inicioSesion button, #registro button, #recuperar button, #eliminar button{
   font-family: 'MiFuente', sans-serif;
   background-color: transparent;
   color: #00cc66;
@@ -143,7 +143,7 @@ body {
     margin-bottom: 10px;
 }
 
-#creditos button:hover, #menu button:hover, #ajustes button:hover, #controles button:hover, #pausa button:hover, #inicioSesion button:hover, #registro button:hover {
+#creditos button:hover, #menu button:hover, #ajustes button:hover, #controles button:hover, #pausa button:hover, #inicioSesion button:hover, #registro button:hover, #recuperar button:hover, #eliminar button:hover {
     background-color: #5e675e;  
     color: white;
 } 

@@ -26,6 +26,8 @@
         <input type="password" id="contrasena" name="contrasena">
         <button onclick="iniciarSesion()">Iniciar</button>
         <p>¿No tienes una cuenta? <a href="#" onclick="mostrarRegistro()" class="enlaceRegistrarse">Registrarse</a></p>
+        <p>¿Olvidaste la contraseña? <a href="#" onclick="mostrarOlvidar()" class="enlaceOlvidar">Recuperar</a></p>
+        <p>¿Eliminar cuenta? <a href="#" onclick="mostrarEliminarCuenta()" class="enlaceEliminar">Eliminar</a></p>
     </div>
 
     <div id="registro" style="display: none;">
@@ -35,6 +37,28 @@
         <label for="nuevaContrasena">Contraseña:</label>
         <input type="password" id="nuevaContrasena" name="nuevaContrasena">
         <button onclick="registrar()">Registrar</button>
+        <p>¿Ya tienes una cuenta? <a href="#" onclick="mostrarInicioSesion()" class="enlaceIniciarSesion">Iniciar Sesión</a></p>
+    </div>
+    
+    <div id="recuperar" style="display: none;">
+        <h2>Actualizar Datos</h2>
+        <p><label for="nombre2">Nombre:</label></p>
+        <input type="text" id="nombre2" name="nombre2">
+        <p><label for="nuevoNombre">Nuevo nombre:</label></p>
+        <input type="text" id="nuevoNombre" name="nuevoNombre">
+        <p><label for="nuevaContrasena2">Nueva contraseña:</label></p>
+        <input type="password" id="nuevaContrasena2" name="nuevaContrasena2">
+        <button onclick="actualizarDatos()">Actualizar</button>
+        <p>¿Ya tienes una cuenta? <a href="#" onclick="mostrarInicioSesion()" class="enlaceIniciarSesion">Iniciar Sesión</a></p>
+    </div>
+    
+    <div id="eliminar" style="display: none;">
+        <h2>Eliminar Cuenta</h2>
+        <p><label for="nombre3">Nombre:</label></p>
+        <input type="text" id="nombre3" name="nombre3">
+        <p><label for="contrasena2">Contraseña:</label></p>
+        <input type="password" id="contrasena2" name="contrasena2">
+        <button onclick="eliminarCuenta()">Eliminar</button>
         <p>¿Ya tienes una cuenta? <a href="#" onclick="mostrarInicioSesion()" class="enlaceIniciarSesion">Iniciar Sesión</a></p>
     </div>
 

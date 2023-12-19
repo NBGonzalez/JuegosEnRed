@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
@@ -47,6 +48,62 @@ public class UsuarioController {
         return new ResponseEntity<>(nombres, HttpStatus.OK);
     }
 
+    @PutMapping()
+    public ResponseEntity<Usuario> actualizarNombreYPassword(@RequestBody Map<String, String> datosUsuario) {
+        String nombre = datosUsuario.get("nombre");
+        String nuevoNombre = datosUsuario.get("nuevoNombre");
+        String nuevaContrasena = datosUsuario.get("nuevaContrasena");
+
+        //Validar que los datos no sean nulos
+        if (nombre != null && nuevoNombre != null && nuevaContrasena != null) {
+            //Buscar el usuario por nombre
+            Optional<Usuario> usuarioExistente = usuarios.stream()
+                    .filter(u -> u.getNombre().equalsIgnoreCase(nombre))
+                    .findFirst();
+
+            if (usuarioExistente.isPresent()) {
+                //Actualizar el nombre y la contraseña del usuario existente
+                Usuario usuario = usuarioExistente.get();
+                usuario.setNombre(nuevoNombre);
+                usuario.setPassword(nuevaContrasena);
+
+                //Actualizar en la lista y guardar en el archivo
+                usuarios.remove(usuarioExistente.get());
+                usuarios.add(usuario);
+                actualizarArchivo();
+
+                return new ResponseEntity<>(usuario, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+    
+    @DeleteMapping()
+    public ResponseEntity<Usuario> eliminarUsuarioPorCredenciales(@RequestBody Map<String, String> datosUsuario) {
+    	 String nombre = datosUsuario.get("nombre");
+         String contrasena = datosUsuario.get("contrasena");
+        Optional<Usuario> usuarioExistente = usuarios.stream()
+                .filter(u -> u.getNombre().equals(nombre) && u.getPassword().equals(contrasena))
+                .findFirst();
+
+        if (usuarioExistente.isPresent()) {
+            Usuario usuarioEliminado = usuarioExistente.get();
+            
+            //Eliminar usuario de la lista
+            usuarios.remove(usuarioEliminado);
+
+            //Eliminar usuario del archivo usuarios.txt
+            eliminarUsuarioDeArchivo(usuarioEliminado);
+
+            return new ResponseEntity<>(usuarioEliminado, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
     
     //obtener todos los usuarios
     @GetMapping("/todos")
@@ -157,9 +214,19 @@ public class UsuarioController {
         }
     }
     
- //Método auxiliar para validar el usuario (valores no nulos)
+ //Método auxiliar para validar el usuario (valores no nulos y nombre ya usado)
     private boolean usuarioValido(Usuario usuario) {
-        return usuario != null && usuario.getNombre() != null && usuario.getPassword() != null;
+        //Verifica que el usuario y contraseña no sean nulos
+        if (usuario != null && usuario.getNombre() != null && usuario.getPassword() != null) {
+            //Verifica si ya existe un usuario con el mismo nombre
+            boolean nombreExistente = usuarios.stream()
+                    .anyMatch(u -> u.getNombre().equalsIgnoreCase(usuario.getNombre()));
+
+            //True solo si el nombre no existe ya
+            return !nombreExistente;
+        } else {
+            return false; 
+        }
     }
 
 private void guardarEnArchivo(Usuario usuario) {
@@ -169,5 +236,31 @@ private void guardarEnArchivo(Usuario usuario) {
         e.printStackTrace();
     }
 }
+
+private void actualizarArchivo() {
+    // Actualizar el archivo con la lista de usuarios
+    try (FileWriter writer = new FileWriter("usuarios.txt")) {
+        for (Usuario usuario : usuarios) {
+            writer.write(usuario.getNombre() + " " + usuario.getPassword() + "\n");
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
+//Método para eliminar usuario del archivo usuarios.txt
+private void eliminarUsuarioDeArchivo(Usuario usuario) {
+    try {
+        List<String> lines = Files.readAllLines(Paths.get("usuarios.txt"));
+        List<String> newLines = lines.stream()
+                .filter(line -> !line.startsWith(usuario.getNombre() + " "))
+                .collect(Collectors.toList());
+
+        Files.write(Paths.get("usuarios.txt"), newLines);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
 }
 

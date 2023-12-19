@@ -187,6 +187,8 @@ function simularCarga() {
 
   function mostrarInicioSesion() {
     document.getElementById('registro').style.display = 'none';
+    document.getElementById('recuperar').style.display = 'none';
+    document.getElementById('eliminar').style.display = 'none';
     document.getElementById('inicioSesion').style.display = 'block';
 }
 
@@ -195,28 +197,40 @@ function mostrarRegistro() {
     document.getElementById('registro').style.display = 'block';
 }
 
+function mostrarEliminarCuenta() {
+    document.getElementById('inicioSesion').style.display = 'none';
+    document.getElementById('eliminar').style.display = 'block';
+}
+
 function irIniciarSesion() {
     document.getElementById('inicioSesion').style.display = 'block';
     document.getElementById('menu').style.display = 'none';
 }
 
+function mostrarOlvidar() {
+    document.getElementById('inicioSesion').style.display = 'none';
+    document.getElementById('recuperar').style.display = 'block';
+}
+
+var ip = location.host;
+
 function registrar() {
-var name = document.getElementById('nombre').value;
-var contr = document.getElementById('nuevaContrasena').value;
-$.ajax({
+	var name = document.getElementById('nombre').value;
+	var contr = document.getElementById('nuevaContrasena').value;
+	$.ajax({
     method: "POST",
-    url: "http://localhost:8080/usuarios", // Asegúrate de usar la URL correcta
+    url: 'http://' + ip + '/usuarios',
     data: JSON.stringify({ nombre: name, password: contr }),
     processData: false,
     headers: {
         "Content-type": "application/json"
     }
-}).done(function (data, textStatus, jqXHR) {
+	}).done(function (data, textStatus, jqXHR) {
     console.log("Usuario creado con éxito. Nuevo ID: " + data);
-}).fail(function (jqXHR, textStatus, errorThrown) {
+	}).fail(function (jqXHR, textStatus, errorThrown) {
     console.log("Error al crear usuario: " + textStatus + " " + errorThrown);
     console.log(jqXHR.responseText);
-});
+	});
 }
 
 function iniciarSesion() {
@@ -225,7 +239,7 @@ function iniciarSesion() {
 
     $.ajax({
         method: "POST",
-        url: "http://localhost:8080/usuarios/login",
+        url: 'http://' + ip + '/usuarios/login',
         data: JSON.stringify({ nombre: usuario, password: contrasena }),
         processData: false,
         headers: {
@@ -238,4 +252,50 @@ function iniciarSesion() {
         console.log("Error al iniciar sesión: " + textStatus + " " + errorThrown);
         console.log(jqXHR.responseText);
     });
+    
+    }
+    
+    function actualizarDatos() {
+	console.log("actualizarDatos() llamada");
+    var nombre = document.getElementById('nombre2').value;
+    var nuevoNombre = document.getElementById('nuevoNombre').value;
+    var nuevaContrasena = document.getElementById('nuevaContrasena2').value;
+
+    $.ajax({
+        method: "PUT",
+        url: 'http://' + ip + '/usuarios',
+        data: JSON.stringify({
+            nombre: nombre,
+            nuevoNombre: nuevoNombre,
+            nuevaContrasena: nuevaContrasena
+        }),
+        processData: false,
+        headers: {
+            "Content-type": "application/json"
+        }
+    }).done(function (data, textStatus, jqXHR) {
+        console.log("Actualización exitosa: " + data);
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("Error al actualizar: " + textStatus + " " + errorThrown);
+        console.log(jqXHR.responseText);
+    });
+}
+
+function eliminarCuenta() {
+    var nombre = document.getElementById('nombre3').value;
+    var contrasena = document.getElementById('contrasena2').value;
+
+    $.ajax({
+    method: "DELETE",
+    url: 'http://' + ip + '/usuarios',
+    data: JSON.stringify({ nombre: nombre, contrasena: contrasena }),
+    contentType: "application/json",  // Agregar esta línea
+    success: function (data, textStatus, jqXHR) {
+        console.log("Cuenta eliminada con éxito: " + data);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+        console.log("Error al eliminar cuenta: " + textStatus + " " + errorThrown);
+        console.log(jqXHR.responseText);
+    }
+});
 }
