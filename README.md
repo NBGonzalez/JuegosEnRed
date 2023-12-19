@@ -5,12 +5,12 @@
 
 **By Pixel Pulse Entertainment**
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.001.png)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.001.png)
 
 **Documento de Diseño**
 
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.002.png)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.002.png)
 
 
 **Realizado por:**  
@@ -29,82 +29,84 @@ Universidad Rey Juan Carlos: <infor@urjc.es>
 
 **Índice**
 
-[1. Introducción	2](#_toc760650589)
+[1. Introducción	2](#_toc140920023)
 
-[1.1. Concepto	2](#_toc750658548)
+[1.1. Concepto	2](#_toc452887774)
 
-[1.2. Historia	2](#_toc2099345688)
+[1.2. Historia	2](#_toc1378620082)
 
-[1.3. Características	3](#_toc840192824)
+[1.3. Características	3](#_toc10563714)
 
-[1.4. Género	3](#_toc501438186)
+[1.4. Género	3](#_toc1461029316)
 
-[1.5. Público objetivo	3](#_toc171519107)
+[1.5. Público objetivo	3](#_toc1665913006)
 
-[1.6. Jugabilidad	4](#_toc2070641521)
+[1.6. Jugabilidad	4](#_toc527232306)
 
-[1.7. Estilo Visual	4](#_toc1500156575)
+[1.7. Estilo Visual	4](#_toc1823471646)
 
-[1.8. Alcance	5](#_toc982324615)
+[1.8. Alcance	5](#_toc2097719718)
 
-[2. Gameplay y Mecánicas	5](#_toc341437965)
+[2. Gameplay y Mecánicas	5](#_toc236416201)
 
-[2.1. Controles	5](#_toc860318516)
+[2.1. Controles	5](#_toc1696102155)
 
-[2.2. Tipos de vehículos	6](#_toc94563972)
+[2.2. Tipos de vehículos	6](#_toc1672004414)
 
-[2.3. Power-Ups (Se marcan con estrella los de la primera versión)	6](#_toc1985379286)
+[2.3. Power-Ups (Se marcan con estrella los de la primera versión)	6](#_toc124006497)
 
-[2.5. Físicas	9](#_toc1243824990)
+[2.5. Físicas	8](#_toc146882706)
 
-[3. Requerimientos Tecnológicos	9](#_toc1896077390)
+[3. Requerimientos Tecnológicos	9](#_toc2007401195)
 
-[3.1. Herramientas utilizadas en el juego	9](#_toc918742918)
+[3.1. Herramientas utilizadas en el juego	9](#_toc903645610)
 
-[3.2. Herramientas en el diseño del juego	10](#_toc2081956896)
+[3.2. Herramientas en el diseño del juego	10](#_toc1422700103)
 
-[4. Parte frontal del juego	10](#_toc128131523)
+[4. Parte frontal del juego	10](#_toc539320254)
 
-[4.1. PEGI	10](#_toc1590207834)
+[4.1. PEGI	10](#_toc886502642)
 
-[5. Arte	11](#_toc639930761)
+[5. Arte	11](#_toc1432704042)
 
-[5.1. Arte 2D	11](#_toc1492175136)
+[5.1. Arte 2D	11](#_toc479443312)
 
-[5.2. Diagrama y arte final	15](#_toc1559615353)
+[5.2. Diagrama y arte final	15](#_toc1912209496)
 
-[5.3. Pantallas	17](#_toc2087677034)
+[5.3. Pantallas	17](#_toc1390349588)
 
-[6. Música y efectos de sonido	21](#_toc673705787)
+[6. Música y efectos de sonido	21](#_toc433078535)
 
-[7. Miembros y roles	22](#_toc1771663148)
+[7. Miembros y roles	22](#_toc384681332)
 
-[7.1. Roles	22](#_toc1920845781)
+[7.1. Roles	22](#_toc608295837)
 
-[7.2. GitHub	22](#_toc1514964740)
+[7.2. GitHub	22](#_toc780043794)
 
-[7.3. Correos	22](#_toc457643327)
+[7.3. Correos	22](#_toc1128552145)
 
-
-
-
+[8. Instrucciones Aplicación	22](#_toc1757001073)
 
 
 
 
-# <a name="_toc760650589"></a>**1. Introducción**
+
+
+
+
+# <a name="_toc140920023"></a>**1. Introducción**
 
 En este documento de diseño se presenta el videojuego *Virtual Velocity: Racing Unleashed*. Este título de carreras en 2D con vista cenital para PC y desarrollado en JavaScript, tendrá diferentes y variadas mecánicas para hacer disfrutar a los jugadores. Sirva este escrito como referencia y presentación del propio videojuego.
 
-## <a name="_toc750658548"></a>**1.1. Concepto**
+## <a name="_toc452887774"></a>**1.1. Concepto**
 
 En *Virtual Velocity: Racing Unleashed* se podrá controlar nuestro propio coche de carreras personalizable para poder así sentir y disfrutar la adrenalina de conducir, pero con un toque más animado y arcade. Aquí, se permitirá competir junto a otro usuario gracias al juego en línea multijugador. Gracias al uso de Power-Ups y ventajas otorgadas, cada jugador deberá dar el número de vueltas estipulado en el menor tiempo posible.
 
-## <a name="_toc2099345688"></a>**1.2. Historia**
+## <a name="_toc1378620082"></a>**1.2. Historia**
 
 Racing Unleashed es un torneo clandestino que se celebra cada 10 años a espaldas del mundo real, en él se toman, de manera aleatoria, rehenes para disputar batallas. Hay numerosas carreras de 1vs1 hasta llegar a una gran final (en la que nos centraremos aquí). El que gane la final podrá irse libremente a su hogar y descansar tranquilamente con una gran cantidad de dinero ganado, los que vayan perdiendo en cada ronda, no correrán la misma suerte...
 
-## <a name="_toc840192824"></a>**1.3. Características**
+## <a name="_toc10563714"></a>**1.3. Características**
 
 Las principales características de *Virtual Velocity: Racing Unleashed* son: 
 
@@ -112,7 +114,7 @@ Las principales características de *Virtual Velocity: Racing Unleashed* son:
 - **Frenetismo:** Las carreras rápidas y frenéticas hará que siempre sepa a poco jugar un número de partidas concreto.
 - **Personalización:** En versiones futuras los jugadores podrán personalizar su propio coche de carreras con una gama de opciones, que van desde la selección de colores y diseños hasta diferentes formas de conducción de cada vehículo.
 ##
-## <a name="_toc501438186"></a>**1.4. Género**
+## <a name="_toc1461029316"></a>**1.4. Género**
 
 Es una combinación de varios géneros:
 
@@ -125,11 +127,11 @@ Análogamente, el videojuego entraría dentro de otros subgéneros como:
 - **Multijugador en línea**: La inclusión de modos multijugador hace que se declare este subgénero.
 - **Acción**: Con la utilización de algunos Power-Ups y elementos especiales, entraría un factor de batalla.
 
-## <a name="_toc171519107"></a>**1.5. Público objetivo**
+## <a name="_toc1665913006"></a>**1.5. Público objetivo**
 
 Al contar con partidas cortas, ciertamente frenéticas y sin ningún tipo de violencia explícita, *Virtual Velocity: Racing Unleashed* abarca una gran cantidad de edades a las que va dirigido. Tanto personas más jóvenes y con más tiempo para jugar, como personas más adultas que disponen de un tiempo más reducido, podrán disfrutar del número de partidas que deseen sin que esto afecte a la experiencia y jugabilidad.
 
-## <a name="_toc2070641521"></a>**1.6. Jugabilidad**
+## <a name="_toc527232306"></a>**1.6. Jugabilidad**
 
 En cada circuito y/o partida del videojuego, se tratará, no solo de ganar la carrera, sino también de la forma más divertida posible, siendo este el objetivo a conseguir. Es por ello que se valdrá de los siguiente:
 
@@ -141,25 +143,25 @@ En cada circuito y/o partida del videojuego, se tratará, no solo de ganar la ca
 
 - **Power-ups y elementos especiales:** Para añadir un toque único y emocionante a las carreras, *Virtual Velocity* podría incluir Power-Ups y elementos especiales que los jugadores pueden recoger y usar durante cada carrera. Esto puede hacer que cambie el trascurso y la estrategia de cada partida.
 
-## <a name="_toc1500156575"></a>**1.7. Estilo Visual**
+## <a name="_toc1823471646"></a>**1.7. Estilo Visual**
 
 Se ha decidido que el estilo general de *Virtual Velocity: Racing Unleashed* sea a modo pixel art en 2D (Figura 1). Se optará por un tono más animado y menos realista siguiendo las mecánicas y jugabilidad del videojuego.
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.003.png)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.003.png)
 
 Figura 1 - Estilo visual a asemejarse - [Fuente](https://www.istockphoto.com/es/ilustraciones/pixel-car)
 ##
 
-## <a name="_toc982324615"></a>**1.8. Alcance**
+## <a name="_toc2097719718"></a>**1.8. Alcance**
 
 El videojuego saldrá de inicio con diferentes pistas, coches y diseños, pero no se descarta la introducción de actualizaciones al cabo del tiempo para mejorar y dar más vida a la experiencia.
 
-# <a name="_toc341437965"></a>**2. Gameplay y Mecánicas**
+# <a name="_toc236416201"></a>**2. Gameplay y Mecánicas**
 
 En este apartado se tratará más a fondo la jugabilidad y los distintos elementos básicos y factores que hay en el videojuego. Para ello, se desarrollarán y explicarán los siguientes apartados
 ##
 ##
-## <a name="_toc860318516"></a>**2.1. Controles**
+## <a name="_toc1696102155"></a>**2.1. Controles**
 
 Para *Virtual Velocity: Racing Unleashed* se van a necesitar unos controles básicos para poder moverse a través de los diferentes menús del videojuego como es lógico. Esto se podrá hacer gracias al ratón.
 
@@ -176,7 +178,7 @@ Paralelamente, al disponer de los nombrados Power-Ups, se tendrá un botón de a
 - **J2**: tecla U, O y P
 ##
 
-## <a name="_2.2._tipos_de"></a><a name="_toc94563972"></a>**2.2. Tipos de vehículos**
+## <a name="_2.2._tipos_de"></a><a name="_toc1672004414"></a>**2.2. Tipos de vehículos**
 
 Como se ha comentado anteriormente, en *Virtual Velocity: Racing Unleashed* se dará la opción de manejar distintos tipos de vehículos. En un principio habrá 3 tipos diferentes de manejables, que se irán introduciendo en contenidos adicionales de futuras versiones del videojuego:
 
@@ -186,7 +188,7 @@ Como se ha comentado anteriormente, en *Virtual Velocity: Racing Unleashed* se d
 
 - **Camión (Iron Clad)**: Vehículo pesado donde los haya, pero muy divertido de llevar. Será el más lento de los 3 pero arrasará con todos elementos del circuito y no sufrirá penalizaciones al chocar.
 
-## <a name="_2.3._power-ups"></a><a name="_toc1985379286"></a>**2.3. Power-Ups (Se marcan con estrella los de la primera versión)**
+## <a name="_2.3._power-ups"></a><a name="_toc124006497"></a>**2.3. Power-Ups (Se marcan con estrella los de la primera versión)**
 
 - **Nitro Boost\*:** El vehículo de cada jugador dispondrá de un pequeño turbo que le ayude a ir más rápido por el circuito. 
 
@@ -230,7 +232,7 @@ En un principio se contará con 3 circuitos jugables dentro de *Virtual Velocity
 
 - **Circuito en el bosque encantado**: Un trazado en un bosque mágico con caminos de tierra, setas gigantes y cascadas de agua cristalina.
 
-## <a name="_toc1243824990"></a>**2.5. Físicas**
+## <a name="_toc146882706"></a>**2.5. Físicas**
 
 En *Virtual Velocity: Racing Unleashed* tendremos una vista cenital en todo momento del circuito en el que se está corriendo. En él, como se ha comentado, habrá distintos elementos que supongan obstáculos para los jugadores. Éstos pueden ser impedimentos en forma de objetos sólidos en el camino, que ralenticen los vehículos de los usuarios. Estos objetos tendrán estéticas acordes a cada circuito. Además, los circuitos dispondrán de barreras con las que también se podrá chocar los jugadores, al igual que entre los vehículos que estén sobre el circuito. 
 
@@ -242,9 +244,9 @@ Las colisiones serían:
 
 - Jugador - Jugador
 
-# <a name="_toc1896077390"></a>**3. Requerimientos Tecnológicos**
+# <a name="_toc2007401195"></a>**3. Requerimientos Tecnológicos**
 
-## <a name="_toc918742918"></a>**3.1. Herramientas utilizadas en el juego**
+## <a name="_toc903645610"></a>**3.1. Herramientas utilizadas en el juego**
 
 El juego deberá implementarse con las tecnologías principales abordadas en la asignatura:
 
@@ -262,14 +264,14 @@ Asimismo, se utilizará lo siguiente para el desarrollo del videojuego
 - Microsoft Visual Studio Code.
 - GitHub
 
-## <a name="_toc2081956896"></a>**3.2. Herramientas en el diseño del juego**
+## <a name="_toc1422700103"></a>**3.2. Herramientas en el diseño del juego**
 
 Para realizar los diferentes diseño y prototipos del videojuego se usarán diferentes herramientas de dibujado y edición como:
 
 - Adobe Photoshop 2023
 - Krita
 
-# <a name="_toc128131523"></a>**4. Parte frontal del juego**
+# <a name="_toc539320254"></a>**4. Parte frontal del juego**
 
 En la carátula y menú principal del videojuego se enseñará la siguiente información: Título del mismo con su correspondiente tipografía y diseño y los diferentes menús navegables:
 
@@ -281,19 +283,19 @@ En la carátula y menú principal del videojuego se enseñará la siguiente info
 - **Controles**: Pequeña guía del manejo de los vehículos para cada jugador.
 - ***Salir***: Se permitirá al usuario cerrar el videojuego.
 
-## <a name="_toc1590207834"></a>**4.1. PEGI**
+## <a name="_toc886502642"></a>**4.1. PEGI**
 
 *Virtual Velocity* es un juego pensado para todas las edades en el que no se representa nada de violencia en las carreras.
 
 El juego tendrá una tienda en la que se puedan comprar skins y diseños exclusivos para los coches. Para futuras versiones.
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.004.jpeg)                        ![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.005.jpeg)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.004.jpeg)                        ![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.005.jpeg)
 
 Figura 2 - Pegi
 #
 
 
-# <a name="_toc639930761"></a>**5. Arte**
+# <a name="_toc1432704042"></a>**5. Arte**
 
 El estilo visual de *Virtual Velocity: Racing Unleashed* está diseñado para complementar la experiencia de juego. Como ya se ha mencionado previamente, se ha optado por un estilo de arte *pixel art* en 2D*,* que combina con la jugabilidad animada y arcade del juego. Este enfoque estilístico ha sido elegido para dar al juego un aspecto atractivo y único, manteniendo al mismo tiempo una sensación retro.
 
@@ -301,17 +303,17 @@ Todos los gráficos serán pixel art, tanto vehículos, personajes, circuitos co
 
 La paleta de colores es vibrante, lo que añade profundidad y emoción a los de las carreras. Los diseños de los vehículos reflejan su personalidad y estilo, permitiendo a los jugadores conectarse con sus elecciones.
 
-## <a name="_toc1492175136"></a>**5.1. Arte 2D**
+## <a name="_toc479443312"></a>**5.1. Arte 2D**
 
 Para realizar los [vehículos](#_2.2._tipos_de), pistas o botones se han tomado en cuenta inspiración de distintos juegos como *Mario Kart*, así como buscar referencias por internet (Figuras 3 y 4).
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.006.png)	![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.007.png)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.006.png)	![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.007.png)
 
 Figura 3 - [Vista Cenital	](https://www.artstation.com/artwork/L26G0R)			Figura 4 - [Vehículos](https://www.123rf.com/photo_41826971_pixel-art-game-cars-collection-vector-illustration.html)
 
 Se han cogido ideas para los assets como farolas, señales, o cubos de la primera imagen. Para los power-ups se diseñará cada uno en el estilo de la segunda foto (Figuras 5 y 6).
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.008.png)		![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.009.png)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.008.png)		![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.009.png)
 
 Figura 5 - [Assets	](https://groovymcgee.itch.io/car-game-pixel-art)		 	Figura 6 - [Power-Ups](https://www.pinterest.cl/pin/AWAuqbZ7iO41AmLsg242xPrq-ZvK_2DSh8gEzwq_-RcoP_iNtF_P5gM/)
 
@@ -319,7 +321,7 @@ Figura 5 - [Assets	](https://groovymcgee.itch.io/car-game-pixel-art)		 	Figura 6
 
 Para el diseño de circuitos y el diseño de las interfaces se han cogido referencia de la serie de videojuegos Mario Kart.
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.010.png)		![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.011.png)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.010.png)		![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.011.png)
 
 `          `Figura 7 - [Circuito](https://mario-kart.fandom.com/es/wiki/Circuito_Mario_3)			               Figura 8 -  [Interfaz](https://en.wikipedia.org/wiki/Mario_Kart_DS)
 
@@ -327,7 +329,7 @@ Para el diseño de circuitos y el diseño de las interfaces se han cogido refere
 
 **Interfaz:**
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.012.jpeg)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.012.jpeg)
 
 Figura 9 – Boceto Interfaz
 
@@ -339,67 +341,67 @@ Figura 9 – Boceto Interfaz
 
 **Power-Ups:**
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.013.jpeg)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.013.jpeg)
 
 Figura 10 – Boceto power-ups
 
-## <a name="_toc1559615353"></a>**5.2. Diagrama y arte final**
+## <a name="_toc1912209496"></a>**5.2. Diagrama y arte final**
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.014.png)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.014.png)
 
 Figura 11 – Diagrama de flujo completo
 
 **Coches**
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.015.png)         ![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.016.png)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.015.png)         ![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.016.png)
 
 Figura 12 – Sprites coche J1 y J2
 
 **Carretera**
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.017.png)    ![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.018.png)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.017.png)    ![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.018.png)
 
 Figura 13 – Curvas 
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.019.png)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.019.png)
 
 Figura 14 – Rectas
 
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.020.png)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.020.png)
 
 Figura 15 – Meta
 
 **Assets variados**
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.021.png)![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.022.png)![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.023.png)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.021.png)![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.022.png)![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.023.png)
 
 Figura 16 – Pelotas
 
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.024.png)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.024.png)
 
 Figura 17 – Charco
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.025.png)![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.026.png) ![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.027.png)![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.028.png)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.025.png)![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.026.png) ![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.027.png)![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.028.png)
 
 Figura 18 - Toallas
 
 #
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.029.png)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.029.png)
 
 Figura 19 – Arena
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.030.png)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.030.png)
 
 Figura 20 - Botón
 
-## <a name="_toc2087677034"></a>**5.3. Pantallas**
+## <a name="_toc1390349588"></a>**5.3. Pantallas**
 
 Pantalla inicial con todas las opciones de menú
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.031.png)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.031.png)
 
 Figura 21 - Menú principal
 
@@ -410,13 +412,13 @@ Figura 21 - Menú principal
 
 Pantalla de créditos con los integrantes y equipo
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.032.png)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.032.png)
 
 Figura 22 - Menú créditos
 
 Pantalla con los controles necesarios para controlar los vehículos
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.033.png)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.033.png)
 
 Figura 23 - Menú controles
 
@@ -424,26 +426,51 @@ Figura 23 - Menú controles
 
 Pantalla de ajustes para controlar el volumen y las vueltas a realizar
 
-![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.034.png)
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.034.png)
 
 Figura 24 - Menú ajustes
 
 Pantalla de juego con la disposición de los coches, assets e información adicional.
-# ![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.035.png)
+# ![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.035.png)
 Figura 25 – Pantalla de juego
 
 
 Pantalla de juego en pausa, con opción de reanudar la partida, quitar la música, y volver al menú principal.
-# ![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.036.png)
+# ![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.036.png)
 Figura 26 - Menú de pausa
 
 Pantalla de victoria para cada jugador, en la que por fin escapa del torneo.
-# ![](./Imágenes%20Readme/Aspose.Words.8e938ced-df57-4b68-9fc6-faac33269977.037.png)
+# ![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.037.png)
 Figura 27 – Pantalla de victoria
 
 #
+Pantalla de inicio de sesión donde ingresas el usuario y contraseña. Podrás obtener la ID del usuario, ir a las pantallas de: recuperar, eliminar y registrar, así como iniciar sesión.
 
-# <a name="_toc673705787"></a>**6. Música y efectos de sonido**
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.038.png)
+
+Figura 28 – Pantalla de inicio de sesión
+
+Pantalla de registrarse en la cual podremos introducir un usuario y contraseña nuevos y registrar la información o volver al menú de inicio.
+
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.039.png)
+
+Figura 29 – Pantalla de registro
+
+Pantalla de actualizar datos para poner un nuevo nombre y contraseña a un usuario ya creado.
+
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.040.png)
+
+Figura 30 – Pantalla de actualización de datos
+
+Pantalla para eliminar cuenta a través de un usuario y contraseña existentes.
+
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.041.png)
+
+Figura 31 – Pantalla de eliminar cuenta
+
+
+
+# <a name="_toc433078535"></a>**6. Música y efectos de sonido**
 
 Los sonidos y músicas requeridos para el desarrollo del videojuego se descargarán de páginas libres y sin Copyright:
 
@@ -451,9 +478,9 @@ Los sonidos y músicas requeridos para el desarrollo del videojuego se descargar
 - <https://pixabay.com/es/sound-effects/>
 - <https://www.fiftysounds.com/es/>
 
-# <a name="_toc1771663148"></a>**7. Miembros y roles**
+# <a name="_toc384681332"></a>**7. Miembros y roles**
 
-## <a name="_toc1920845781"></a>**7.1. Roles**
+## <a name="_toc608295837"></a>**7.1. Roles**
 
 **Néstor Bermejillo González:** Programación de mecánicas
 **Antonio Bernal de Celis:** Arte y diseño.
@@ -461,13 +488,13 @@ Los sonidos y músicas requeridos para el desarrollo del videojuego se descargar
 **Alejandro Tobías Márquez:** Programación de objetos y potenciadores.
 **Pablo Prior Molina:** Programación de interfaces.
 
-## <a name="_toc1514964740"></a>**7.2. GitHub**
+## <a name="_toc780043794"></a>**7.2. GitHub**
 
 Repositorio: <https://github.com/NBGonzalez/JuegosEnRed>
 
 ##
 
-## <a name="_toc457643327"></a>**7.3. Correos**
+## <a name="_toc1128552145"></a>**7.3. Correos**
 
 Néstor Bermejillo: <n.bermejillo.2021@alumnos.urjc.es>
 
@@ -482,6 +509,17 @@ Pablo Prior: <p.prior.2019@alumnos.urjc.es>
 Universidad Rey Juan Carlos: <infor@urjc.es>
 
 
+# <a name="_toc1757001073"></a>**8. Instrucciones Aplicación**
+
+Al abrir el proyecto en Spring, se debe acceder a src/main/java ---> com.example.demo y se debe hacer Run As como una Java Application el archivo: VirtualVelocityApplication.java.
+
+La URL para ejecutar el juego sería: <http://localhost:8080/Index.html>
+
+# **9. Diagrama de clases**
+
+En verde se representan las clases de la Api y en blanco las desarrolladas en la fase anterior para el videojuego.
+
+![](Aspose.Words.7efae920-9447-43ae-8987-73fef11e10b7.042.png)
 ||||
 | :- | :-: | -: |
 
