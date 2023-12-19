@@ -99,6 +99,10 @@ function volverAlMenu() {
 function verCreditos() {
     document.getElementById('menu').style.display = 'none';
     document.getElementById('creditos').style.display = 'block';
+    $(document).ready(function(){
+	console.log('El DOM está cargado')
+	// Acciones sobre el documento
+});
     if(musica)
     reproducirMusica();
 }
@@ -183,6 +187,8 @@ function simularCarga() {
 
   function mostrarInicioSesion() {
     document.getElementById('registro').style.display = 'none';
+    document.getElementById('recuperar').style.display = 'none';
+    document.getElementById('eliminar').style.display = 'none';
     document.getElementById('inicioSesion').style.display = 'block';
 }
 
@@ -191,13 +197,166 @@ function mostrarRegistro() {
     document.getElementById('registro').style.display = 'block';
 }
 
-function iniciarSesion() {
+function mostrarEliminarCuenta() {
+    document.getElementById('inicioSesion').style.display = 'none';
+    document.getElementById('eliminar').style.display = 'block';
+}
+
+function irIniciarSesion() {
     document.getElementById('inicioSesion').style.display = 'block';
     document.getElementById('menu').style.display = 'none';
 }
 
+function mostrarOlvidar() {
+    document.getElementById('inicioSesion').style.display = 'none';
+    document.getElementById('recuperar').style.display = 'block';
+}
+
+var ip = location.host;
+
 function registrar() {
-    // Lógica de registro aquí
-    // Puedes acceder a los valores de nombre y nueva contraseña con document.getElementById('nombre').value, document.getElementById('nuevaContrasena').value
-    // Después del registro, puedes redirigir al usuario a la pantalla de inicio de sesión o cargar el juego.
+	var name = document.getElementById('nombre').value;
+	var contr = document.getElementById('nuevaContrasena').value;
+	$.ajax({
+    method: "POST",
+    url: 'http://' + ip + '/usuarios',
+    data: JSON.stringify({ nombre: name, password: contr }),
+    processData: false,
+    headers: {
+        "Content-type": "application/json"
+    }
+	}).done(function (data, textStatus, jqXHR) {
+	document.getElementById('mensajeRegExito').style.display = 'block';
+    console.log("Usuario creado con éxito. Nuevo ID: " + data);
+    setTimeout(function () {
+            mensajeRegExito.style.display = 'none';
+        }, 3000);
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+	document.getElementById('mensajeRegFallido').style.display = 'block';
+    console.log("Error al crear usuario: " + textStatus + " " + errorThrown);
+    console.log(jqXHR.responseText);
+    setTimeout(function () {
+            mensajeRegFallido.style.display = 'none';
+        }, 3000);
+	});
+}
+
+function iniciarSesion() {
+    var usuario = document.getElementById('usuario').value;
+    var contrasena = document.getElementById('contrasena').value;
+
+    $.ajax({
+        method: "POST",
+        url: 'http://' + ip + '/usuarios/login',
+        data: JSON.stringify({ nombre: usuario, password: contrasena }),
+        processData: false,
+        headers: {
+            "Content-type": "application/json"
+        }
+    }).done(function (data, textStatus, jqXHR) {
+        console.log("Inicio de sesión exitoso: " + data);
+        iniciarJuego();  // Llama a la función para iniciar el juego
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+		document.getElementById('mensajeLogFallido').style.display = 'block';
+        console.log("Error al iniciar sesión: " + textStatus + " " + errorThrown);
+        console.log(jqXHR.responseText);
+         setTimeout(function () {
+            mensajeLogFallido.style.display = 'none';
+        }, 3000);
+    });
+    
+    }
+    
+    function actualizarDatos() {
+    console.log("actualizarDatos() llamada");
+    var nombre = document.getElementById('nombre2').value;
+    var nuevoNombre = document.getElementById('nuevoNombre').value;
+    var nuevaContrasena = document.getElementById('nuevaContrasena2').value;
+
+    $.ajax({
+        method: "PUT",
+        url: 'http://' + ip + '/usuarios',
+        data: {
+            nombre: nombre,
+            nuevoNombre: nuevoNombre,
+            nuevaContrasena: nuevaContrasena
+        },
+        success: function (data, textStatus, jqXHR) {
+            document.getElementById('mensajeActExito').style.display = 'block';
+            console.log("Actualización exitosa: " + data);
+            setTimeout(function () {
+                mensajeActExito.style.display = 'none';
+            }, 3000);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            document.getElementById('mensajeActFallido').style.display = 'block';
+            console.log("Error al actualizar: " + textStatus + " " + errorThrown);
+            console.log(jqXHR.responseText);
+            setTimeout(function () {
+                mensajeActFallido.style.display = 'none';
+            }, 3000);
+        }
+    });
+}
+
+function eliminarCuenta() {
+    var nombre = document.getElementById('nombre3').value;
+    var contrasena = document.getElementById('contrasena2').value;
+
+    $.ajax({
+        method: "DELETE",
+        url: 'http://' + ip + '/usuarios',
+        data: {
+            nombre: nombre,
+            contrasena: contrasena
+        },
+        success: function (data, textStatus, jqXHR) {
+            document.getElementById('mensajeEliExito').style.display = 'block';
+            console.log("Cuenta eliminada con éxito: " + data);
+            setTimeout(function () {
+                mensajeEliExito.style.display = 'none';
+            }, 3000);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            document.getElementById('mensajeEliFallido').style.display = 'block';
+            console.log("Error al eliminar cuenta: " + textStatus + " " + errorThrown);
+            console.log(jqXHR.responseText);
+            setTimeout(function () {
+                mensajeEliFallido.style.display = 'none';
+            }, 3000);
+        }
+    });
+}
+
+function obtenerId() {
+	console.log("Obtener ID");
+    var usuario = document.getElementById('usuario').value;
+    var contrasena = document.getElementById('contrasena').value;
+
+    $.ajax({
+        method: "GET",
+        url: 'http://' + ip + '/usuarios/buscarUsuario',
+        data: {
+            nombre: usuario,
+            password: contrasena
+        },
+        headers: {
+            "Content-type": "application/json"
+        }
+    }).done(function (data, textStatus, jqXHR) {
+            console.log("Usuario encontrado. ID: " + data);
+            document.getElementById('mensajeUsuarioEncontrado').style.display = 'block';
+            document.getElementById('idUsuarioEncontrado').innerText = "ID: " + data;
+            setTimeout(function () {
+            document.getElementById('mensajeUsuarioEncontrado').style.display = 'none';
+        }, 3000);
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+		  console.log("Usuario no encontrado.");
+          document.getElementById('mensajeUsuarioNoEncontrado').style.display = 'block'; 
+          console.log("Error al buscar usuario: " + textStatus + " " + errorThrown);
+          console.log(jqXHR.responseText);
+          setTimeout(function () {
+            document.getElementById('mensajeUsuarioNoEncontrado').style.display = 'none';
+        }, 3000);
+    });
 }

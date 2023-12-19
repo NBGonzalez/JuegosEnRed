@@ -6,6 +6,8 @@
     <audio autoplay id="miMusica" loop>
         <source src="assets/musica.mp3" type="audio/mp3">
     </audio>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js">
+	</script>
     <script src="phaser.js"></script>
     <link rel="stylesheet" type="text/css" href="menu.css">
     
@@ -15,6 +17,38 @@
         <h1>Cargando...</h1>
         <div class="barraCarga" id="barraCarga"></div>
     </div>
+    
+    <div id="mensajeRegExito" style="display: none; color: green;">
+    	¡Registro exitoso! Usuario creado con éxito
+	</div>
+	
+	<div id="mensajeRegFallido" style="display: none; color: rgb(255, 0, 0);">
+    	¡Registro fallido! Nombre ya en uso
+	</div>
+	
+	<div id="mensajeLogFallido" style="display: none; color: rgb(255, 0, 0);">
+    	¡Inicio fallido! Nombre o contraseña incorrectos
+	</div>
+	
+	<div id="mensajeActExito" style="display: none; color: rgb(0, 128, 0);">
+    	¡Actualización exitosa! Nombre y contraseña actualizados
+	</div>
+	
+	<div id="mensajeActFallido" style="display: none; color: rgb(255, 0, 0);">
+    	¡Actualización fallida! Nombre incorrecto
+	</div>
+	
+	<div id="mensajeEliExito" style="display: none; color: green;">
+    	¡Usuario eliminado con éxito!
+	</div>
+	
+	<div id="mensajeEliFallido" style="display: none; color: rgb(255, 0, 0);">
+    	¡Eliminación fallida! Nombre o contraseña incorrectos
+	</div>
+	
+	<div id="mensajeUsuarioEncontrado" style="display:none; color: green;">Usuario encontrado. <span id="idUsuarioEncontrado"></span></div>
+	
+	<div id="mensajeUsuarioNoEncontrado" style="display:none; color: rgb(255, 0, 0);">Usuario no encontrado. Nombre o contraseña incorrectos</div>
 
      <div id="inicioSesion" style="display: none;">
         <h2>Iniciar Sesión</h2>
@@ -22,8 +56,11 @@
         <input type="text" id="usuario" name="usuario">
         <label for="contrasena">Contraseña:</label>
         <input type="password" id="contrasena" name="contrasena">
-        <button onclick="iniciarJuego()">Iniciar</button>
+        <button onclick="iniciarSesion()">Iniciar</button>
+        <button onclick="obtenerId()">ID</button>
         <p>¿No tienes una cuenta? <a href="#" onclick="mostrarRegistro()" class="enlaceRegistrarse">Registrarse</a></p>
+        <p>¿Olvidaste la contraseña? <a href="#" onclick="mostrarOlvidar()" class="enlaceOlvidar">Recuperar</a></p>
+        <p>¿Eliminar cuenta? <a href="#" onclick="mostrarEliminarCuenta()" class="enlaceEliminar">Eliminar</a></p>
     </div>
 
     <div id="registro" style="display: none;">
@@ -35,10 +72,32 @@
         <button onclick="registrar()">Registrar</button>
         <p>¿Ya tienes una cuenta? <a href="#" onclick="mostrarInicioSesion()" class="enlaceIniciarSesion">Iniciar Sesión</a></p>
     </div>
+    
+    <div id="recuperar" style="display: none;">
+        <h2>Actualizar Datos</h2>
+        <p><label for="nombre2">Nombre:</label></p>
+        <input type="text" id="nombre2" name="nombre2">
+        <p><label for="nuevoNombre">Nuevo nombre:</label></p>
+        <input type="text" id="nuevoNombre" name="nuevoNombre">
+        <p><label for="nuevaContrasena2">Nueva contraseña:</label></p>
+        <input type="password" id="nuevaContrasena2" name="nuevaContrasena2">
+        <button onclick="actualizarDatos()">Actualizar</button>
+        <p>¿Ya tienes una cuenta? <a href="#" onclick="mostrarInicioSesion()" class="enlaceIniciarSesion">Iniciar Sesión</a></p>
+    </div>
+    
+    <div id="eliminar" style="display: none;">
+        <h2>Eliminar Cuenta</h2>
+        <p><label for="nombre3">Nombre:</label></p>
+        <input type="text" id="nombre3" name="nombre3">
+        <p><label for="contrasena2">Contraseña:</label></p>
+        <input type="password" id="contrasena2" name="contrasena2">
+        <button onclick="eliminarCuenta()">Eliminar</button>
+        <p>¿Ya tienes una cuenta? <a href="#" onclick="mostrarInicioSesion()" class="enlaceIniciarSesion">Iniciar Sesión</a></p>
+    </div>
 
     <div id="menu">
         <h1>VIRTUAL VELOCITY: RACING UNLEASHED </h1>
-        <button onclick="iniciarSesion()">JUGAR</button>
+        <button onclick="irIniciarSesion()">JUGAR</button>
         <button onclick="verCreditos()">CRÉDITOS</button>
         <button onclick="verAjustes()">AJUSTES</button>
         <button onclick="verControles()">CONTROLES</button>
