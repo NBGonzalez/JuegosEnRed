@@ -6,6 +6,21 @@ var vueltasTotales;
 var vueltasMenuVisible = false;
 var nuevoVolumen;
 
+var ip = location.host
+		var connection = new WebSocket('ws://' + ip + '/echo');
+		connection.onopen = function () {
+			connection.send('¡Bienvenido a Virtual Velocity!');
+		}
+		connection.onerror = function(e) {
+			console.log("WS error: " + e);
+		}
+		connection.onmessage = function(msg) {
+			console.log("WS message: " + msg.data);
+		}
+		connection.onclose = function() {
+			console.log("WS conexion cerrada");
+		}
+
 function aplicarAjustes() {
     //lert("Ajustes aplicados. Vueltas totales: " + vueltasTotales);
 }
@@ -226,10 +241,18 @@ function registrar() {
         "Content-type": "application/json"
     }
 	}).done(function (data, textStatus, jqXHR) {
+	document.getElementById('mensajeRegExito').style.display = 'block';
     console.log("Usuario creado con éxito. Nuevo ID: " + data);
+    setTimeout(function () {
+            mensajeRegExito.style.display = 'none';
+        }, 3000);
 	}).fail(function (jqXHR, textStatus, errorThrown) {
+	document.getElementById('mensajeRegFallido').style.display = 'block';
     console.log("Error al crear usuario: " + textStatus + " " + errorThrown);
     console.log(jqXHR.responseText);
+    setTimeout(function () {
+            mensajeRegFallido.style.display = 'none';
+        }, 3000);
 	});
 }
 
@@ -249,14 +272,18 @@ function iniciarSesion() {
         console.log("Inicio de sesión exitoso: " + data);
         iniciarJuego();  // Llama a la función para iniciar el juego
     }).fail(function (jqXHR, textStatus, errorThrown) {
+		document.getElementById('mensajeLogFallido').style.display = 'block';
         console.log("Error al iniciar sesión: " + textStatus + " " + errorThrown);
         console.log(jqXHR.responseText);
+         setTimeout(function () {
+            mensajeLogFallido.style.display = 'none';
+        }, 3000);
     });
     
     }
     
     function actualizarDatos() {
-	console.log("actualizarDatos() llamada");
+    console.log("actualizarDatos() llamada");
     var nombre = document.getElementById('nombre2').value;
     var nuevoNombre = document.getElementById('nuevoNombre').value;
     var nuevaContrasena = document.getElementById('nuevaContrasena2').value;
@@ -264,20 +291,26 @@ function iniciarSesion() {
     $.ajax({
         method: "PUT",
         url: 'http://' + ip + '/usuarios',
-        data: JSON.stringify({
+        data: {
             nombre: nombre,
             nuevoNombre: nuevoNombre,
             nuevaContrasena: nuevaContrasena
-        }),
-        processData: false,
-        headers: {
-            "Content-type": "application/json"
+        },
+        success: function (data, textStatus, jqXHR) {
+            document.getElementById('mensajeActExito').style.display = 'block';
+            console.log("Actualización exitosa: " + data);
+            setTimeout(function () {
+                mensajeActExito.style.display = 'none';
+            }, 3000);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            document.getElementById('mensajeActFallido').style.display = 'block';
+            console.log("Error al actualizar: " + textStatus + " " + errorThrown);
+            console.log(jqXHR.responseText);
+            setTimeout(function () {
+                mensajeActFallido.style.display = 'none';
+            }, 3000);
         }
-    }).done(function (data, textStatus, jqXHR) {
-        console.log("Actualización exitosa: " + data);
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-        console.log("Error al actualizar: " + textStatus + " " + errorThrown);
-        console.log(jqXHR.responseText);
     });
 }
 
@@ -286,16 +319,59 @@ function eliminarCuenta() {
     var contrasena = document.getElementById('contrasena2').value;
 
     $.ajax({
-    method: "DELETE",
-    url: 'http://' + ip + '/usuarios',
-    data: JSON.stringify({ nombre: nombre, contrasena: contrasena }),
-    contentType: "application/json",  // Agregar esta línea
-    success: function (data, textStatus, jqXHR) {
-        console.log("Cuenta eliminada con éxito: " + data);
-    },
-    error: function (jqXHR, textStatus, errorThrown) {
-        console.log("Error al eliminar cuenta: " + textStatus + " " + errorThrown);
-        console.log(jqXHR.responseText);
-    }
-});
+        method: "DELETE",
+        url: 'http://' + ip + '/usuarios',
+        data: {
+            nombre: nombre,
+            contrasena: contrasena
+        },
+        success: function (data, textStatus, jqXHR) {
+            document.getElementById('mensajeEliExito').style.display = 'block';
+            console.log("Cuenta eliminada con éxito: " + data);
+            setTimeout(function () {
+                mensajeEliExito.style.display = 'none';
+            }, 3000);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            document.getElementById('mensajeEliFallido').style.display = 'block';
+            console.log("Error al eliminar cuenta: " + textStatus + " " + errorThrown);
+            console.log(jqXHR.responseText);
+            setTimeout(function () {
+                mensajeEliFallido.style.display = 'none';
+            }, 3000);
+        }
+    });
+}
+
+function obtenerId() {
+	console.log("Obtener ID");
+    var usuario = document.getElementById('usuario').value;
+    var contrasena = document.getElementById('contrasena').value;
+
+    $.ajax({
+        method: "GET",
+        url: 'http://' + ip + '/usuarios/buscarUsuario',
+        data: {
+            nombre: usuario,
+            password: contrasena
+        },
+        headers: {
+            "Content-type": "application/json"
+        }
+    }).done(function (data, textStatus, jqXHR) {
+            console.log("Usuario encontrado. ID: " + data);
+            document.getElementById('mensajeUsuarioEncontrado').style.display = 'block';
+            document.getElementById('idUsuarioEncontrado').innerText = "ID: " + data;
+            setTimeout(function () {
+            document.getElementById('mensajeUsuarioEncontrado').style.display = 'none';
+        }, 3000);
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+		  console.log("Usuario no encontrado.");
+          document.getElementById('mensajeUsuarioNoEncontrado').style.display = 'block'; 
+          console.log("Error al buscar usuario: " + textStatus + " " + errorThrown);
+          console.log(jqXHR.responseText);
+          setTimeout(function () {
+            document.getElementById('mensajeUsuarioNoEncontrado').style.display = 'none';
+        }, 3000);
+    });
 }

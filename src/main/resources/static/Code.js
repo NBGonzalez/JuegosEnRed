@@ -565,6 +565,16 @@ function powerInversion(J, usu) {
     sonidoPower('assets/invertir.mp3');
     J.inver = true;
     usu.numInver = 0;
+
+    // Construir el mensaje de power-up
+    //const mensajePowerUp = {
+       // tipo: 'inversion',
+        //jugador: miID,  // Asegúrate de tener un identificador único para el jugador
+   // };
+
+    // Enviar el mensaje al servidor a través del WebSocket
+    //socket.send(JSON.stringify(mensajePowerUp));
+
     setTimeout(function() {
         noPowerInversion(J);
     }, 5000);

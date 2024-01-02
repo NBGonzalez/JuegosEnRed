@@ -49,25 +49,21 @@ public class UsuarioController {
     }
 
     @PutMapping()
-    public ResponseEntity<Usuario> actualizarNombreYPassword(@RequestBody Map<String, String> datosUsuario) {
-        String nombre = datosUsuario.get("nombre");
-        String nuevoNombre = datosUsuario.get("nuevoNombre");
-        String nuevaContrasena = datosUsuario.get("nuevaContrasena");
-
-        //Validar que los datos no sean nulos
+    public ResponseEntity<Usuario> actualizarNombreYPassword(@RequestParam String nombre, @RequestParam String nuevoNombre, @RequestParam String nuevaContrasena) {
+        // Validar que los datos no sean nulos
         if (nombre != null && nuevoNombre != null && nuevaContrasena != null) {
-            //Buscar el usuario por nombre
+            // Buscar el usuario por nombre
             Optional<Usuario> usuarioExistente = usuarios.stream()
                     .filter(u -> u.getNombre().equalsIgnoreCase(nombre))
                     .findFirst();
 
             if (usuarioExistente.isPresent()) {
-                //Actualizar el nombre y la contraseña del usuario existente
+                // Actualizar el nombre y la contraseña del usuario existente
                 Usuario usuario = usuarioExistente.get();
                 usuario.setNombre(nuevoNombre);
                 usuario.setPassword(nuevaContrasena);
 
-                //Actualizar en la lista y guardar en el archivo
+                // Actualizar en la lista y guardar en el archivo
                 usuarios.remove(usuarioExistente.get());
                 usuarios.add(usuario);
                 actualizarArchivo();
@@ -80,25 +76,38 @@ public class UsuarioController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+
     
     @DeleteMapping()
-    public ResponseEntity<Usuario> eliminarUsuarioPorCredenciales(@RequestBody Map<String, String> datosUsuario) {
-    	 String nombre = datosUsuario.get("nombre");
-         String contrasena = datosUsuario.get("contrasena");
+    public ResponseEntity<Usuario> eliminarUsuarioPorCredenciales(@RequestParam String nombre, @RequestParam String contrasena) {
         Optional<Usuario> usuarioExistente = usuarios.stream()
                 .filter(u -> u.getNombre().equals(nombre) && u.getPassword().equals(contrasena))
                 .findFirst();
 
         if (usuarioExistente.isPresent()) {
             Usuario usuarioEliminado = usuarioExistente.get();
-            
-            //Eliminar usuario de la lista
+
+            // Eliminar usuario de la lista
             usuarios.remove(usuarioEliminado);
 
-            //Eliminar usuario del archivo usuarios.txt
+            // Eliminar usuario del archivo usuarios.txt
             eliminarUsuarioDeArchivo(usuarioEliminado);
 
             return new ResponseEntity<>(usuarioEliminado, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    @GetMapping("/buscarUsuario")
+    public ResponseEntity<Long> buscarUsuarioPorCredenciales(@RequestParam String nombre, @RequestParam String password) {
+        Optional<Usuario> usuarioExistente = usuarios.stream()
+                .filter(u -> u.getNombre().equals(nombre) && u.getPassword().equals(password))
+                .findFirst();
+
+        if (usuarioExistente.isPresent()) {
+            return new ResponseEntity<>(usuarioExistente.get().getId(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
