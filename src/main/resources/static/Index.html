@@ -49,6 +49,13 @@
 	<div id="mensajeUsuarioEncontrado" style="display:none; color: green;">Usuario encontrado. <span id="idUsuarioEncontrado"></span></div>
 	
 	<div id="mensajeUsuarioNoEncontrado" style="display:none; color: rgb(255, 0, 0);">Usuario no encontrado. Nombre o contraseña incorrectos</div>
+	
+	 <div id="chat"></div>
+    <div id="chat2" style="display: none;">
+        <!--<input type="text" id="remitente" placeholder="Tu nombre">-->
+        <input type="text" id="contenido" placeholder="Escribe tu mensaje">
+        <button onclick="enviarMensaje()">Enviar</button>
+    </div>
 
      <div id="inicioSesion" style="display: none;">
         <h2>Iniciar Sesión</h2>
@@ -161,6 +168,54 @@
     </div>
 
     <script src="menu.js" data-vueltas="${vueltasTotales}"></script>
+
+	<script>
+    function cargarMensajes() {
+    console.log('mensaje cargado');
+    $.ajax({
+        method: "GET",
+        url: "/mensajes",
+        dataType: "json",
+        success: function (mensajes) {
+            $("#chat").empty();
+            mensajes.forEach(function (mensaje) {
+                $("#chat").append("<p><strong>" + mensaje.remitente + ":</strong> " + mensaje.contenido + "</p>");
+            });
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Error al cargar mensajes: " + textStatus + " " + errorThrown);
+            console.log(jqXHR.responseText);
+        }
+    });
+}
+
+function enviarMensaje() {
+    var remitente = document.getElementById('usuario').value;
+    var contenido = document.getElementById('contenido').value;
+
+    if (remitente && contenido) {
+        var mensaje = { remitente: remitente, contenido: contenido };
+        $.ajax({
+            method: "POST",
+            url: "/mensajes",
+            data: JSON.stringify(mensaje),
+            processData: false,
+            contentType: "application/json",
+            success: function () {
+                cargarMensajes();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error al enviar mensaje: " + textStatus + " " + errorThrown);
+                console.log(jqXHR.responseText);
+            }
+        });
+    }
+}
+
+	$(document).ready(function () {
+    	cargarMensajes();
+	});
+  </script>
 
 </body>
 </html>

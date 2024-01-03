@@ -60,6 +60,11 @@ var tracks;
 var elements;
 var detection;
 var assets;
+var icons;
+
+var icTurb;
+var icInv;
+var icCong;
 
 var teclaW;
 var teclaA;
@@ -70,6 +75,8 @@ var teclaI;
 var teclaJ;
 var teclaL;
 var teclaK;
+
+var teclaC;
 
 var teclaE;
 
@@ -119,6 +126,8 @@ function preload ()
     this.load.image('towell2', 'assets/toalla3.png');
     this.load.image('towell3', 'assets/toalla4.png');
     this.load.image('interface', 'assets/interfaz.png');
+    this.load.image('box', 'assets/cajaPower.png');
+    this.load.image('box2', 'assets/cajaVueltas.png');
 
     //imágenes de victoria
     this.load.image('ganaJ1', 'assets/ganaJ1.png');
@@ -133,6 +142,12 @@ function preload ()
     this.load.spritesheet('car2ver', 'assets/spritesheetvertical2.png', { frameWidth: 28, frameHeight: 49 });
     this.load.spritesheet('car2hor', 'assets/spritesheethorizontal2.png', { frameWidth: 49, frameHeight: 28 });
     this.load.spritesheet('car2dia', 'assets/spritesheetdiagonal2.png', { frameWidth: 43, frameHeight: 45 });
+    
+    //power-ups
+    this.load.image('icCong', 'assets/pistolacongelacion.png');
+    this.load.image('icTurb', 'assets/turbo.png');
+    this.load.image('icInv', 'assets/inversion.png');
+    
 }
 
 function create ()
@@ -165,9 +180,11 @@ function create ()
     detection = this.physics.add.staticGroup();
 
     assets = this.physics.add.staticGroup();
+    
+    icons = this.physics.add.staticGroup();
 
     detection.create(192, 512, 'meta').setScale(0.6).refreshBody();
-
+	
     //Circuito
     tracks.create(192, 256, 'straight1').setScale(0.4).refreshBody;
     tracks.create(192, 128, 'curva2').setScale(0.4).refreshBody;
@@ -217,14 +234,24 @@ function create ()
 
     assets.create(750, 350, 'ball');
     assets.create(350, 520, 'ball2');
-    assets.create(70, 250, 'ball3');
+    assets.create(70, 700, 'ball3');
     assets.create(835, 135, 'puddle');
     assets.create(570, 650, 'mudpuddle');
     assets.create(544, 384, 'betis');
     assets.create(830, 520, 'towell');
     assets.create(64, 490, 'towell2');
     assets.create(300, 265, 'towell3');
-    assets.create(544, 384, 'interface');
+    //assets.create(544, 384, 'interface');
+    assets.create(60, 150, 'box');
+    assets.create(60, 250, 'box');
+    assets.create(60, 350, 'box');
+    assets.create(136, 30, 'box2').setScale(3, 0.6);
+    assets.create(948, 30, 'box2').setScale(3.1, 0.6);
+    
+    //iconos power-up
+    icTurb = icons.create(60, 150, 'icTurb');
+	icInv = icons.create(60, 250, 'icInv');
+	icCong = icons.create(60, 350, 'icCong');
     
     //Animaciones rectas coche 1
 
@@ -371,6 +398,9 @@ function create ()
     //teclas power up turbo
     teclaQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
     teclaU = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.U);
+    
+    //tecla chat
+    teclaC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
 
     this.physics.add.collider(J1.fisicas, back);
     this.physics.add.collider(J2.fisicas, back);
@@ -381,8 +411,8 @@ function create ()
     this.physics.add.overlap(J1.fisicas, detection, cambiarJ1, null, this);
     this.physics.add.overlap(J2.fisicas, detection, cambiarJ2, null, this);
 
-    numVueltasJ1Text = this.add.text(16, 16, 'J1 Vueltas: 1/' + vueltasTotales, { fontSize: '32px', fill: '#000' });
-    numVueltasJ2Text = this.add.text(800, 16, 'J2 Vueltas: 1/' + vueltasTotales, { fontSize: '32px', fill: '#000' });
+    numVueltasJ1Text = this.add.text(24, 8, 'J1 Vueltas: 1/' + vueltasTotales, { fontSize: '32px', fill: '#000' });
+    numVueltasJ2Text = this.add.text(834, 10, 'J2 Vueltas: 1/' + vueltasTotales, { fontSize: '32px', fill: '#000' });
     numVueltasJ1Text.setStyle(estilo1);
     numVueltasJ2Text.setStyle(estilo2);
 }
@@ -432,10 +462,12 @@ function update ()
 
     verificarFinJuego();
     document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-            pausarJuego();
-        }
-    });
+    if (event.key === 'Escape') {
+        pausarJuego();
+    }else if(teclaC.isDown){
+		verChat();	
+	}
+	});
         }
     }
 }
@@ -553,6 +585,12 @@ function reanudarJuego() {
     juegoPausado = false;
 }
 
+function verChat() {  
+    // Ocultar el menú de pausa
+    document.getElementById('chat2').style.display = 'block';
+    juegoPausado = true;
+}
+
 function sonidoPower(ruta) {
     //elemento de audio
     var audio = new Audio(ruta);
@@ -565,7 +603,7 @@ function powerInversion(J, usu) {
     sonidoPower('assets/invertir.mp3');
     J.inver = true;
     usu.numInver = 0;
-
+    icInv.setVisible(false);
     // Construir el mensaje de power-up
     //const mensajePowerUp = {
        // tipo: 'inversion',
@@ -589,6 +627,7 @@ function powerCongelacion(J, usu){
     J.vel = 0;
     J.velD = 0;
     usu.numCong = 0;
+    icCong.setVisible(false);
     setTimeout(function() {
         noPowerCongelacion(J);
     }, 5000);
@@ -604,6 +643,7 @@ function powerTurbo(J){
     J.vel *= 1.5;
     J.velD *= 1.5;
     J.numTurb = 0;
+    icTurb.setVisible(false);
     setTimeout(function() {
         noPowerTurbo(J);
     }, 5000);
@@ -623,6 +663,7 @@ function finalizarPartida() {
     back.clear(true, true);      
     detection.clear(true, true);
     assets.clear(true, true);
+    icons.clear(true, true);
     numVueltasJ1Text.setVisible(false);
     numVueltasJ2Text.setVisible(false);
     sonidoPower('assets/final.mp3')

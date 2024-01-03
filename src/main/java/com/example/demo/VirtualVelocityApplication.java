@@ -10,7 +10,20 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 
 @SpringBootApplication
 @EntityScan(basePackages = {"com.example.demo"})
-public class VirtualVelocityApplication {
+@EnableWebSocket
+public class VirtualVelocityApplication implements WebSocketConfigurer {
+	
+	@Override
+	public void registerWebSocketHandlers(
+		WebSocketHandlerRegistry registry) {
+		registry.addHandler(echoHandler(), "/echo")
+			.setAllowedOrigins("*");
+	}
+	
+	@Bean
+	public WebsocketEchoHandler echoHandler() {
+		return new WebsocketEchoHandler();
+	}
 	
 	public static void main(String[] args) {
 		SpringApplication.run(VirtualVelocityApplication.class, args);

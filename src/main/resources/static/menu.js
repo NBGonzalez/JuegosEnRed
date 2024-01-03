@@ -9,7 +9,7 @@ var nuevoVolumen;
 var ip = location.host
 		var connection = new WebSocket('ws://' + ip + '/echo');
 		connection.onopen = function () {
-			connection.send('¡Bienvenido a Virtual Velocity!');
+			connection.send('¡Bienvenido/a a Virtual Velocity!');
 		}
 		connection.onerror = function(e) {
 			console.log("WS error: " + e);
@@ -142,6 +142,7 @@ function verAjustes(){
 }
 
 function cargarJuego() {
+	//document.getElementById('chat2').style.display = 'block';
     var gameScript = document.createElement('script');
     gameScript.src = 'Code.js';
     document.head.appendChild(gameScript);
