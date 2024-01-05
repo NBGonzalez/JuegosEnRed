@@ -50,11 +50,13 @@
 	
 	<div id="mensajeUsuarioNoEncontrado" style="display:none; color: rgb(255, 0, 0);">Usuario no encontrado. Nombre o contraseña incorrectos</div>
 	
+	<div id="chat-container">
 	 <div id="chat"></div>
     <div id="chat2" style="display: none;">
         <!--<input type="text" id="remitente" placeholder="Tu nombre">-->
         <input type="text" id="contenido" placeholder="Escribe tu mensaje">
         <button onclick="enviarMensaje()">Enviar</button>
+    </div>
     </div>
 
      <div id="inicioSesion" style="display: none;">
@@ -171,7 +173,7 @@
 
 	<script>
     function cargarMensajes() {
-    console.log('mensaje cargado');
+    //console.log('mensaje cargado');
     $.ajax({
         method: "GET",
         url: "/mensajes",
@@ -179,7 +181,8 @@
         success: function (mensajes) {
             $("#chat").empty();
             mensajes.forEach(function (mensaje) {
-                $("#chat").append("<p><strong>" + mensaje.remitente + ":</strong> " + mensaje.contenido + "</p>");
+                var mensajeHTML = "<p><strong style='color: red;'>" + mensaje.remitente + ":</strong> <span style='color: white;'>" + mensaje.contenido + "</span></p>";
+                $("#chat").append(mensajeHTML);
             });
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -192,7 +195,8 @@
 function enviarMensaje() {
     var remitente = document.getElementById('usuario').value;
     var contenido = document.getElementById('contenido').value;
-
+	console.log(remitente + ': ' + contenido);
+	
     if (remitente && contenido) {
         var mensaje = { remitente: remitente, contenido: contenido };
         $.ajax({

@@ -104,6 +104,21 @@ var musica = document.getElementById('miMusica');
 
 var game = new Phaser.Game(config);
 
+var ip = location.host
+var connection = new WebSocket('ws://' + ip + '/echo');
+connection.onopen = function () {
+	connection.send('¡Bienvenido/a a Virtual Velocity!');
+}
+connection.onerror = function(e) {
+	console.log("WS error: " + e);
+}
+connection.onmessage = function(msg) {
+	console.log("WS message: " + msg.data);
+}
+connection.onclose = function() {
+	console.log("WS conexion cerrada");
+}
+
 function preload ()
 {
     //elememtos pista
@@ -459,7 +474,7 @@ function update ()
     if(teclaU.isDown && J2.numTurb == 1){
         powerTurbo(J2);
     }
-
+	cargarMensajes();
     verificarFinJuego();
     document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
@@ -588,7 +603,7 @@ function reanudarJuego() {
 function verChat() {  
     // Ocultar el menú de pausa
     document.getElementById('chat2').style.display = 'block';
-    juegoPausado = true;
+    //juegoPausado = true;
 }
 
 function sonidoPower(ruta) {

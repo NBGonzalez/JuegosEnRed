@@ -6,21 +6,6 @@ var vueltasTotales;
 var vueltasMenuVisible = false;
 var nuevoVolumen;
 
-var ip = location.host
-		var connection = new WebSocket('ws://' + ip + '/echo');
-		connection.onopen = function () {
-			connection.send('¡Bienvenido/a a Virtual Velocity!');
-		}
-		connection.onerror = function(e) {
-			console.log("WS error: " + e);
-		}
-		connection.onmessage = function(msg) {
-			console.log("WS message: " + msg.data);
-		}
-		connection.onclose = function() {
-			console.log("WS conexion cerrada");
-		}
-
 function aplicarAjustes() {
     //lert("Ajustes aplicados. Vueltas totales: " + vueltasTotales);
 }

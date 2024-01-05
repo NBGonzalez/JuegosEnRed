@@ -20,7 +20,7 @@ public class MensajeController {
     //Agregar un mensaje al chat
     @PostMapping(consumes = "application/json")
     public ResponseEntity<Mensaje> agregarMensaje(@RequestBody Mensaje mensaje) {
-    	System.out.println("mensaje enviado2");
+    	System.out.println(mensaje.getRemitente() + ": " + mensaje.getContenido());
         mensajes.add(mensaje);
         return new ResponseEntity<>(mensaje, HttpStatus.CREATED);
     }
@@ -28,7 +28,6 @@ public class MensajeController {
     //Obtener todos los mensajes del chat
     @GetMapping()
     public ResponseEntity<List<Mensaje>> obtenerMensajes() {
-    	System.out.println("mensaje cargado2");
         return new ResponseEntity<>(mensajes, HttpStatus.OK);
     }
 }

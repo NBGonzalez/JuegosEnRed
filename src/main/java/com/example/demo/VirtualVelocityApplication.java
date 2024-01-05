@@ -14,10 +14,8 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 public class VirtualVelocityApplication implements WebSocketConfigurer {
 	
 	@Override
-	public void registerWebSocketHandlers(
-		WebSocketHandlerRegistry registry) {
-		registry.addHandler(echoHandler(), "/echo")
-			.setAllowedOrigins("*");
+	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+		registry.addHandler(echoHandler(), "/echo").setAllowedOrigins("*");
 	}
 	
 	@Bean
