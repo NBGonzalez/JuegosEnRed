@@ -1,3 +1,4 @@
+//$(document).ready(function () {
 var config = {
     type: Phaser.AUTO,
     width: 1088,
@@ -27,6 +28,7 @@ class Jugador{
     this.numCong = 1;
     this.turb = false;
     this.numTurb = 1;
+    this.animacionActual = null;
     }
     get velocidad(){
         return this.vel;
@@ -49,7 +51,10 @@ var estilo2 = {
 };
 
 var J1 = new Jugador(100, 75);
+J1.nombre = 'J1';
+
 var J2 = new Jugador(100, 75);
+J2.nombre = 'J2'
 
 var back;
 var gameOver = false;
@@ -228,6 +233,7 @@ function create ()
 
     //Llena la pantalla con bloques de arena
     for (let row = 32; row < 1088; row += 64) {
+		console.log('arena87');
         for (let col = 32; col < 768; col += 64) {
             let overlappingTrack = false;
 
@@ -474,6 +480,8 @@ function update ()
     if(teclaU.isDown && J2.numTurb == 1){
         powerTurbo(J2);
     }
+    
+    
 	cargarMensajes();
     verificarFinJuego();
     document.addEventListener('keydown', function(event) {
@@ -483,6 +491,10 @@ function update ()
 		verChat();	
 	}
 	});
+	document.addEventListener('keydown', function() {
+    enviarPosicionesAlServidor(J1);
+    enviarPosicionesAlServidor(J2)
+    });
         }
     }
 }
@@ -513,6 +525,15 @@ function cambiarJ2(){
 
 //función de los controles con jugador, teclas y animaciones
 function controles(J, u, d, l, r,aniLU,aniLD,aniRU,aniRD,aniL,aniR,aniU,aniD){
+	 const mensaje = {
+        tipo: 'movimiento',
+        jugador: J.nombre,  // Agregar el nombre del jugador al mensaje
+        direccion: { izquierda: l.isDown, derecha: r.isDown, arriba: u.isDown, abajo: d.isDown },
+        posicion: { x: J.fisicas.x, y: J.fisicas.y }
+    };
+    //console.log('entra2');
+    connection.send(JSON.stringify(mensaje));
+	
     if(l.isDown && u.isDown)
     {
         J.fisicas.anims.play(aniLU, true);
@@ -577,6 +598,7 @@ function controles(J, u, d, l, r,aniLU,aniLD,aniRU,aniRD,aniL,aniR,aniU,aniD){
         J.fisicas.setVelocityY(0);
         //J1.angle = 0;
     } 
+    
 }
 
 function verificarFinJuego() {
@@ -627,7 +649,10 @@ function powerInversion(J, usu) {
 
     // Enviar el mensaje al servidor a través del WebSocket
     //socket.send(JSON.stringify(mensajePowerUp));
-
+    document.getElementById('mensajePelota').style.display = 'block';
+	 setTimeout(function () {
+            document.getElementById('mensajePelota').style.display = 'none';
+        }, 3000);
     setTimeout(function() {
         noPowerInversion(J);
     }, 5000);
@@ -691,3 +716,98 @@ function finalizarPartida() {
         window.location.href = 'Index.html';
     }, 5000); 
 }
+
+function enviarPosicionesAlServidor(J) {
+    const mensaje = {
+        tipo: 'posicion',
+        jugador: J.nombre,
+        posicion: { x: J.fisicas.x, y: J.fisicas.y },
+        velocidad: { velX: J.fisicas.body.velocity.x, velY: J.fisicas.body.velocity.y },
+        animacion: { currentAnim: J.animacionActual }
+
+
+
+        //animacion: {anim: J.fisicas.anims}
+    };
+    connection.send(JSON.stringify(mensaje));
+}
+
+connection.onmessage = function (msg) {
+    var mensaje = JSON.parse(msg.data);
+
+    switch (mensaje.tipo) {
+        case 'posicion':
+            actualizarPosicionJugador(mensaje.jugador, mensaje.posicion, mensaje.velocidad, mensaje.animacion);
+            //controles(mensaje.jugador, teclaW, teclaS, teclaA, teclaD,'leftup','leftdown','rightup','rightdown','left','right','up','down')
+            break;
+        // otros casos...
+    }
+}
+
+function actualizarPosicionJugador(nombreJugador, posicion, velocidad, animacion) {
+    if (nombreJugador === 'J1' && J1.fisicas) {
+        J1.fisicas.setPosition(posicion.x, posicion.y);
+        J1.fisicas.setVelocityX(velocidad.velX);
+        J1.fisicas.setVelocityY(velocidad.vely);
+        J1.animacionActual = animacion.currentAnim;
+        //J1.fisicas.anims.play(animacion, true);
+    } else if (nombreJugador === 'J2' && J2.fisicas) {
+        J2.fisicas.setPosition(posicion.x, posicion.y);
+        J2.fisicas.setVelocityX(velocidad.velX);
+        J2.fisicas.setVelocityY(velocidad.vely);
+        J2.animacionActual = animacion.currentAnim;
+        //J2.fisicas.anims.play(animacion, true);
+    }
+}
+
+
+/*connection.onmessage = function (msg) {
+    var data = JSON.parse(msg.data);
+    if (data.tipo === 'movimiento') {
+        // Actualizar el movimiento del coche en el juego
+        actualizarMovimiento(data);
+    } else {
+        // Otro tipo de mensajes si es necesario
+    }
+};
+
+function actualizarMovimiento(data) {
+    // Obtener la dirección del movimiento del mensaje
+    const direccion = data.direccion;
+
+    // Obtener el jugador del mensaje
+    const jugador = data.jugador;
+
+    // Obtener el objeto del jugador correspondiente
+    let jugadorObj;
+    if (jugador === 'J1') {
+        jugadorObj = J1;
+    } else if (jugador === 'J2') {
+        jugadorObj = J2;
+    } else {
+        jugadorObj = J1;
+    }
+
+    // Actualizar la posición del jugador en el juego según la dirección del mensaje
+    if (direccion.izquierda && direccion.arriba) {
+        controles(jugadorObj, teclaW, teclaS, teclaA, teclaD,'leftup','leftdown','rightup','rightdown','left','right','up','down');
+    } else if (direccion.izquierda && direccion.abajo) {
+        controles(jugadorObj, teclaW, teclaS, teclaA, teclaD,'leftup','leftdown','rightup','rightdown','left','right','up','down');
+    } else if (direccion.derecha && direccion.arriba) {
+        controles(jugadorObj, teclaW, teclaS, teclaA, teclaD,'leftup','leftdown','rightup','rightdown','left','right','up','down');
+    } else if (direccion.derecha && direccion.abajo) {
+        controles(jugadorObj, teclaW, teclaS, teclaA, teclaD,'leftup','leftdown','rightup','rightdown','left','right','up','down');
+    } else if (direccion.izquierda) {
+        controles(jugadorObj, teclaW, teclaS, teclaA, teclaD,'leftup','leftdown','rightup','rightdown','left','right','up','down');
+    } else if (direccion.derecha) {
+        controles(jugadorObj, teclaW, teclaS, teclaA, teclaD,'leftup','leftdown','rightup','rightdown','left','right','up','down');
+    } else if (direccion.arriba) {
+        controles(jugadorObj, teclaW, teclaS, teclaA, teclaD,'leftup','leftdown','rightup','rightdown','left','right','up','down');
+    } else if (direccion.abajo) {
+        controles(jugadorObj, teclaW, teclaS, teclaA, teclaD,'leftup','leftdown','rightup','rightdown','left','right','up','down');
+    } else {
+        // Si no hay ninguna dirección, detener el movimiento del jugador
+        jugadorObj.fisicas.setVelocity(0, 0);
+    }
+}*/
+//});

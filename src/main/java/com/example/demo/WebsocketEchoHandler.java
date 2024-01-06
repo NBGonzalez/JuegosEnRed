@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -24,10 +25,34 @@ private Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
 		sessions.remove(session.getId());
 	}
 	
-	@Override
+	/*@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		System.out.println("Message received: " + message.getPayload());
 		String msg = message.getPayload();
-		session.sendMessage(new TextMessage(msg));
+		//session.sendMessage(new TextMessage(msg));
+		//broadcastMessage(msg);
+	}
+	
+	private void broadcastMessage(String message) {
+        for (WebSocketSession session : sessions.values()) {
+            try {
+                session.sendMessage(new TextMessage(message));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }*/
+	
+	@Override
+	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+		sendOtherParticipants(session, message.getPayload());
+	}
+
+	private void sendOtherParticipants(WebSocketSession session, String payload) throws IOException {
+		for(WebSocketSession participant : sessions.values()) {
+			if(!participant.getId().equals(session.getId())) {
+				participant.sendMessage(new TextMessage(payload));
+			}
+		}
 	}
 }
