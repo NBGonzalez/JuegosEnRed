@@ -6,6 +6,7 @@ public class Usuario {
     private Long id;
     private String nombre;
     private String password;
+    private boolean sesionIniciada = false;
 
     public Usuario() {
     }
@@ -27,6 +28,10 @@ public class Usuario {
         return id;
     }
     
+    public boolean getSesionIniciada() {
+        return sesionIniciada;
+    }
+    
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -37,6 +42,10 @@ public class Usuario {
     
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public void setSesionIniciada(boolean ini) {
+        this.sesionIniciada = ini;
     }
 }
 

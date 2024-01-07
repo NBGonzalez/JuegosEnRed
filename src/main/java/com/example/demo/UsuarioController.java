@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,12 @@ public class UsuarioController {
     private List<Usuario> usuarios = new ArrayList<>();
     private Set<Long> idsUtilizados = new HashSet<>();
     private Random random = new Random();
+    private final SessionService sessionService;
+    
+    @Autowired
+    public UsuarioController(SessionService sessionService) {
+        this.sessionService = sessionService;
+    }
     
     //crear un nuevo usuario
     @PostMapping()
@@ -180,9 +187,12 @@ public class UsuarioController {
     
     @PostMapping("/login")
     public ResponseEntity<String> iniciarSesion(@RequestBody Usuario usuario) {
-        if (credencialesValidas(usuario.getNombre(), usuario.getPassword())) {
+        if (credencialesValidas(usuario.getNombre(), usuario.getPassword()) && !sessionService.verificarSesion(usuario.getNombre())) {
+            System.out.println("inicia");
+            sessionService.iniciarSesion(usuario.getNombre());
             return new ResponseEntity<>("Inicio de sesión exitoso", HttpStatus.OK);
         } else {
+            System.out.println("ya ha iniciado");
             return new ResponseEntity<>("Credenciales incorrectas", HttpStatus.UNAUTHORIZED);
         }
     }

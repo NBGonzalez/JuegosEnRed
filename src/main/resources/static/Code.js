@@ -233,7 +233,7 @@ function create ()
 
     //Llena la pantalla con bloques de arena
     for (let row = 32; row < 1088; row += 64) {
-		console.log('arena009');
+		console.log('arenatiti');
         for (let col = 32; col < 768; col += 64) {
             let overlappingTrack = false;
 
@@ -436,6 +436,12 @@ function create ()
     numVueltasJ2Text = this.add.text(834, 10, 'J2 Vueltas: 1/' + vueltasTotales, { fontSize: '32px', fill: '#000' });
     numVueltasJ1Text.setStyle(estilo1);
     numVueltasJ2Text.setStyle(estilo2);
+    
+    /*this.timedEventUpdateConnection = this.time.addEvent( {
+		delay: 13,
+		callback: this.enviarPosicionesAlServidor,
+		callbackScoope: this,
+		loop: true });*/
 }
 
 function update ()
@@ -491,6 +497,7 @@ function update ()
 		verChat();	
 	}
 	});
+	
 	document.addEventListener('keydown', function() {
     enviarPosicionesAlServidor(J1);
     enviarPosicionesAlServidor(J2)
@@ -726,6 +733,7 @@ function enviarPosicionesAlServidor(J) {
         animacion: { currentAnim: J.fisicas.anims.currentAnim }
         //animacion: {anim: J.fisicas.anims}
     };
+    
     connection.send(JSON.stringify(mensaje));
 }
 
@@ -745,11 +753,11 @@ function actualizarPosicionJugador(nombreJugador, posicion, velocidad, animacion
     if (nombreJugador === 'J1' && J1.fisicas) {
         J1.fisicas.setPosition(posicion.x, posicion.y);
         J1.fisicas.setVelocity(velocidad.velX, velocidad.velY);  // Ajustamos aquí para establecer ambas velocidades
-        J1.fisicas.anims.play(animacion.currentAnim || 'defaultAnimation', true); // Si no hay animación, reproducir una predeterminada
+        J1.fisicas.anims.play(animacion.currentAnim || 'up', true); // Si no hay animación, reproducir una predeterminada
     } else if (nombreJugador === 'J2' && J2.fisicas) {
         J2.fisicas.setPosition(posicion.x, posicion.y);
         J2.fisicas.setVelocity(velocidad.velX, velocidad.velY);
-        J2.fisicas.anims.play(animacion.currentAnim || 'defaultAnimation', true);
+        J2.fisicas.anims.play(animacion.currentAnim || 'up2', true);
     }
 }
 
