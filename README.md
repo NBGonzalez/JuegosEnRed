@@ -91,7 +91,7 @@ Universidad Rey Juan Carlos: <infor@urjc.es>
 
 
 
-
+Vídeo enseñando el videojuego, [link](https://youtu.be/HJ7ujm7oXLk). 
 
 
 # <a name="_toc140920023"></a>**1. Introducción**
@@ -508,14 +508,25 @@ Pablo Prior: <p.prior.2019@alumnos.urjc.es>
 
 Universidad Rey Juan Carlos: <infor@urjc.es>
 
+**8. WebSockets**
 
-# <a name="_toc1757001073"></a>**8. Instrucciones Aplicación**
+La parte que ha sido implmentada con WebSockets es todo lo relacionado con movimientos, velocidades, posiciones, utilización de power-ups y actualización de atributos como las vueltas dadas. A grandes rasgos, se han ido enviando estos elementos descritos al servidor creando mensajes, se han recibido y se han vuelto a recibir con onmessage para actualizar los distintos valores en cada cliente.  
+
+En cuanto al diseño del menú y la fase 2 se han actualizado los colores de los botones y letras para hacerlos más diferenciables, ver Figura 21. Se soluciono el alert del selector de vueltas y el error que había en las vueltas totales asignadas. 
+
+**9. Mejoras incluidas (Fase 5)**
+
+Se han introducido mejoras visuales en las interfaces de las pantallas de juego como se puede ver en la Figura 25. Las vueltas y jugadores tienen marcos propios para apreciar mejor las letras, se ha añadido un apartado en el lateral de power-ups los cuales irán despareciendo según se van usando y con sus respectivos marcos para mejorar la interfaz. Además, se ha creado la funcionalidad de chat para poder hablar entre clientes conectados o en una partida en local, ver Figura 32. 
+
+En cuanto al diseño del menú y la fase 2 se han actualizado los colores de los botones y letras para hacerlos más diferenciables, ver Figura 21. Se soluciono el alert del selector de vueltas y el error que había en las vueltas totales asignadas. 
+
+# <a name="_toc1757001073"></a>**10. Instrucciones Aplicación**
 
 Al abrir el proyecto en Spring, se debe acceder a src/main/java ---> com.example.demo y se debe hacer Run As como una Java Application el archivo: VirtualVelocityApplication.java.
 
 La URL para ejecutar el juego sería: <http://localhost:8080/Index.html>
 
-# **9. Diagrama de clases**
+# **11. Diagrama de clases**
 
 En verde se representan las clases de la Api y en blanco las desarrolladas en la fase anterior para el videojuego.
 
