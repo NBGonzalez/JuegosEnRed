@@ -28,7 +28,7 @@ class Jugador{
     this.numCong = 1;
     this.turb = false;
     this.numTurb = 1;
-    this.animacionActual = null;
+    //this.animacionActual = null;
     }
     get velocidad(){
         return this.vel;
@@ -233,7 +233,7 @@ function create ()
 
     //Llena la pantalla con bloques de arena
     for (let row = 32; row < 1088; row += 64) {
-		console.log('arena87');
+		console.log('arena009');
         for (let col = 32; col < 768; col += 64) {
             let overlappingTrack = false;
 
@@ -525,14 +525,14 @@ function cambiarJ2(){
 
 //función de los controles con jugador, teclas y animaciones
 function controles(J, u, d, l, r,aniLU,aniLD,aniRU,aniRD,aniL,aniR,aniU,aniD){
-	 const mensaje = {
+	 /*const mensaje = {
         tipo: 'movimiento',
         jugador: J.nombre,  // Agregar el nombre del jugador al mensaje
         direccion: { izquierda: l.isDown, derecha: r.isDown, arriba: u.isDown, abajo: d.isDown },
         posicion: { x: J.fisicas.x, y: J.fisicas.y }
-    };
+    };*/
     //console.log('entra2');
-    connection.send(JSON.stringify(mensaje));
+    //connection.send(JSON.stringify(mensaje));
 	
     if(l.isDown && u.isDown)
     {
@@ -723,10 +723,7 @@ function enviarPosicionesAlServidor(J) {
         jugador: J.nombre,
         posicion: { x: J.fisicas.x, y: J.fisicas.y },
         velocidad: { velX: J.fisicas.body.velocity.x, velY: J.fisicas.body.velocity.y },
-        animacion: { currentAnim: J.animacionActual }
-
-
-
+        animacion: { currentAnim: J.fisicas.anims.currentAnim }
         //animacion: {anim: J.fisicas.anims}
     };
     connection.send(JSON.stringify(mensaje));
@@ -738,7 +735,7 @@ connection.onmessage = function (msg) {
     switch (mensaje.tipo) {
         case 'posicion':
             actualizarPosicionJugador(mensaje.jugador, mensaje.posicion, mensaje.velocidad, mensaje.animacion);
-            //controles(mensaje.jugador, teclaW, teclaS, teclaA, teclaD,'leftup','leftdown','rightup','rightdown','left','right','up','down')
+            //controles(mensaje.jugador, teclaW, teclaS, teclaA, teclaD, mensaje.animacion,mensaje.animacion,mensaje.animacion,mensaje.animacion,mensaje.animacion,mensaje.animacion,mensaje.animacion,mensaje.animacion)
             break;
         // otros casos...
     }
@@ -747,18 +744,16 @@ connection.onmessage = function (msg) {
 function actualizarPosicionJugador(nombreJugador, posicion, velocidad, animacion) {
     if (nombreJugador === 'J1' && J1.fisicas) {
         J1.fisicas.setPosition(posicion.x, posicion.y);
-        J1.fisicas.setVelocityX(velocidad.velX);
-        J1.fisicas.setVelocityY(velocidad.vely);
-        J1.animacionActual = animacion.currentAnim;
-        //J1.fisicas.anims.play(animacion, true);
+        J1.fisicas.setVelocity(velocidad.velX, velocidad.velY);  // Ajustamos aquí para establecer ambas velocidades
+        J1.fisicas.anims.play(animacion.currentAnim || 'defaultAnimation', true); // Si no hay animación, reproducir una predeterminada
     } else if (nombreJugador === 'J2' && J2.fisicas) {
         J2.fisicas.setPosition(posicion.x, posicion.y);
-        J2.fisicas.setVelocityX(velocidad.velX);
-        J2.fisicas.setVelocityY(velocidad.vely);
-        J2.animacionActual = animacion.currentAnim;
-        //J2.fisicas.anims.play(animacion, true);
+        J2.fisicas.setVelocity(velocidad.velX, velocidad.velY);
+        J2.fisicas.anims.play(animacion.currentAnim || 'defaultAnimation', true);
     }
 }
+
+
 
 
 /*connection.onmessage = function (msg) {
