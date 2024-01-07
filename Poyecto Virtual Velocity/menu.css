@@ -26,6 +26,46 @@ body {
     color: rgb(255, 255, 255);
 }
 
+#chat-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#chat {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#chat p {
+    margin: 0 0 10px;
+}
+
+#chat2 {
+    display: flex;
+    align-items: center;
+}
+
+#contenido {
+    flex: 1;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+#chat-container button {
+    padding: 8px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#chat-container button:hover {
+    background-color: #45a049;
+}
+
 #pausa {
     color: rgb(255, 255, 255);
     font-size: 24px;
