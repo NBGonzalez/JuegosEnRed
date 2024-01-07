@@ -59,6 +59,7 @@ J2.nombre = 'J2'
 var back;
 var gameOver = false;
 var juegoPausado = false;
+var chatActivo = false;
 var J2Win;
 
 var tracks;
@@ -82,6 +83,7 @@ var teclaL;
 var teclaK;
 
 var teclaC;
+var teclaV;
 
 var teclaE;
 
@@ -112,6 +114,7 @@ var game = new Phaser.Game(config);
 var ip = location.host
 var connection = new WebSocket('ws://' + ip + '/echo');
 connection.onopen = function () {
+	console.log('Conexión WebSocket abierta con éxito');
 	connection.send('¡Bienvenido/a a Virtual Velocity!');
 }
 connection.onerror = function(e) {
@@ -148,6 +151,7 @@ function preload ()
     this.load.image('interface', 'assets/interfaz.png');
     this.load.image('box', 'assets/cajaPower.png');
     this.load.image('box2', 'assets/cajaVueltas.png');
+    this.load.image('meme', 'assets/meme.png');
 
     //imágenes de victoria
     this.load.image('ganaJ1', 'assets/ganaJ1.png');
@@ -233,7 +237,7 @@ function create ()
 
     //Llena la pantalla con bloques de arena
     for (let row = 32; row < 1088; row += 64) {
-		console.log('arenatiti');
+		//console.log('arena');
         for (let col = 32; col < 768; col += 64) {
             let overlappingTrack = false;
 
@@ -268,6 +272,7 @@ function create ()
     assets.create(60, 350, 'box');
     assets.create(136, 30, 'box2').setScale(3, 0.6);
     assets.create(948, 30, 'box2').setScale(3.1, 0.6);
+    assets.create(560, 265, 'meme');
     
     //iconos power-up
     icTurb = icons.create(60, 150, 'icTurb');
@@ -422,6 +427,7 @@ function create ()
     
     //tecla chat
     teclaC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
+    teclaV = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.V);
 
     this.physics.add.collider(J1.fisicas, back);
     this.physics.add.collider(J2.fisicas, back);
@@ -491,17 +497,25 @@ function update ()
 	cargarMensajes();
     verificarFinJuego();
     document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        pausarJuego();
-    }else if(teclaC.isDown){
-		verChat();	
-	}
+   if (event.key === 'Escape') {
+	   if(!juegoPausado && !chatActivo)
+    		pausarJuego();
+    		else if(event.key === 'Escape'){
+		if(chatActivo)
+			ocultarChat();
+	}	
+	} else if (event.key === 'c') {
+    	if (!chatActivo) {
+        	verChat();
+    	}
+	} 
 	});
 	
 	document.addEventListener('keydown', function() {
     enviarPosicionesAlServidor(J1);
     enviarPosicionesAlServidor(J2)
     });
+        
         }
     }
 }
@@ -630,8 +644,15 @@ function reanudarJuego() {
 }
 
 function verChat() {  
-    // Ocultar el menú de pausa
+    document.getElementById('chat-container').style.display = 'block';
     document.getElementById('chat2').style.display = 'block';
+    chatActivo = true;
+    //juegoPausado = true;
+}
+
+function ocultarChat() { 
+    document.getElementById('chat2').style.display = 'none';
+    chatActivo = false;
     //juegoPausado = true;
 }
 
@@ -713,6 +734,9 @@ function finalizarPartida() {
     icons.clear(true, true);
     numVueltasJ1Text.setVisible(false);
     numVueltasJ2Text.setVisible(false);
+    ocultarChat();
+    reanudarJuego();
+    document.getElementById('chat-container').style.display = 'none';
     sonidoPower('assets/final.mp3')
     if(numVueltasJ1 > vueltasTotales){
         J2Win.setVisible(false);
@@ -762,7 +786,12 @@ function actualizarPosicionJugador(nombreJugador, posicion, velocidad, animacion
 }
 
 
-
+document.addEventListener('keydown', function (event) {
+    // Detener la propagación del evento si el chat está activo
+    if (chatActivo) {
+        event.stopPropagation();
+    }
+});
 
 /*connection.onmessage = function (msg) {
     var data = JSON.parse(msg.data);

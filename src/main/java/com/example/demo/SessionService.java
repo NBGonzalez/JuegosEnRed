@@ -15,5 +15,9 @@ public class SessionService {
     public void iniciarSesion(String nombreUsuario) {
         sesiones.put(nombreUsuario, true);
     }
+    
+    public void cerrarSesion(String nombreUsuario) {
+        sesiones.put(nombreUsuario, false);
+    }
 }
 

@@ -26,6 +26,7 @@ public class UsuarioController {
     private Set<Long> idsUtilizados = new HashSet<>();
     private Random random = new Random();
     private final SessionService sessionService;
+    private int usuariosActivos = 0;
     
     @Autowired
     public UsuarioController(SessionService sessionService) {
@@ -196,7 +197,44 @@ public class UsuarioController {
             return new ResponseEntity<>("Credenciales incorrectas", HttpStatus.UNAUTHORIZED);
         }
     }
+    
+    /*@PostMapping("/login")
+    public ResponseEntity<String> iniciarSesion(@RequestBody Usuario usuario) {
+        if (credencialesValidas(usuario.getNombre(), usuario.getPassword()) && !sessionService.verificarSesion(usuario.getNombre())) {
+            System.out.println("inicia");
+            sessionService.iniciarSesion(usuario.getNombre());
+            
+            // Incrementar el contador de usuarios activos
+            usuariosActivos++;
+            
+            return new ResponseEntity<>("Inicio de sesión exitoso", HttpStatus.OK);
+        } else {
+            System.out.println("ya ha iniciado");
+            return new ResponseEntity<>("Credenciales incorrectas", HttpStatus.UNAUTHORIZED);
+        }
+    }*/
+    
+    @PostMapping("/logout")
+    public ResponseEntity<String> cerrarSesion(@RequestBody Usuario usuario) {
+        if (sessionService.verificarSesion(usuario.getNombre())) {
+            System.out.println("cierra");
+            sessionService.cerrarSesion(usuario.getNombre());
+            
+            // Decrementar el contador de usuarios activos
+            usuariosActivos--;
+            
+            return new ResponseEntity<>("Cierre de sesión exitoso", HttpStatus.OK);
+        } else {
+            System.out.println("sesión no encontrada");
+            return new ResponseEntity<>("Sesión no encontrada", HttpStatus.NOT_FOUND);
+        }
+    }
 
+    @GetMapping("/usuariosActivos")
+    public ResponseEntity<Integer> obtenerUsuariosActivos() {
+        return new ResponseEntity<>(usuariosActivos, HttpStatus.OK);
+    }
+    
     private boolean credencialesValidas(String usuario, String contrasena) {
         try {
             List<String> lines = Files.readAllLines(Paths.get("usuarios.txt"));

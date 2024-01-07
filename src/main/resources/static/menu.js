@@ -1,4 +1,3 @@
-
 var musica = document.getElementById('miMusica');
 var sliderVolumen = document.getElementById('sliderVolumen');
 var cargaYaMostrada = sessionStorage.getItem("cargaMostrada");
@@ -19,7 +18,7 @@ function mostrarSelectorVueltas() {
         //Si el menú no está visible, lo mostramos
         if (!selectVueltas) {
             //Creamos el desplegable solo no existe
-            const opcionesVueltas = ["-", "2", "3", "5", "7"];
+            const opcionesVueltas = ["-", "1", "3", "5", "7"];
             const select = document.createElement("select");
             select.id = "selectVueltas";
 
@@ -73,7 +72,7 @@ function reproducirMusica() {
 
 function iniciarJuego() {
     if(vueltasTotales == "${vueltasTotales}"){
-    vueltasTotales = 3;
+    vueltasTotales = 1;
     }
     cargarJuego();
     if(!musica.muted)
