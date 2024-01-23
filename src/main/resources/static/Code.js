@@ -107,6 +107,8 @@ var inver2;
 var cong;
 var cong2;
 
+var debouncedEnvio = null;
+
 var musica = document.getElementById('miMusica');
 
 var game = new Phaser.Game(config);
@@ -237,7 +239,7 @@ function create ()
 
     //Llena la pantalla con bloques de arena
     for (let row = 32; row < 1088; row += 64) {
-		//console.log('arena');
+		console.log('arena21');
         for (let col = 32; col < 768; col += 64) {
             let overlappingTrack = false;
 
@@ -272,7 +274,7 @@ function create ()
     assets.create(60, 350, 'box');
     assets.create(136, 30, 'box2').setScale(3, 0.6);
     assets.create(948, 30, 'box2').setScale(3.1, 0.6);
-    assets.create(560, 265, 'meme');
+    //assets.create(560, 265, 'meme');
     
     //iconos power-up
     icTurb = icons.create(60, 150, 'icTurb');
@@ -511,11 +513,11 @@ function update ()
 	} 
 	});
 	
-	document.addEventListener('keydown', function() {
-    enviarPosicionesAlServidor(J1);
-    enviarPosicionesAlServidor(J2)
-    });
-        
+    debouncedEnvio = setTimeout(function() {
+        enviarPosicionesAlServidor(J1);
+        enviarPosicionesAlServidor(J2);
+    }, 1000); 
+   
         }
     }
 }
@@ -763,14 +765,9 @@ function enviarPosicionesAlServidor(J) {
 
 connection.onmessage = function (msg) {
     var mensaje = JSON.parse(msg.data);
-
-    switch (mensaje.tipo) {
-        case 'posicion':
-            actualizarPosicionJugador(mensaje.jugador, mensaje.posicion, mensaje.velocidad, mensaje.animacion);
+    actualizarPosicionJugador(mensaje.jugador, mensaje.posicion, mensaje.velocidad, mensaje.animacion);
             //controles(mensaje.jugador, teclaW, teclaS, teclaA, teclaD, mensaje.animacion,mensaje.animacion,mensaje.animacion,mensaje.animacion,mensaje.animacion,mensaje.animacion,mensaje.animacion,mensaje.animacion)
-            break;
-        // otros casos...
-    }
+          
 }
 
 function actualizarPosicionJugador(nombreJugador, posicion, velocidad, animacion) {
@@ -787,7 +784,7 @@ function actualizarPosicionJugador(nombreJugador, posicion, velocidad, animacion
 
 
 document.addEventListener('keydown', function (event) {
-    // Detener la propagación del evento si el chat está activo
+    //Detener la propagación del evento si el chat está activo
     if (chatActivo) {
         event.stopPropagation();
     }
