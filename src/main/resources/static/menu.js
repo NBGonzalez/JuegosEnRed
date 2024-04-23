@@ -2,8 +2,10 @@ var musica = document.getElementById('miMusica');
 var sliderVolumen = document.getElementById('sliderVolumen');
 var cargaYaMostrada = sessionStorage.getItem("cargaMostrada");
 var vueltasTotales;
+var selJ;
 var vueltasMenuVisible = false;
 var nuevoVolumen;
+var usuariosActivos = 0;
 
 function aplicarAjustes() {
     //lert("Ajustes aplicados. Vueltas totales: " + vueltasTotales);
@@ -74,10 +76,33 @@ function iniciarJuego() {
     if(vueltasTotales == "${vueltasTotales}"){
     vueltasTotales = 1;
     }
+    obtenerUsuariosActivos();
+    usuariosActivos = script.getAttribute("data-usuarios");
     cargarJuego();
     if(!musica.muted)
     reproducirMusica();
 }
+
+function mostrarSel()
+{
+	document.getElementById('menu').style.display = 'none';
+    document.getElementById('selectJ').style.display = 'block';
+}
+
+function elegirJ1() {
+	selJ = 1;
+	irIniciarSesion();
+	console.log(usuariosActivos);
+}
+
+function elegirJ2() {
+	selJ = 2;
+	irIniciarSesion();
+	console.log(usuariosActivos);
+}
+
+selJ = script.getAttribute("data-jugador");
+console.log("Jugador:", selJ);
 
 function volverDesdePausa(){
     window.location.href = 'Index.html';
@@ -204,7 +229,8 @@ function mostrarEliminarCuenta() {
 
 function irIniciarSesion() {
     document.getElementById('inicioSesion').style.display = 'block';
-    document.getElementById('menu').style.display = 'none';
+    usuariosActivos = 0;
+    document.getElementById('selectJ').style.display = 'none';
 }
 
 function mostrarOlvidar() {
@@ -358,5 +384,21 @@ function obtenerId() {
           setTimeout(function () {
             document.getElementById('mensajeUsuarioNoEncontrado').style.display = 'none';
         }, 3000);
+    });
+}
+
+function obtenerUsuariosActivos() {
+    $.ajax({
+        method: "GET",
+        url: 'http://' + ip + '/usuarios/usuariosActivos',
+        success: function (data, textStatus, jqXHR) {
+            console.log("Usuarios activos: " + data);
+            // Aquí puedes hacer lo que necesites con el valor de usuarios activos
+            // Por ejemplo, asignarlo a una variable de JavaScript
+            usuariosActivos = data;
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Error al obtener usuarios activos: " + textStatus + " " + errorThrown);
+        }
     });
 }

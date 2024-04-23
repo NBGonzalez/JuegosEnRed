@@ -50,10 +50,16 @@ var estilo2 = {
     fill: 'rgb(153, 204, 0)'
 };
 
-var J1 = new Jugador(100, 75);
+var estilo3 = {
+    fontSize: '100px',
+    fontFamily: 'MiFuente',
+    fill: 'rgb(255, 255, 255)'
+};
+
+var J1 = new Jugador(150, 100);
 J1.nombre = 'J1';
 
-var J2 = new Jugador(100, 75);
+var J2 = new Jugador(150, 100);
 J2.nombre = 'J2'
 
 var back;
@@ -92,8 +98,11 @@ var numVueltasJ2;
 
 var numVueltasJ1Text; 
 var numVueltasJ2Text;
+var esperando;
 
 var vueltasTotales;
+var selJ;
+var usuariosActivos;
 
 var cruzarJ1;
 var cruzarJ2;
@@ -108,6 +117,7 @@ var cong;
 var cong2;
 
 var debouncedEnvio = null;
+var debouncedEnvio2 = null;
 
 var musica = document.getElementById('miMusica');
 
@@ -117,7 +127,7 @@ var ip = location.host
 var connection = new WebSocket('ws://' + ip + '/echo');
 connection.onopen = function () {
 	console.log('Conexión WebSocket abierta con éxito');
-	connection.send('¡Bienvenido/a a Virtual Velocity!');
+	connection.send(JSON.stringify('¡Bienvenido/a a Virtual Velocity!'));
 }
 connection.onerror = function(e) {
 	console.log("WS error: " + e);
@@ -186,7 +196,7 @@ function create ()
 
     inver = false;
     inver2 = false;
-
+    
     // if((vueltasTotales!=2) || (vueltasTotales!=3) || (vueltasTotales!=5) || (vueltasTotales!=7)){
     // vueltasTotales = 52;
     // }
@@ -212,34 +222,40 @@ function create ()
     detection.create(192, 512, 'meta').setScale(0.6).refreshBody();
 	
     //Circuito
-    tracks.create(192, 256, 'straight1').setScale(0.4).refreshBody;
-    tracks.create(192, 128, 'curva2').setScale(0.4).refreshBody;
-    tracks.create(320, 128, 'straight2').setScale(0.4).refreshBody;
-    tracks.create(448, 128, 'straight2').setScale(0.4).refreshBody;
-    tracks.create(576, 128, 'straight2').setScale(0.4).refreshBody;
-    tracks.create(704, 128, 'curva1').setScale(0.4).refreshBody;
-    tracks.create(704, 256, 'curva3').setScale(0.4).refreshBody;
-    tracks.create(832, 256, 'straight2').setScale(0.4).refreshBody;
-    tracks.create(960, 256, 'curva1').setScale(0.4).refreshBody;
-    tracks.create(960, 384, 'straight1').setScale(0.4).refreshBody;
-    tracks.create(960, 512, 'straight1').setScale(0.4).refreshBody;
-    tracks.create(960, 640, 'curva4').setScale(0.4).refreshBody;
-    tracks.create(832, 640, 'straight2').setScale(0.4).refreshBody;
-    tracks.create(704, 640, 'curva3').setScale(0.4).refreshBody;
-    tracks.create(704, 512, 'curva1').setScale(0.4).refreshBody;
-    tracks.create(576, 512, 'straight2').setScale(0.4).refreshBody;
-    tracks.create(448, 512, 'curva2').setScale(0.4).refreshBody;
-    tracks.create(448, 640, 'curva4').setScale(0.4).refreshBody;
-    tracks.create(320, 640, 'straight2').setScale(0.4).refreshBody;
-    tracks.create(192, 640, 'curva3').setScale(0.4).refreshBody;
-    tracks.create(192, 512, 'straight1').setScale(0.4).refreshBody;
-    tracks.create(192, 384, 'straight1').setScale(0.4).refreshBody;
+    const trackData = [
+    { x: 192, y: 256, type: 'straight1' },
+    { x: 192, y: 128, type: 'curva2' },
+    { x: 320, y: 128, type: 'straight2' },
+    { x: 448, y: 128, type: 'straight2' },
+    { x: 576, y: 128, type: 'straight2' },
+    { x: 704, y: 128, type: 'curva1' },
+    { x: 704, y: 256, type: 'curva3' },
+    { x: 832, y: 256, type: 'straight2' },
+    { x: 960, y: 256, type: 'curva1' },
+    { x: 960, y: 384, type: 'straight1' },
+    { x: 960, y: 512, type: 'straight1' },
+    { x: 960, y: 640, type: 'curva4' },
+    { x: 832, y: 640, type: 'straight2' },
+    { x: 704, y: 640, type: 'curva3' },
+    { x: 704, y: 512, type: 'curva1' },
+    { x: 576, y: 512, type: 'straight2' },
+    { x: 448, y: 512, type: 'curva2' },
+    { x: 448, y: 640, type: 'curva4' },
+    { x: 320, y: 640, type: 'straight2' },
+    { x: 192, y: 640, type: 'curva3' },
+    { x: 192, y: 512, type: 'straight1' },
+    { x: 192, y: 384, type: 'straight1' }
+	];
+
+	trackData.forEach(data => {
+    	tracks.create(data.x, data.y, data.type).setScale(0.4).refreshBody();
+	});
     
     //Arena
 
     //Llena la pantalla con bloques de arena
     for (let row = 32; row < 1088; row += 64) {
-		console.log('arena21');
+		console.log('arena8');
         for (let col = 32; col < 768; col += 64) {
             let overlappingTrack = false;
 
@@ -274,7 +290,7 @@ function create ()
     assets.create(60, 350, 'box');
     assets.create(136, 30, 'box2').setScale(3, 0.6);
     assets.create(948, 30, 'box2').setScale(3.1, 0.6);
-    //assets.create(560, 265, 'meme');
+    assets.create(560, 265, 'meme');
     
     //iconos power-up
     icTurb = icons.create(60, 150, 'icTurb');
@@ -416,6 +432,22 @@ function create ()
     teclaJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
     teclaL = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
     teclaK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
+    
+    if (selJ==1)
+    {
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.I);
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.J);
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.K);
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.L);
+	}
+	
+	if (selJ==2)
+    {
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.A);
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.S);
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.D);
+	}
 
     //teclas power up inversión
     teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
@@ -445,6 +477,9 @@ function create ()
     numVueltasJ1Text.setStyle(estilo1);
     numVueltasJ2Text.setStyle(estilo2);
     
+    esperando = this.add.text(200, 250, 'ESPERANDO...', { fontSize: '100px', fill: '#000' });
+    esperando.setStyle(estilo3);
+    
     /*this.timedEventUpdateConnection = this.time.addEvent( {
 		delay: 13,
 		callback: this.enviarPosicionesAlServidor,
@@ -454,7 +489,7 @@ function create ()
 
 function update ()
 {
-    if (!gameOver){
+    if (!gameOver && usuariosActivos > 1){
         if(!juegoPausado){
 
     //condiciones movimiento coche 1
@@ -495,6 +530,13 @@ function update ()
         powerTurbo(J2);
     }
     
+    while(usuariosActivos < 2) {
+    esperando.setText('ESPERANDO...');
+    }
+    
+    if(usuariosActivos > 1) {
+		esperando.setVisible(false);
+	}
     
 	cargarMensajes();
     verificarFinJuego();
@@ -513,14 +555,35 @@ function update ()
 	} 
 	});
 	
-    debouncedEnvio = setTimeout(function() {
-        enviarPosicionesAlServidor(J1);
-        enviarPosicionesAlServidor(J2);
-    }, 1000); 
+let colaDeActualizaciones = [];
+let intervaloEnvio = null;
+
+function procesarColaDeActualizaciones() {
+    if (colaDeActualizaciones.length > 0) {
+
+        colaDeActualizaciones.forEach(function(J) {
+            enviarPosicionesAlServidor(J);
+        });
+
+        colaDeActualizaciones = [];
+    }
+}
+
+ debouncedEnvio = setTimeout(function() {
+
+    colaDeActualizaciones.push(J1);
+    colaDeActualizaciones.push(J2);
+
+    if (!intervaloEnvio) {
+        intervaloEnvio = setInterval(procesarColaDeActualizaciones, 100); 
+    }
+},100);
    
         }
     }
 }
+
+game.loop.targetFps = 60;
 
 function cambiarCruzarJ1(){
     cruzarJ1 += 1;
@@ -604,6 +667,7 @@ function controles(J, u, d, l, r,aniLU,aniLD,aniRU,aniRD,aniL,aniR,aniU,aniD){
         J.fisicas.setVelocityY(-J.velocidad);
         //J1.angle = 0;
         J.fisicas.anims.play(aniU, true);
+        console.log(usuariosActivos);
         //J1 = this.physics.add.sprite('car1ver');
     }
     else if (d.isDown)
@@ -756,7 +820,9 @@ function enviarPosicionesAlServidor(J) {
         jugador: J.nombre,
         posicion: { x: J.fisicas.x, y: J.fisicas.y },
         velocidad: { velX: J.fisicas.body.velocity.x, velY: J.fisicas.body.velocity.y },
-        animacion: { currentAnim: J.fisicas.anims.currentAnim }
+        animacion: { currentAnim: J.fisicas.anims.currentAnim },
+        ganada: gameOver,
+        usuarios: usuariosActivos
         //animacion: {anim: J.fisicas.anims}
     };
     
@@ -765,12 +831,12 @@ function enviarPosicionesAlServidor(J) {
 
 connection.onmessage = function (msg) {
     var mensaje = JSON.parse(msg.data);
-    actualizarPosicionJugador(mensaje.jugador, mensaje.posicion, mensaje.velocidad, mensaje.animacion);
+    actualizarPosicionJugador(mensaje.jugador, mensaje.posicion, mensaje.velocidad, mensaje.animacion, mensaje.ganada, mensaje.usuarios);
             //controles(mensaje.jugador, teclaW, teclaS, teclaA, teclaD, mensaje.animacion,mensaje.animacion,mensaje.animacion,mensaje.animacion,mensaje.animacion,mensaje.animacion,mensaje.animacion,mensaje.animacion)
           
 }
 
-function actualizarPosicionJugador(nombreJugador, posicion, velocidad, animacion) {
+function actualizarPosicionJugador(nombreJugador, posicion, velocidad, animacion, ganada, usuarios) {
     if (nombreJugador === 'J1' && J1.fisicas) {
         J1.fisicas.setPosition(posicion.x, posicion.y);
         J1.fisicas.setVelocity(velocidad.velX, velocidad.velY);  // Ajustamos aquí para establecer ambas velocidades
@@ -780,6 +846,9 @@ function actualizarPosicionJugador(nombreJugador, posicion, velocidad, animacion
         J2.fisicas.setVelocity(velocidad.velX, velocidad.velY);
         J2.fisicas.anims.play(animacion.currentAnim || 'up2', true);
     }
+    gameOver = ganada;
+    if (usuarios>1)
+    	usuariosActivos = usuarios;
 }
 
 

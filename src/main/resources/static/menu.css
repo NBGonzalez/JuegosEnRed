@@ -15,7 +15,7 @@ body {
     margin: 0;
 }
 
-#menu, #creditos, #ajustes, #controles, #inicioSesion, #registro, #recuperar, #eliminar {
+#menu, #creditos, #ajustes, #controles, #inicioSesion, #registro, #recuperar, #eliminar, #selectJ {
     text-align: center;
     margin: 50px;
     width: 1088px;
@@ -71,7 +71,7 @@ body {
     font-size: 24px;
 }
 
-#menu {
+#menu, #selectJ {
     background-image: url('assets/fondoMenu.png');
     background-size: cover;
     /*display: flex;*/
@@ -109,7 +109,7 @@ body {
 }
 
 
-#menu button, #creditos button, #ajustes button, #pausa button, #controles button, #inicioSesion button, #registro button, #recuperar button, #eliminar button{
+#menu button, #creditos button, #ajustes button, #pausa button, #controles button, #inicioSesion button, #registro button, #recuperar button, #eliminar button, #selectJ button{
   font-family: 'MiFuente', sans-serif;
   background-color: transparent;
   color: #00cc66;

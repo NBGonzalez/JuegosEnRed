@@ -110,12 +110,17 @@
 
     <div id="menu">
         <h1>VIRTUAL VELOCITY: RACING UNLEASHED </h1>
-        <button onclick="irIniciarSesion()">JUGAR</button>
+        <button onclick="mostrarSel()">JUGAR</button>
         <button onclick="verCreditos()">CRÉDITOS</button>
         <button onclick="verAjustes()">AJUSTES</button>
         <button onclick="verControles()">CONTROLES</button>
         <button onclick="salirDelJuego()">SALIR</button>
     </div>
+    
+    <div id="selectJ" style="display: none;">
+		<button onclick="elegirJ1()">J1</button>
+        <button onclick="elegirJ2()">J2</button>
+	</div>
 
     <div id="creditos" style="display: none;">
         <h2>CRÉDITOS</h2>
@@ -178,7 +183,7 @@
         <button onclick="volverDesdePausa()">MENÚ</button>
     </div>
 
-    <script src="menu.js" data-vueltas="${vueltasTotales}"></script>
+    <script src="menu.js" data-vueltas="${vueltasTotales}", data-jugador="${selJ}", data-usuarios="${usuariosActivos}"></script>
 
 	<script>
     function cargarMensajes() {

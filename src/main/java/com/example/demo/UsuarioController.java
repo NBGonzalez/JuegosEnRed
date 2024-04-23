@@ -188,12 +188,15 @@ public class UsuarioController {
     
     @PostMapping("/login")
     public ResponseEntity<String> iniciarSesion(@RequestBody Usuario usuario) {
-        if (credencialesValidas(usuario.getNombre(), usuario.getPassword()) && !sessionService.verificarSesion(usuario.getNombre())) {
+        //if (credencialesValidas(usuario.getNombre(), usuario.getPassword()) && !sessionService.verificarSesion(usuario.getNombre())) {
+        if (credencialesValidas(usuario.getNombre(), usuario.getPassword())){
             System.out.println("inicia");
             sessionService.iniciarSesion(usuario.getNombre());
+            usuariosActivos++;
+            
             return new ResponseEntity<>("Inicio de sesión exitoso", HttpStatus.OK);
         } else {
-            System.out.println("ya ha iniciado");
+            //System.out.println("ya ha iniciado");
             return new ResponseEntity<>("Credenciales incorrectas", HttpStatus.UNAUTHORIZED);
         }
     }
