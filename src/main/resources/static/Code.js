@@ -255,7 +255,7 @@ function create ()
 
     //Llena la pantalla con bloques de arena
     for (let row = 32; row < 1088; row += 64) {
-		console.log('arena8');
+		console.log('arena33');
         for (let col = 32; col < 768; col += 64) {
             let overlappingTrack = false;
 
@@ -538,7 +538,7 @@ function update ()
 		esperando.setVisible(false);
 	}
     
-	cargarMensajes();
+	//cargarMensajes();
     verificarFinJuego();
     document.addEventListener('keydown', function(event) {
    if (event.key === 'Escape') {
@@ -555,7 +555,7 @@ function update ()
 	} 
 	});
 	
-let colaDeActualizaciones = [];
+/*let colaDeActualizaciones = [];
 let intervaloEnvio = null;
 
 function procesarColaDeActualizaciones() {
@@ -577,7 +577,7 @@ function procesarColaDeActualizaciones() {
     if (!intervaloEnvio) {
         intervaloEnvio = setInterval(procesarColaDeActualizaciones, 100); 
     }
-},100);
+},100);*/
    
         }
     }
@@ -625,18 +625,21 @@ function controles(J, u, d, l, r,aniLU,aniLD,aniRU,aniRD,aniL,aniR,aniU,aniD){
         J.fisicas.anims.play(aniLU, true);
         J.fisicas.setVelocityX(-J.velocidadD);
         J.fisicas.setVelocityY(-J.velocidadD);
+        enviarPosicionesAlServidor(J);
     }
     else if(l.isDown && d.isDown)
     {
         J.fisicas.anims.play(aniLD, true);
         J.fisicas.setVelocityX(-J.velocidadD);
         J.fisicas.setVelocityY(J.velocidadD);
+        enviarPosicionesAlServidor(J);
     }
     else if(r.isDown && u.isDown)
     {
         J.fisicas.anims.play(aniRU, true);
         J.fisicas.setVelocityX(J.velocidadD);
         J.fisicas.setVelocityY(-J.velocidadD);
+        enviarPosicionesAlServidor(J);
         
     }
     else if(r.isDown && d.isDown)
@@ -644,6 +647,7 @@ function controles(J, u, d, l, r,aniLU,aniLD,aniRU,aniRD,aniL,aniR,aniU,aniD){
         J.fisicas.anims.play(aniRD, true);
         J.fisicas.setVelocityX(J.velocidadD);
         J.fisicas.setVelocityY(J.velocidadD);
+        enviarPosicionesAlServidor(J);
     }
     else if (l.isDown)
     {
@@ -651,6 +655,7 @@ function controles(J, u, d, l, r,aniLU,aniLD,aniRU,aniRD,aniL,aniR,aniU,aniD){
         J.fisicas.setVelocityX(-J.velocidad);
         //J1.angle = -45;
         J.fisicas.anims.play(aniL, true);
+        enviarPosicionesAlServidor(J);
         //J1 = this.physics.add.sprite('car1hor');
     }
     else if (r.isDown)
@@ -659,6 +664,7 @@ function controles(J, u, d, l, r,aniLU,aniLD,aniRU,aniRD,aniL,aniR,aniU,aniD){
         J.fisicas.setVelocityX(J.velocidad);
         //J1.angle = 45;
         J.fisicas.anims.play(aniR, true);
+        enviarPosicionesAlServidor(J);
         //J1 = this.physics.add.sprite('car1hor');
     }
     else if (u.isDown)
@@ -668,6 +674,7 @@ function controles(J, u, d, l, r,aniLU,aniLD,aniRU,aniRD,aniL,aniR,aniU,aniD){
         //J1.angle = 0;
         J.fisicas.anims.play(aniU, true);
         console.log(usuariosActivos);
+        enviarPosicionesAlServidor(J);
         //J1 = this.physics.add.sprite('car1ver');
     }
     else if (d.isDown)
@@ -676,6 +683,7 @@ function controles(J, u, d, l, r,aniLU,aniLD,aniRU,aniRD,aniL,aniR,aniU,aniD){
         J.fisicas.setVelocityY(J.velocidad);
         //J1.angle = 180;
         J.fisicas.anims.play(aniD, true);
+        enviarPosicionesAlServidor(J);
         //J1 = this.physics.add.sprite('car1ver');
     }
     else
@@ -831,24 +839,24 @@ function enviarPosicionesAlServidor(J) {
 
 connection.onmessage = function (msg) {
     var mensaje = JSON.parse(msg.data);
-    actualizarPosicionJugador(mensaje.jugador, mensaje.posicion, mensaje.velocidad, mensaje.animacion, mensaje.ganada, mensaje.usuarios);
+    actualizarPosicionJugador(mensaje);
             //controles(mensaje.jugador, teclaW, teclaS, teclaA, teclaD, mensaje.animacion,mensaje.animacion,mensaje.animacion,mensaje.animacion,mensaje.animacion,mensaje.animacion,mensaje.animacion,mensaje.animacion)
           
 }
 
-function actualizarPosicionJugador(nombreJugador, posicion, velocidad, animacion, ganada, usuarios) {
-    if (nombreJugador === 'J1' && J1.fisicas) {
-        J1.fisicas.setPosition(posicion.x, posicion.y);
-        J1.fisicas.setVelocity(velocidad.velX, velocidad.velY);  // Ajustamos aquí para establecer ambas velocidades
-        J1.fisicas.anims.play(animacion.currentAnim || 'up', true); // Si no hay animación, reproducir una predeterminada
-    } else if (nombreJugador === 'J2' && J2.fisicas) {
-        J2.fisicas.setPosition(posicion.x, posicion.y);
-        J2.fisicas.setVelocity(velocidad.velX, velocidad.velY);
-        J2.fisicas.anims.play(animacion.currentAnim || 'up2', true);
-    }
-    gameOver = ganada;
-    if (usuarios>1)
-    	usuariosActivos = usuarios;
+function actualizarPosicionJugador(msg) {
+		if (msg.jugador === 'J1' && J1.fisicas) {
+	        J1.fisicas.setPosition(msg.posicion.x, msg.posicion.y);
+	        J1.fisicas.setVelocity(msg.velocidad.velX, msg.velocidad.velY);  // Ajustamos aquí para establecer ambas velocidades
+	        J1.fisicas.anims.play(msg.animacion.currentAnim || 'up', true); // Si no hay animación, reproducir una predeterminada
+	    } else if (msg.jugador === 'J2' && J2.fisicas) {
+	        J2.fisicas.setPosition(msg.posicion.x, msg.posicion.y);
+	        J2.fisicas.setVelocity(msg.velocidad.velX, msg.velocidad.velY);
+	        J2.fisicas.anims.play(msg.animacion.currentAnim || 'up2', true);
+	    }
+	    gameOver = msg.ganada;
+	    if (msg.usuarios>1)
+	    	usuariosActivos = msg.usuarios;
 }
 
 

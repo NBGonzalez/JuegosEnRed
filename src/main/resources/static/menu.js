@@ -85,6 +85,7 @@ function iniciarJuego() {
 
 function mostrarSel()
 {
+	console.log(usuariosActivos)
 	document.getElementById('menu').style.display = 'none';
     document.getElementById('selectJ').style.display = 'block';
 }
@@ -114,6 +115,8 @@ function volverAlMenu() {
     document.getElementById('creditos').style.display = 'none';
     document.getElementById('ajustes').style.display = 'none';
     document.getElementById('controles').style.display = 'none';
+    document.getElementById('inicioSesion').style.display = 'none';
+    document.getElementById('selectJ').style.display = 'none';
     document.getElementById('menu').style.display = 'block';
     if(!musica.muted)
     reproducirMusica();

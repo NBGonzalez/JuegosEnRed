@@ -10,11 +10,13 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class WebsocketEchoHandler extends TextWebSocketHandler {
 	
 	private Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
+	private ObjectMapper mapper = new ObjectMapper();
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -31,10 +33,11 @@ public class WebsocketEchoHandler extends TextWebSocketHandler {
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		System.out.println("Message received: " + message.getPayload());
+		JsonNode node = mapper.readTree(message.getPayload());
 		//String msg = message.getPayload();
 		//session.sendMessage(new TextMessage(msg));
 		//broadcastMessage(msg);
-		sendOtherParticipants(session, message.getPayload());
+		sendOtherParticipants(session, message.getPayload(), node);
 		
 //		System.out.println("Message received: " + message.getPayload());
 //		JsonNode node = mapper.readTree(message.getPayload());
@@ -42,7 +45,7 @@ public class WebsocketEchoHandler extends TextWebSocketHandler {
 //		sendOtherParticipants(session, node);
 	}
 	
-	private void broadcastMessage(String message) {
+	private void broadcastMessage(String message) {	
         for (WebSocketSession session : sessions.values()) {
             try {
                 session.sendMessage(new TextMessage(message));
@@ -57,7 +60,24 @@ public class WebsocketEchoHandler extends TextWebSocketHandler {
 		sendOtherParticipants(session, message.getPayload());
 	}*/
 
-	private void sendOtherParticipants(WebSocketSession session, String payload) throws IOException {
+	private void sendOtherParticipants(WebSocketSession session, String payload, JsonNode node) throws IOException {
+		ObjectNode newNode = mapper.createObjectNode();
+		
+		/*if (node.get("posicion") != null)
+		{
+			newNode.put("posicion", node.get("posicion").asText());
+		}
+		
+		if (node.get("velocidad") != null)
+		{
+			newNode.put("velocidad", node.get("velocidad").asText());
+		}
+		
+		if (node.get("animacion") != null)
+		{
+			newNode.put("animacion", node.get("animacion").asText());
+		}*/
+		
 		for(WebSocketSession participant : sessions.values()) {
 			if(!participant.getId().equals(session.getId())) {
 				participant.sendMessage(new TextMessage(payload));

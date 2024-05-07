@@ -183,9 +183,10 @@ body {
     margin-bottom: 10px;
 }
 
-#creditos button:hover, #menu button:hover, #ajustes button:hover, #controles button:hover, #pausa button:hover, #inicioSesion button:hover, #registro button:hover, #recuperar button:hover, #eliminar button:hover {
+#creditos button:hover, #menu button:hover, #ajustes button:hover, #controles button:hover, #pausa button:hover, #inicioSesion button:hover, #registro button:hover, #recuperar button:hover, #eliminar button:hover, #selectJ button:hover {
     background-color: #5e675e;  
-    color: white;
+    /*color: white;*/
+    color: rgb(255, 0, 0);
 } 
 
 #sonido {
