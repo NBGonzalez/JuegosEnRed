@@ -50,6 +50,14 @@
     	¡Eso ha sido una jugada de mucha inteligencia! Tal y como haría el profe
 	</div>
 	
+	<div id="cambioaJ2" style="display: none; color: green;">
+    	¡Ahora eres J2!
+	</div>
+	
+	<div id="cambioaJ1" style="display: none; color: green;">
+    	¡Ahora eres J1!
+	</div>
+	
 	<div id="mensajeUsuarioEncontrado" style="display:none; color: green;">Usuario encontrado. <span id="idUsuarioEncontrado"></span></div>
 	
 	<div id="mensajeUsuarioNoEncontrado" style="display:none; color: rgb(255, 0, 0);">Usuario no encontrado. Nombre o contraseña incorrectos</div>
@@ -119,8 +127,14 @@
     </div>
     
     <div id="selectJ" style="display: none;">
-		<button onclick="elegirJ1()">J1</button>
-        <button onclick="elegirJ2()">J2</button>
+		<button onclick="elegirJ1()">
+			J1
+			<img src="assets/spritesheetvertical.png" alt="Imagen J1" style="float: right; margin-left: 10px;">
+			</button>
+        <button onclick="elegirJ2()">
+			J2
+			<img src="assets/spritesheetvertical2.png" alt="Imagen J1" style="float: right; margin-left: 10px;">
+			</button>
         <button onclick="volverAlMenu()">MENÚ</button>
 	</div>
 

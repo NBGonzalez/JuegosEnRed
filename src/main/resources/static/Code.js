@@ -139,6 +139,9 @@ connection.onclose = function() {
 	console.log("WS conexion cerrada");
 }
 
+var countdownText;
+var countdownValue = 3;
+
 function preload ()
 {
     //elememtos pista
@@ -255,7 +258,7 @@ function create ()
 
     //Llena la pantalla con bloques de arena
     for (let row = 32; row < 1088; row += 64) {
-		console.log('arena33');
+		console.log('arena94');
         for (let col = 32; col < 768; col += 64) {
             let overlappingTrack = false;
 
@@ -431,23 +434,7 @@ function create ()
     teclaI = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
     teclaJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
     teclaL = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
-    teclaK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
-    
-    if (selJ==1)
-    {
-		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.I);
-		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.J);
-		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.K);
-		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.L);
-	}
-	
-	if (selJ==2)
-    {
-		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);
-		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.A);
-		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.S);
-		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.D);
-	}
+    teclaK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);    
 
     //teclas power up inversión
     teclaE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
@@ -480,18 +467,46 @@ function create ()
     esperando = this.add.text(200, 250, 'ESPERANDO...', { fontSize: '100px', fill: '#000' });
     esperando.setStyle(estilo3);
     
+    countdownText = this.add.text(544, 256, '', estilo3).setOrigin(0.5).setVisible(false);
+    
     /*this.timedEventUpdateConnection = this.time.addEvent( {
 		delay: 13,
 		callback: this.enviarPosicionesAlServidor,
 		callbackScoope: this,
 		loop: true });*/
+	enviarPosicionesAlServidor(J1)
+	enviarPosicionesAlServidor(J2)
+	
 }
 
 function update ()
 {
-    if (!gameOver && usuariosActivos > 1){
+    if (!gameOver && usuariosActivos % 2 == 0){
         if(!juegoPausado){
 
+   if (empezar){	
+	   
+	if (selJ==1)
+    {
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.I);
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.J);
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.K);
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.L);
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.U);
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.O);
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.P);
+	}
+	
+	if (selJ==2)
+    {
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.A);
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.S);
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.D);
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.Q);
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.E);
+		this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.R);
+	}
     //condiciones movimiento coche 1
     if(!J1.inver){
     controles(J1, teclaW, teclaS, teclaA, teclaD,'leftup','leftdown','rightup','rightdown','left','right','up','down');
@@ -505,7 +520,7 @@ function update ()
     } else {
         controles(J2, teclaK, teclaI, teclaL, teclaJ,'leftup2','leftdown2','rightup2','rightdown2','left2','right2','up2','down2');
     }
-
+    
     if(teclaE.isDown && J1.numInver == 1){
         powerInversion(J2,J1);
     }
@@ -529,13 +544,15 @@ function update ()
     if(teclaU.isDown && J2.numTurb == 1){
         powerTurbo(J2);
     }
+   }
     
-    while(usuariosActivos < 2) {
+    while(usuariosActivos % 2 != 0) {
     esperando.setText('ESPERANDO...');
     }
     
-    if(usuariosActivos > 1) {
+    if(usuariosActivos % 2 == 0) {
 		esperando.setVisible(false);
+		startCountdown();
 	}
     
 	//cargarMensajes();
@@ -673,7 +690,7 @@ function controles(J, u, d, l, r,aniLU,aniLD,aniRU,aniRD,aniL,aniR,aniU,aniD){
         J.fisicas.setVelocityY(-J.velocidad);
         //J1.angle = 0;
         J.fisicas.anims.play(aniU, true);
-        console.log(usuariosActivos);
+        //console.log(usuariosActivos);
         enviarPosicionesAlServidor(J);
         //J1 = this.physics.add.sprite('car1ver');
     }
@@ -698,9 +715,11 @@ function controles(J, u, d, l, r,aniLU,aniLD,aniRU,aniRD,aniL,aniR,aniU,aniD){
 
 function verificarFinJuego() {
     if (numVueltasJ1 > vueltasTotales || numVueltasJ2 > vueltasTotales) {
-        finalizarPartida()
-    
+		finalizarPartida()
         gameOver = true;
+        //enviarPosicionesAlServidor(J1)
+        
+        //enviarPosicionesAlServidor(J2)
     }
 }
 
@@ -752,7 +771,7 @@ function powerInversion(J, usu) {
     // Enviar el mensaje al servidor a través del WebSocket
     //socket.send(JSON.stringify(mensajePowerUp));
     document.getElementById('mensajePelota').style.display = 'block';
-	 setTimeout(function () {
+	setTimeout(function () {
             document.getElementById('mensajePelota').style.display = 'none';
         }, 3000);
     setTimeout(function() {
@@ -766,8 +785,8 @@ function noPowerInversion(Ju) {
 
 function powerCongelacion(J, usu){
     sonidoPower('assets/congelar.mp3');
-    J.vel = 0;
-    J.velD = 0;
+    J.vel *= 0.5;
+    J.velD *= 0.5;
     usu.numCong = 0;
     icCong.setVisible(false);
     setTimeout(function() {
@@ -776,8 +795,8 @@ function powerCongelacion(J, usu){
 }
 
 function noPowerCongelacion(Ju) {
-    Ju.vel = 100;
-    Ju.velD = 75;
+    Ju.vel /= 0.5;
+    Ju.velD /= 0.5;
 }
 
 function powerTurbo(J){
@@ -796,6 +815,37 @@ function noPowerTurbo(Ju) {
     Ju.velD /= 1.5;
 }
 
+let countdownRunning = false; // Variable de bandera para controlar si el contador está en ejecución
+let empezar = false;
+
+function startCountdown() {
+	//juegoPausado = true
+    if (!countdownRunning) { // Verificar si el contador ya está en ejecución
+        countdownRunning = true; // Establecer la bandera de contador en ejecución
+        
+        countdownText.setVisible(true); // Mostrar el texto del contador
+        
+        let countdownValue = 3; // Inicializar el valor del contador
+        countdownText.setText(countdownValue); // Establecer el valor inicial del texto del contador
+        
+        let countdownTimer = setInterval(() => { // Configurar el temporizador que se ejecuta cada segundo
+            countdownValue--; // Decrementar el valor del contador
+            countdownText.setText(countdownValue); // Actualizar el texto del contador
+            
+            if (countdownValue === 0) { // Cuando el contador llegue a cero
+                clearInterval(countdownTimer); // Detener el temporizador
+                countdownText.setVisible(false); // Ocultar el texto del contador
+                //countdownRunning = true; // Restablecer la bandera de contador en ejecución
+                //juegoPausado = false;
+                empezar = true;
+            }
+        }, 1000); // 1000 milisegundos = 1 segundo
+    }
+}
+
+
+
+
 function finalizarPartida() {
     // Ocultar elementos existentes
     J1.fisicas.visible = false;
@@ -810,6 +860,7 @@ function finalizarPartida() {
     numVueltasJ2Text.setVisible(false);
     ocultarChat();
     reanudarJuego();
+    //usuariosActivos = 0;
     document.getElementById('chat-container').style.display = 'none';
     sonidoPower('assets/final.mp3')
     if(numVueltasJ1 > vueltasTotales){
@@ -830,7 +881,12 @@ function enviarPosicionesAlServidor(J) {
         velocidad: { velX: J.fisicas.body.velocity.x, velY: J.fisicas.body.velocity.y },
         animacion: { currentAnim: J.fisicas.anims.currentAnim },
         ganada: gameOver,
-        usuarios: usuariosActivos
+        usuarios: usuariosActivos,
+        jugSelec: selJ,
+        inverJ1: J1.inver,
+        inverJ2: J2.inver
+        //congeJ1: J1.cong,
+        //congeJ2: J2.cong
         //animacion: {anim: J.fisicas.anims}
     };
     
@@ -844,6 +900,9 @@ connection.onmessage = function (msg) {
           
 }
 
+var contInverJ1 = 0;
+var contInverJ2 = 0;
+
 function actualizarPosicionJugador(msg) {
 		if (msg.jugador === 'J1' && J1.fisicas) {
 	        J1.fisicas.setPosition(msg.posicion.x, msg.posicion.y);
@@ -855,8 +914,48 @@ function actualizarPosicionJugador(msg) {
 	        J2.fisicas.anims.play(msg.animacion.currentAnim || 'up2', true);
 	    }
 	    gameOver = msg.ganada;
+	    /*J1.inver = msg.inverJ1;
+	    J2.inver = msg.inverJ2;
+	    J1.cong = msg.congeJ1;
+	    J2.cong = msg.congeJ2;*/
+	    
+	    if (msg.inverJ1 && contInverJ1 == 0){
+			J1.inver = true;
+			contInverJ1 = 1;
+		} else if(!msg.inverJ1 && contInverJ1 == 1){
+			J1.inver = false;
+			contInverJ1 = 3;
+		}
+		
+		if (msg.inverJ2 && contInverJ2 == 0){
+			J2.inver = true;
+			contInverJ2 = 1;
+		} else if(!msg.inverJ2 && contInverJ2 == 1){
+			J2.inver = false;
+			contInverJ2 = 3;
+		}
+	    
 	    if (msg.usuarios>1)
 	    	usuariosActivos = msg.usuarios;
+
+	    if (selJ == msg.jugSelec){
+			if (selJ == 1){
+				selJ = 2
+				document.getElementById('cambioaJ2').style.display = 'block';
+				setTimeout(function () {
+            		document.getElementById('cambioaJ2').style.display = 'none';
+        		}, 3000);
+				//consle.log("Ahora eres " + selJ)
+				}
+			else {
+				selJ = 1
+				document.getElementById('cambioaJ1').style.display = 'block';
+				setTimeout(function () {
+            		document.getElementById('cambioaJ1').style.display = 'none';
+        		}, 3000);
+				//console.log("Ahora eres " + selJ)
+				}
+		}
 }
 
 
