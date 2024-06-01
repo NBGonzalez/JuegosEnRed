@@ -258,7 +258,7 @@ function create ()
 
     //Llena la pantalla con bloques de arena
     for (let row = 32; row < 1088; row += 64) {
-		console.log('arena94');
+		console.log('arena21');
         for (let col = 32; col < 768; col += 64) {
             let overlappingTrack = false;
 
@@ -636,7 +636,84 @@ function controles(J, u, d, l, r,aniLU,aniLD,aniRU,aniRD,aniL,aniR,aniU,aniD){
     };*/
     //console.log('entra2');
     //connection.send(JSON.stringify(mensaje));
-	
+    
+    if (J.cong){
+		if(l.isDown && u.isDown)
+    {
+        J.fisicas.anims.play(aniLU, true);
+        J.fisicas.setVelocityX(0);
+        J.fisicas.setVelocityY(0);
+        enviarPosicionesAlServidor(J);
+    }
+    else if(l.isDown && d.isDown)
+    {
+        J.fisicas.anims.play(aniLD, true);
+        J.fisicas.setVelocityX(0);
+        J.fisicas.setVelocityY(0);
+        enviarPosicionesAlServidor(J);
+    }
+    else if(r.isDown && u.isDown)
+    {
+        J.fisicas.anims.play(aniRU, true);
+        J.fisicas.setVelocityX(0);
+        J.fisicas.setVelocityY(0);
+        enviarPosicionesAlServidor(J);
+        
+    }
+    else if(r.isDown && d.isDown)
+    {
+        J.fisicas.anims.play(aniRD, true);
+        J.fisicas.setVelocityX(0);
+        J.fisicas.setVelocityY(0);
+        enviarPosicionesAlServidor(J);
+    }
+    else if (l.isDown)
+    {
+        J.fisicas.setVelocityY(0);
+        J.fisicas.setVelocityX(0);
+        //J1.angle = -45;
+        J.fisicas.anims.play(aniL, true);
+        enviarPosicionesAlServidor(J);
+        //J1 = this.physics.add.sprite('car1hor');
+    }
+    else if (r.isDown)
+    {
+        J.fisicas.setVelocityY(0);
+        J.fisicas.setVelocityX(0);
+        //J1.angle = 45;
+        J.fisicas.anims.play(aniR, true);
+        enviarPosicionesAlServidor(J);
+        //J1 = this.physics.add.sprite('car1hor');
+    }
+    else if (u.isDown)
+    {
+        J.fisicas.setVelocityX(0);
+        J.fisicas.setVelocityY(0);
+        //J1.angle = 0;
+        J.fisicas.anims.play(aniU, true);
+        //console.log(usuariosActivos);
+        enviarPosicionesAlServidor(J);
+        //J1 = this.physics.add.sprite('car1ver');
+    }
+    else if (d.isDown)
+    {
+        J.fisicas.setVelocityX(0);
+        J.fisicas.setVelocityY(0);
+        //J1.angle = 180;
+        J.fisicas.anims.play(aniD, true);
+        enviarPosicionesAlServidor(J);
+        //J1 = this.physics.add.sprite('car1ver');
+    }
+    else
+    {
+        J.fisicas.setVelocityX(0);
+        //J1.angle = 0;
+        J.fisicas.setVelocityY(0);
+        //J1.angle = 0;
+    } 
+		
+	} else {
+    
     if(l.isDown && u.isDown)
     {
         J.fisicas.anims.play(aniLU, true);
@@ -710,6 +787,7 @@ function controles(J, u, d, l, r,aniLU,aniLD,aniRU,aniRD,aniL,aniR,aniU,aniD){
         J.fisicas.setVelocityY(0);
         //J1.angle = 0;
     } 
+    }
     
 }
 
@@ -717,7 +795,8 @@ function verificarFinJuego() {
     if (numVueltasJ1 > vueltasTotales || numVueltasJ2 > vueltasTotales) {
 		finalizarPartida()
         gameOver = true;
-        //enviarPosicionesAlServidor(J1)
+        enviarPosicionesAlServidor(J1)
+        enviarPosicionesAlServidor(J2)
         
         //enviarPosicionesAlServidor(J2)
     }
@@ -760,6 +839,7 @@ function sonidoPower(ruta) {
 function powerInversion(J, usu) {
     sonidoPower('assets/invertir.mp3');
     J.inver = true;
+    enviarPosicionesAlServidor(J)
     usu.numInver = 0;
     icInv.setVisible(false);
     // Construir el mensaje de power-up
@@ -781,12 +861,15 @@ function powerInversion(J, usu) {
 
 function noPowerInversion(Ju) {
     Ju.inver = false;
+    enviarPosicionesAlServidor(Ju)
 }
 
 function powerCongelacion(J, usu){
     sonidoPower('assets/congelar.mp3');
-    J.vel *= 0.5;
-    J.velD *= 0.5;
+    //J.vel *= 0.5;
+    //J.velD *= 0.5;
+    J.cong = true;
+    enviarPosicionesAlServidor(J)
     usu.numCong = 0;
     icCong.setVisible(false);
     setTimeout(function() {
@@ -795,8 +878,10 @@ function powerCongelacion(J, usu){
 }
 
 function noPowerCongelacion(Ju) {
-    Ju.vel /= 0.5;
-    Ju.velD /= 0.5;
+    //Ju.vel /= 0.5;
+    //Ju.velD /= 0.5;
+    Ju.cong = false;
+    enviarPosicionesAlServidor(Ju)
 }
 
 function powerTurbo(J){
@@ -848,6 +933,8 @@ function startCountdown() {
 
 function finalizarPartida() {
     // Ocultar elementos existentes
+    enviarPosicionesAlServidor(J1);
+    enviarPosicionesAlServidor(J2);
     J1.fisicas.visible = false;
     J2.fisicas.visible = false;
     tracks.clear(true, true);
@@ -884,7 +971,12 @@ function enviarPosicionesAlServidor(J) {
         usuarios: usuariosActivos,
         jugSelec: selJ,
         inverJ1: J1.inver,
-        inverJ2: J2.inver
+        inverJ2: J2.inver,
+        congJ1: J1.cong,
+        congJ2: J2.cong,
+        vuelts: vueltasTotales,
+        //vueltaJ1: numVueltasJ1,
+        //vueltaJ2: numVueltasJ2
         //congeJ1: J1.cong,
         //congeJ2: J2.cong
         //animacion: {anim: J.fisicas.anims}
@@ -903,17 +995,26 @@ connection.onmessage = function (msg) {
 var contInverJ1 = 0;
 var contInverJ2 = 0;
 
+var contCongJ1 = 0;
+var contCongJ2 = 0;
+
 function actualizarPosicionJugador(msg) {
 		if (msg.jugador === 'J1' && J1.fisicas) {
 	        J1.fisicas.setPosition(msg.posicion.x, msg.posicion.y);
 	        J1.fisicas.setVelocity(msg.velocidad.velX, msg.velocidad.velY);  // Ajustamos aquí para establecer ambas velocidades
 	        J1.fisicas.anims.play(msg.animacion.currentAnim || 'up', true); // Si no hay animación, reproducir una predeterminada
+	        //numVueltasJ1 = msg.vueltaJ1;
 	    } else if (msg.jugador === 'J2' && J2.fisicas) {
 	        J2.fisicas.setPosition(msg.posicion.x, msg.posicion.y);
 	        J2.fisicas.setVelocity(msg.velocidad.velX, msg.velocidad.velY);
 	        J2.fisicas.anims.play(msg.animacion.currentAnim || 'up2', true);
+	        //numVueltasJ2 = msg.vueltaJ2;
 	    }
-	    gameOver = msg.ganada;
+	    
+	    //if(msg.ganada){
+	    	gameOver = msg.ganada;
+	    	//}
+		vueltasTotales = msg.vuelts;
 	    /*J1.inver = msg.inverJ1;
 	    J2.inver = msg.inverJ2;
 	    J1.cong = msg.congeJ1;
@@ -933,6 +1034,22 @@ function actualizarPosicionJugador(msg) {
 		} else if(!msg.inverJ2 && contInverJ2 == 1){
 			J2.inver = false;
 			contInverJ2 = 3;
+		}
+		
+		if (msg.congJ1 && contCongJ1 == 0){
+			J1.cong = true;
+			contCongJ1 = 1;
+		} else if(!msg.congJ1 && contCongJ1 == 1){
+			J1.cong = false;
+			contCongJ1 = 3;
+		}
+		
+		if (msg.congJ2 && contCongJ2 == 0){
+			J2.cong = true;
+			contCongJ2 = 1;
+		} else if(!msg.congJ2 && contCongJ2 == 1){
+			J2.cong = false;
+			contCongJ2 = 3;
 		}
 	    
 	    if (msg.usuarios>1)
