@@ -91,7 +91,7 @@ Universidad Rey Juan Carlos: <infor@urjc.es>
 
 
 
-Vídeo enseñando el videojuego, [link](https://youtu.be/HJ7ujm7oXLk). 
+Vídeo enseñando el videojuego, [link](https://www.youtube.com/watch?v=Ox848RQbOMw). 
 
 
 # <a name="_toc140920023"></a>**1. Introducción**
